@@ -4,4 +4,3 @@ test.sh
 nvim
 dadbod.lua
 secret_aliases
-config/scripts/platform_startup_script.sql
