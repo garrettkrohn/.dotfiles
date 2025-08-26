@@ -9,7 +9,7 @@
 # second is where it is within the dotfiles repo
 - link:
     ~/.zshrc:
-      path: ./config/.zshrc
+      path: ./config/zshrc
     ~/.oh-my-zsh/custom/aliases.zsh~:
       path: ./config/aliases
     ~/.config/tmux/tmux.conf:
