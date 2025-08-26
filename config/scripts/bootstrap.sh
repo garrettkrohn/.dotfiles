@@ -54,5 +54,5 @@ fi
 
 if $start_up_script; then
     print_pink "Running seed script"
-    PGPASSWORD='postgres' psql -h localhost -p 4432 -U postgres -d novaapi -f ~/dotfiles/config/scripts/platform_startup_script.sql
+    PGPASSWORD='postgres' psql -h localhost -p 4432 -U postgres -d novaapi -f ~/dotfiles/config/secrets/scripts/platform_startup_script.sql
 fi
