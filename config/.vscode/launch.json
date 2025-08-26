@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "php",
+      "request": "launch",
+      "name": "kipsu_docker",
+      "port": "9000",
+      "hostname": "0.0.0.0",
+      "stopOnEntry": true,
+      "pathMappings": {
+        "/Users/garrettkrohn/code/kipsu/": "/var/www/html/acct"
+      }
+    }
+  ]
+}

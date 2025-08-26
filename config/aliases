@@ -1,0 +1,177 @@
+#Aliases here
+alias awslogin="aws ecr get-login-password --region us-east-1 | docker 
+login --username AWS --password-stdin 
+776290407496.dkr.ecr.us-east-1.amazonaws.com"
+alias lg="lazygit"
+alias ld="lazydocker"
+alias q="exit"
+alias nrs="npm run start"
+alias c="clear"
+alias w="cd ~/vimwiki && n"
+alias sql="nvim ~/code/aep_cs_scripts"
+alias post="cd ~/code/postman && nvim ."
+alias le="cd ~/code/liv-env-scripts/scripts/"
+alias n="cd ~/notes && kick netspi_notes.md"
+alias term="nvim -c ':terminal'"
+alias or="nvim -c ':silent Octo pr edit " #open review
+alias review="checkout_and_open_pr.sh" # checkout the branch and open the pr # include the -c flag to checkout
+alias ghd="gh dash"
+alias auth="source ~/code/rest/auth.sh"
+alias dap="nvim application/src/main/java/com/netspi/platform/Application.java"
+alias rg="mvn clean install && java -jar -Dspring.profiles.active=local ./target/global-service-0.0.1-SNAPSHOT.jar"
+alias s="sesh connect dotfiles"
+alias sd="~/code/sesh/sesh"
+alias sn="eval '$(fnm env)' && fnm use v18.16.0"
+alias j='function _j(){ javac "$1" && java "${1%.*}"; }; _j'
+alias nvimt='NVIM_APPNAME=nvimtest nvim'
+alias db="nvim -c 'DBUI'"
+
+alias gb='go build .'
+alias gr='go run .'
+alias gbr='go build . && go run .'
+alias gt='go test -v ./...'
+
+alias ln='$HOME/code/nuclei/bin/nuclei' # local nuclei
+
+# opening neovim
+alias kick="nvim"
+f() {
+    nvim $(fzf --filter="$1" | head -n 1)
+}
+
+kf() {
+  nvim -c ":lua Snacks.picker.files({ input = '$1' })"
+}
+ks() {
+  nvim -c ":lua Snacks.picker.grep({ input = '$1' })"
+}
+
+# Telescope
+# kf() {
+#   nvim -c ":Telescope find_files default_text=$1"
+# }
+#
+# ks() {
+#   nvim -c ":Telescope live_grep default_text=$1"
+# }
+# alias kc="nvim -c ':CopilotChat'"
+alias k="nvim -c ':Oil'"
+
+# local 
+#
+# alias feb="corepack enable && corepack prepare yarn@3.5.1 --activate && yarn cache clean && yarn install && yarn api && yarn build && yarn start-4444 --no-open"
+
+# -db to destroy db
+# -skipTests to skip tests
+alias beb="back_end_build.sh"
+alias bebh="echo '-db to destroy db\n-skipTests to skip test'"
+
+# -skipbuild skips the build process
+alias feb="front_end_build.sh"
+alias febh="echo '-skipBuild to skip build'"
+
+
+alias boot="bootstrap.sh"
+
+alias nw="create_platform_worktree.sh"
+alias rw="remove_platform_worktree.sh"
+alias bare="cd ~/code/platform_work/platform_bare"
+
+alias mci="mvn clean install"
+alias mt="mvn test"
+alias ys="fnm use 18.16.0 && yarn start-4444 --no-open"
+
+# git worktree
+alias gw="git worktree"
+alias gwa="git worktree add"
+alias gwr="git worktree remove -f"
+alias gwl="git worktree list"
+alias tkd="/Users/gkrohn/code/treekanga_work/dev/treekanga"
+function tkdev {
+  local folder
+  folder=$(find ~/code/treekanga_work -mindepth 1 -maxdepth 1 -type d | fzf --prompt="Select a worktree: ")
+  if [[ -n "$folder" ]]; then
+    "$folder"/treekanga "$@" || return
+  fi
+}
+
+alias settkd='export TREEKANGA_WORKTREE="$(pwd)"'
+alias tk="/opt/homebrew/bin/treekanga"
+alias tka="/opt/homebrew/bin/treekanga -d /Users/gkrohn/code/platform_work/platform_bare add"
+
+alias p="/Users/gkrohn/code/pluck/pluck"
+
+# docker
+alias do="open -n ~/../../Applications/Docker.app"
+alias d="Docker"
+alias dcu="docker compose up -d"
+alias dcd="docker compose down"
+alias dcls="docker container ls"
+alias dclsa="docker container ls -a"
+alias dils="docker image ls -a"
+alias dvls="docker volume ls -a"
+alias bw="npm run build:widgets"
+alias pu="docker exec -it kippy-core vendor/bin/phpunit"
+alias ci="docker exec -it kippy-core ./composer.phar install"
+alias dm="docker compose exec kippy ./vendor/bin/doctrine-migrations migrations:migrate"
+alias ld="DOCKER_HOST=unix:///$HOME/.docker/run/docker.sock lazydocker"
+alias kiprun="MICRONAUT_ENVIRONMENTS=extract,load ./gradlew run"
+alias dcub="docker compose up --build -d"
+
+# tmux
+alias ta="tmux attach -t"
+alias tn="tmux new -s"
+alias td="tmux detach"
+alias tls='tmux ls'
+alias tkill='tmux kill-session -t'
+alias tkilla='tmux kill-server'
+alias mux='tmuxinator'
+alias msl='mux s loc'
+alias mss='mux s sql'
+alias ms='mux s'
+
+#config
+alias dot="cd ~/dotfiles/config && nvim ."
+alias na="nvim ~/dotfiles/config/aliases"
+alias vzsh="nvim ~/.zshrc"
+
+# Filesystem aliases
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
+# reload zsh config
+alias reload='RELOAD=1 source ~/.zshrc'
+
+# Hide/show all desktop icons (useful when presenting)
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+
+# Side projects
+alias ivan="nvim ~/ivan/ivan_website"
+alias westman="nvim ~/sideProjects/westman"
+
+# Ranger
+alias r="ranger"
+alias rr="ranger ~"
+
+# Borders
+alias borders="brew services start borders"
+alias bordersr="brew services restart borders"
+
+# Astro
+alias nrd="npm run dev"
+
+# python
+alias pyt='pytest -v -m "not integration"'
+alias activate='source .venv/bin/activate'
+
+# goose up
+alias gooseup='goose -dir db/migrations postgres "user=postgres password=postgres dbname=db host=localhost port=3333 sslmode=disable" up'
+
+# awslocal
+alias awslocal='aws --endpoint-url=http://localhost:4566'
+
+# tunnels
+alias t='/Users/gkrohn/code/tunnels/tunnels'

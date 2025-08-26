@@ -1,0 +1,75 @@
+prSections:
+- title: My Pull Requests
+  filters: is:open author:@me
+- title: My Closed Requests
+  filters: is:closed author:@me repo:netspi/offensive-security-platform
+- title: All Open Platform prs
+  filters: is:pr is:open PFASM in:title 
+- title: All Closed Platform prs
+  filters: is:pr is:closed repo:netspi/offensive-security-platform
+- title: My Reviewed (open)
+  filters: is:pr is:open reviewed-by:@me 
+- title: My Reviewed (closed)
+  filters: is:pr is:closed reviewed-by:@me 
+issuesSections:
+- title: My Issues
+  filters: is:open author:@me
+- title: Assigned
+  filters: is:open assignee:@me
+- title: Involved
+  filters: is:open involves:@me -author:@me
+defaults:
+  preview:
+    open: true
+    width: 150
+  prsLimit: 20
+  issuesLimit: 20
+  view: prs
+  layout:
+    prs:
+      updatedAt:
+        width: 7
+      repo:
+        width: 15
+      author:
+        width: 15
+      assignees:
+        width: 20
+        hidden: true
+      base:
+        width: 15
+        hidden: true
+      lines:
+        width: 16
+    issues:
+      updatedAt:
+        width: 7
+      repo:
+        width: 15
+      creator:
+        width: 10
+      assignees:
+        width: 20
+        hidden: true
+  refetchIntervalMinutes: 30
+keybindings:
+  universal: []
+  issues: []
+  prs: 
+    - key: O
+      command: >
+        tmux new-window -c . -n "Review" 'nvim -c ":silent Octo pr edit {{.PrNumber}}"'
+    - key: c
+      command: >
+        gh pr checkout {{.PrNumber}}
+repoPaths: 
+  netspi/offensive-security-platform: ~/code/platform_work
+theme:
+  ui:
+    sectionsShowCount: true
+    table:
+      showSeparator: true
+pager:
+  diff: ""
+confirmQuit: false
+

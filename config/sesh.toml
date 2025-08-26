@@ -1,0 +1,99 @@
+[[session]]
+name = "dotfiles"
+path = "~/dotfiles"
+startup_command = "kick"
+
+# [[session]]
+# name = "MLB"
+# path = "~/side/MLB-StatsAPI/"
+# startup_command = "python hr-k-draft.py"
+
+[[session]]
+name = "local"
+path = "~/code/platform_work"
+startup_command = ""
+
+[[session]]
+name = "rest"
+path = "~/code/rest"
+startup_command = "kick"
+
+[[session]]
+name = "wezterm"
+path = "~/dotfiles/config/wezterm"
+startup_command = "kick wezterm.lua"
+
+[[session]]
+name = "aerospace"
+path = "~/dotfiles/config"
+startup_command = "kick aerospace.toml"
+
+[[session]]
+name = "zshrc"
+path = "~/dotfiles/config/"
+startup_command = "kick .zshrc"
+
+[[session]]
+name = "root"
+path = "~/"
+startup_command = ""
+
+[[session]]
+name = "tmux"
+path = "~/dotfiles/config/tmux/"
+startup_command = "kick tmux.conf"
+
+[[session]]
+name = "ghd"
+path = "~/"
+startup_command = "ghd"
+
+[[session]]
+name = "journal"
+path = "~/notes/journal"
+startup_command = "kf"
+
+[[session]]
+name = "daily"
+path = "~/notes/journal"
+startup_command = "kick daily_checklist.md"
+
+[[session]]
+name = "notes"
+path = "~/notes"
+startup_command = "kf"
+
+[[session]]
+name = "lazy plugins"
+path = "~/.local/share/nvim/lazy"
+startup_command = "sesh connect $(ls | fzf --ansi --no-border --preview 'glow -s light {}/README.md' --preview-window=right:70,border-none) && exit"
+
+[[session]]
+name = "new blog post"
+path = "/Users/gkrohn/side/new_blog/src/content/blog"
+startup_command = "kick"
+
+[[session]]
+name = "neovim test"
+path = "~/.config/nvimtest"
+startup_command = "kick"
+
+[[session]]
+name = "hrkdraft"
+path = "/Users/gkrohn/side/pybaseball"
+startup_command = "python hr-k-draft.py"
+
+[[session]]
+name = "scratch"
+path = "~"
+startup_command = ""
+
+[[session]]
+name = "db"
+path = "~"
+startup_command = "db"
+
+[[session]]
+name = "ssh tunnels"
+path = "~/.ssh"
+startup_command = ""

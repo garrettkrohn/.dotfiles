@@ -1,0 +1,409 @@
+{
+    "clientId": 10788,
+    "userId": 2972,
+    "workflowExecutionId": null,
+    "asnCompanyToAdd": [
+        {
+            "asn": "AS13205",
+            "name": "British Telecommunications PLC",
+            "domain": "bt.com",
+            "startIp": "31.11.59.0",
+            "endIp": "31.11.63.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT Cardiff Bay Unified Data Centre",
+            "domain": "bt.com",
+            "startIp": "217.140.63.0",
+            "endIp": "217.140.63.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT Datacentre Omninet",
+            "domain": "bt.com",
+            "startIp": "217.140.56.0",
+            "endIp": "217.140.57.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT DCS Amsterdam International Data Centre",
+            "domain": "bt.com",
+            "startIp": "217.140.0.0",
+            "endIp": "217.140.7.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT DCS Amsterdam International Data Centre",
+            "domain": "bt.com",
+            "startIp": "78.109.10.0",
+            "endIp": "78.109.13.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT DCS Amsterdam International Data Centre",
+            "domain": "bt.com",
+            "startIp": "78.109.5.0",
+            "endIp": "78.109.5.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT DCS BT DCS Hempoint Data Centre",
+            "domain": "bt.com",
+            "startIp": "78.109.7.0",
+            "endIp": "78.109.8.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT DCS Hempoint Data Centre",
+            "domain": "bt.com",
+            "startIp": "78.109.0.0",
+            "endIp": "78.109.1.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT DCS Niewegein Data Centre",
+            "domain": "bt.com",
+            "startIp": "31.11.56.0",
+            "endIp": "31.11.57.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT Dual Site Internet",
+            "domain": "bt.com",
+            "startIp": "78.109.9.0",
+            "endIp": "78.109.9.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT Global Services-Atlantic Telecom - Hempoint DC",
+            "domain": "bt.com",
+            "startIp": "78.109.2.0",
+            "endIp": "78.109.4.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT Global Services DCS Amsterdam International Data Centre",
+            "domain": "bt.com",
+            "startIp": "78.109.14.0",
+            "endIp": "78.109.15.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT Global Services DCS Cardiff Bay Data Centre",
+            "domain": "bt.com",
+            "startIp": "217.140.32.0",
+            "endIp": "217.140.35.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT Global Services DCS Cardiff Bay Data Centre",
+            "domain": "bt.com",
+            "startIp": "217.140.40.0",
+            "endIp": "217.140.47.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT Global Services DCS Colo for teleconcept.nl",
+            "domain": "bt.com",
+            "startIp": "217.140.13.128",
+            "endIp": "217.140.13.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT Global Services DCS Hempoint Data Centre",
+            "domain": "bt.com",
+            "startIp": "217.140.12.0",
+            "endIp": "217.140.13.127",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT Global Services DCS Hempoint Data Centre",
+            "domain": "bt.com",
+            "startIp": "217.140.14.0",
+            "endIp": "217.140.15.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT Global Services DCS Hempoint Data Centre",
+            "domain": "bt.com",
+            "startIp": "78.109.6.0",
+            "endIp": "78.109.6.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT Group Computing Services",
+            "domain": "bt.com",
+            "startIp": "192.65.153.0",
+            "endIp": "192.65.153.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT MESSAGING &COLLABORATION",
+            "domain": "bt.com",
+            "startIp": "217.140.37.0",
+            "endIp": "217.140.37.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT MESSAGING &COLLABORATION",
+            "domain": "bt.com",
+            "startIp": "217.140.48.0",
+            "endIp": "217.140.48.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "BT messaging - notes.bt.com",
+            "domain": "bt.com",
+            "startIp": "217.140.38.0",
+            "endIp": "217.140.39.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "GPRS/EDGE mobile network customerinternet access",
+            "domain": "bt.com",
+            "startIp": "217.140.8.0",
+            "endIp": "217.140.10.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS13205",
+            "name": "Sopra Steria Limited",
+            "domain": "bt.com",
+            "startIp": "137.213.0.0",
+            "endIp": "137.213.255.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS14187",
+            "name": "Construcción y Administración S.A.",
+            "domain": "bt.com",
+            "startIp": "200.89.10.48",
+            "endIp": "200.89.10.67",
+            "fullAsn": false
+        },
+        {
+            "asn": "AS14187",
+            "name": "GRUPO AGUERO S.A.C.",
+            "domain": "bt.com",
+            "startIp": "200.89.10.16",
+            "endIp": "200.89.10.19",
+            "fullAsn": false
+        },
+        {
+            "asn": "AS14187",
+            "name": "Intersur",
+            "domain": "bt.com",
+            "startIp": "200.89.10.40",
+            "endIp": "200.89.10.47",
+            "fullAsn": false
+        },
+        {
+            "asn": "AS14742",
+            "name": "Accent Source LLC",
+            "domain": "accent.it",
+            "startIp": "66.150.197.80",
+            "endIp": "66.150.197.87",
+            "fullAsn": false
+        },
+        {
+            "asn": "AS14742",
+            "name": "Accent Source LLC",
+            "domain": "accent.it",
+            "startIp": "72.5.27.128",
+            "endIp": "72.5.27.255",
+            "fullAsn": false
+        },
+        {
+            "asn": "AS15410",
+            "name": "British Telecommunications PLC",
+            "domain": "bt.com",
+            "startIp": "62.80.66.0",
+            "endIp": "62.80.66.127",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS15410",
+            "name": "British Telecommunications PLC",
+            "domain": "bt.com",
+            "startIp": "62.80.66.144",
+            "endIp": "62.80.67.95",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS15410",
+            "name": "British Telecommunications PLC",
+            "domain": "bt.com",
+            "startIp": "62.80.67.128",
+            "endIp": "62.80.70.63",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS15410",
+            "name": "British Telecommunications PLC",
+            "domain": "bt.com",
+            "startIp": "62.80.70.72",
+            "endIp": "62.80.71.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS15410",
+            "name": "British Telecommunications PLC",
+            "domain": "bt.com",
+            "startIp": "62.80.72.64",
+            "endIp": "62.80.79.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS15410",
+            "name": "British Telecommunications PLC",
+            "domain": "bt.com",
+            "startIp": "62.80.82.0",
+            "endIp": "62.80.83.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS15410",
+            "name": "British Telecommunications PLC",
+            "domain": "bt.com",
+            "startIp": "62.80.85.48",
+            "endIp": "62.80.85.127",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS15410",
+            "name": "British Telecommunications PLC",
+            "domain": "bt.com",
+            "startIp": "62.80.86.0",
+            "endIp": "62.80.86.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS15410",
+            "name": "British Telecommunications PLC",
+            "domain": "bt.com",
+            "startIp": "62.80.89.0",
+            "endIp": "62.80.91.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS15410",
+            "name": "BT Hungary",
+            "domain": "bt.com",
+            "startIp": "62.80.64.0",
+            "endIp": "62.80.64.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS15410",
+            "name": "BT Hungary, Budapest",
+            "domain": "bt.com",
+            "startIp": "62.80.72.0",
+            "endIp": "62.80.72.63",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS15410",
+            "name": "BT Slovakia, s.r.o",
+            "domain": "bt.com",
+            "startIp": "62.80.65.0",
+            "endIp": "62.80.65.255",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS15410",
+            "name": "MPLS external management subnet",
+            "domain": "bt.com",
+            "startIp": "62.80.66.128",
+            "endIp": "62.80.66.143",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS15410",
+            "name": "PWC",
+            "domain": "bt.com",
+            "startIp": "62.80.67.96",
+            "endIp": "62.80.67.127",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS15410",
+            "name": "Szabo_Kovari_Tercsak_Tarsai",
+            "domain": "bt.com",
+            "startIp": "62.80.70.64",
+            "endIp": "62.80.70.71",
+            "fullAsn": true
+        },
+        {
+            "asn": "AS15557",
+            "name": "LA DEFENSE",
+            "domain": "bt.com",
+            "startIp": "195.115.96.224",
+            "endIp": "195.115.96.255",
+            "fullAsn": false
+        },
+        {
+            "asn": "AS15685",
+            "name": "Accent Source LLC",
+            "domain": "accent.it",
+            "startIp": "217.11.236.160",
+            "endIp": "217.11.236.191",
+            "fullAsn": false
+        },
+        {
+            "asn": "AS15802",
+            "name": "Abacus Consulting Fz LLC",
+            "domain": "abacus.de",
+            "startIp": "91.74.237.168",
+            "endIp": "91.74.237.175",
+            "fullAsn": false
+        },
+        {
+            "asn": "AS15830",
+            "name": "Baker Tilly Serviços de Tecnologia Ltda",
+            "domain": "bt.com",
+            "startIp": "168.90.172.176",
+            "endIp": "168.90.172.183",
+            "fullAsn": false
+        },
+        {
+            "asn": "AS15830",
+            "name": "BT_AMERICAS",
+            "domain": "bt.com",
+            "startIp": "94.103.29.180",
+            "endIp": "94.103.29.183",
+            "fullAsn": false
+        },
+        {
+            "asn": "AS15830",
+            "name": "BT Australasia 1/76 Berry St, North Sydney NSW 2060",
+            "domain": "bt.com",
+            "startIp": "202.177.218.8",
+            "endIp": "202.177.218.15",
+            "fullAsn": false
+        }
+    ],
+    "batchNumber": 46,
+    "totalBatches": 3245
+}

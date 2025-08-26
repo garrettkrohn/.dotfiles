@@ -1,0 +1,6 @@
+[submodule "dotbot"]
+	path = dotbot
+	url = https://github.com/anishathalye/dotbot
+[submodule "vscode-php-debug"]
+	path = vscode-php-debug
+	url = https://github.com/xdebug/vscode-php-debug.git

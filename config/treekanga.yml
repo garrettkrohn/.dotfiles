@@ -1,0 +1,23 @@
+repos:
+  offensive-security-platform:
+    defaultBranch: development
+    zoxideFolders:
+      - ui
+      - parent
+      - parent/application/src/main/resources/db/migration
+      - .github/workflows
+      - scan/scanners/containers
+      - warehouse
+    postScript: ~/dotfiles/config/scripts/platform_build_script.sh
+    autoRunPostScript: false
+  treekanga:
+    defaultBranch: dev
+    zoxideFolders:
+    worktreeTargetDir: /code/treekanga_work #assumes starting in the $HOME directory
+  attack-surface-management:
+    defaultBranch: development
+    zoxideFolders:
+      - frontend
+      - backend
+  dgsimgo:
+    defaultBranch: main 
