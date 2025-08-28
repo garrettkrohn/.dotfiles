@@ -6,7 +6,7 @@ return {
     -- { 'bezhermoso/todos-lualine.nvim' },
     -- { 'folke/todo-comments.nvim' },
   },
-  enabled = true,
+  enabled = false,
   event = 'VeryLazy',
   opts = function(plugin)
     if plugin.override then
