@@ -12,19 +12,36 @@ return {
       'DBUIFindBuffer',
     },
     config = function()
-      -- Helper function to fetch passwords from pass
+      -- helper to run `pass` at startup
       local function pass(entry)
-        local handle = io.popen('pass show ' .. entry)
-        if handle then
-          local result = handle:read '*l' -- read first line (password)
-          handle:close()
-          return result or ''
-        end
-        return ''
+        return vim.fn.system('pass ' .. entry):gsub('\n', '')
       end
 
-      vim.g.db_ui_use_nerd_fonts = 1
       vim.g.dbs = {
+        {
+          name = 'platform_local',
+          url = string.format('postgresql://postgres:%s@localhost:4432/novaapi', pass 'platform/local'),
+        },
+        {
+          name = 'platform_dev',
+          url = string.format('postgresql://gkrohn:%s@localhost:1111/novaapi', pass 'dev01'),
+        },
+        {
+          name = 'platform_dev_workflow',
+          url = string.format('postgresql://gkrohn:%s@localhost:1111/workflow_engine', pass 'dev01'),
+        },
+        {
+          name = 'platform_ptx',
+          url = string.format('postgresql://gkrohn:%s@localhost:1111/novaapi', pass 'ptx01'),
+        },
+        {
+          name = 'platform_prod',
+          url = string.format('postgresql://gkrohn:%s@localhost:1111/novaapi', pass 'prod01'),
+        },
+        {
+          name = 'platform_prod_workflow_engine',
+          url = string.format('postgresql://gkrohn:%s@localhost:1111/workflow_engine', pass 'prod01'),
+        },
         {
           name = 'ctl_local',
           url = string.format('postgresql://myuser:%s@localhost:1432/warehouse', pass 'ctl/local'),
@@ -32,18 +49,6 @@ return {
         {
           name = 'ctl_dev',
           url = string.format('postgresql://garrett.krohn:%s@localhost:1111/warehouse', pass 'ctl/dev'),
-        },
-        {
-          name = 'platform_local',
-          url = string.format('postgresql://postgres:%s@localhost:4432/novaapi', pass 'platform/local'),
-        },
-        {
-          name = 'platform_dev',
-          url = string.format('postgresql://gkrohn:%s@localhost:1112/novaapi', pass 'platform/dev'),
-        },
-        {
-          name = 'platform_prod',
-          url = string.format('postgresql://gkrohn:%s@localhost:1113/novaapi', pass 'platform/prod'),
         },
       }
     end,

@@ -1,7 +1,7 @@
 return {
   {
     'nvim-telescope/telescope.nvim',
-    enabled = false,
+    -- enabled = false,
     tag = '0.1.8',
     lazy = false,
     dependencies = {
