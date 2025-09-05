@@ -20,7 +20,7 @@ return {
       vim.g.dbs = {
         {
           name = 'platform_local',
-          url = string.format('postgresql://postgres:%s@localhost:4432/novaapi', pass 'platform/local'),
+          url = string.format('postgresql://postgres:%s@localhost:4432/novaapi', 'postgres'),
         },
         {
           name = 'platform_dev',
