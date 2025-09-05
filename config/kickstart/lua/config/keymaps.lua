@@ -203,3 +203,5 @@ keymap.set('n', '<leader>ta', ':set list<cr>|:set listchars=tab:>-,space:.<cr>')
 -- goto next error
 keymap.set('n', '<leader>en', ':lua vim.diagnostic.goto_next()<cr>')
 keymap.set('n', '<leader>ep', ':lua vim.diagnostic.goto_prev()<cr>')
+
+vim.keymap.set('n', '<leader>st', ':!tmux send-keys -t "ssh tunnels" C-p Enter<cr><cr>')
