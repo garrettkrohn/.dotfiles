@@ -160,6 +160,7 @@ export GOOSE_DBSTRING=user="postgres password=postgres dbname=db host=localhost 
 # opencode
 export PATH=/Users/gkrohn/.opencode/bin:$PATH
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 #gpg
 export GPG_TTY=$(tty)
