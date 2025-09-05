@@ -96,13 +96,13 @@ return {
       end,
       desc = 'Command History',
     },
-    {
-      '<leader>ff',
-      function()
-        Snacks.picker.files()
-      end,
-      desc = 'Find Files',
-    },
+    -- {
+    --   '<leader>ff',
+    --   function()
+    --     Snacks.picker.files()
+    --   end,
+    --   desc = 'Find Files',
+    -- },
     {
       '<leader>fr',
       function()
