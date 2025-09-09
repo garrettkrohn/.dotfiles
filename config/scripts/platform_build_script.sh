@@ -1,7 +1,7 @@
 tmux kill-session -t local
-tmux new -d -s local
-tmux send-keys -t local 'beb -d -s -c' Enter
-tmux new-window -t local
-tmux send-keys -t local:2 'sleep 80 && feb' Enter
-tmux new-window -t local
-tmux send-keys -t local:3 'sleep 80 && boot -r' Enter
+tmux new -d -s local -n backend
+tmux send-keys -t local:backend 'beb -d -s -c' Enter
+tmux new-window -t local -n frontend
+tmux send-keys -t local:frontend 'sleep 100 && feb' Enter
+tmux new-window -t local -n bootstrap
+tmux send-keys -t local:bootstrap 'sleep 100 && boot -r' Enter
