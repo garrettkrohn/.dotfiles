@@ -94,6 +94,21 @@ path = "~"
 startup_command = "db"
 
 [[session]]
+name = "db_local"
+path = "~"
+startup_command = "db"
+
+[[session]]
+name = "db_dev"
+path = "~"
+startup_command = "db"
+
+[[session]]
+name = "db_prod"
+path = "~"
+startup_command = "db"
+
+[[session]]
 name = "ssh tunnels"
 path = "~/.ssh"
 startup_command = ""
