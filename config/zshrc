@@ -70,3 +70,16 @@ function fuzzy_nvim_start {
         kick $@
     fi
 }
+
+# custom scripts
+export PATH="$PATH:$HOME/dotfiles/config/scripts"
+
+# fnm
+export PATH="$PATH:$HOME/.fnm"
+eval "$(fnm env --use-on-cd --shell zsh)"
+
+# postgres
+export PATH="$PATH:/opt/homebrew/opt/postgresql@15/bin"
+
+# Python paths
+export PATH="$HOME/.local/bin:/usr/local/opt/python/libexec/bin:$PATH"

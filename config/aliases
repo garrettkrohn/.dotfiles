@@ -68,7 +68,7 @@ alias bebh="echo '-db to destroy db\n-skipTests to skip test'"
 
 # -skipbuild skips the build process
 alias feb="front_end_build.sh"
-alias febh="echo '-skipBuild to skip build'"
+alias cb="client_front_end_build.sh"
 
 
 alias boot="bootstrap.sh"
@@ -175,3 +175,8 @@ alias awslocal='aws --endpoint-url=http://localhost:4566'
 
 # tunnels
 alias t='/Users/gkrohn/code/tunnels/tunnels'
+
+alias pbs='platform_build_script.sh'
+
+# run jacoco tests
+alias mj='mvn org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven-plugin:report -Djacoco.formats=CSV' 
