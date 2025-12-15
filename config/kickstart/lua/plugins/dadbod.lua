@@ -48,7 +48,7 @@ return {
         },
         {
           name = 'ctl_dev',
-          url = string.format('postgresql://garrett.krohn:%s@localhost:1111/warehouse', pass 'ctl/dev'),
+          url = string.format('postgresql://garrett.krohn:%s@localhost:1111/warehouse', pass 'dw01'),
         },
       }
     end,

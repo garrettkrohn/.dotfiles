@@ -11,9 +11,9 @@ return {
     require('neotest').setup {
       adapters = {
         require 'neotest-jest' {
-          jestCommand = 'yarn test --',
+          jestCommand = 'pnpm test --',
           jestConfigFile = 'jest.config.js',
-          env = { CI = true, NODE_VERSION = 'v18.16.0' },
+          env = { CI = true, NODE_VERSION = 'v22.15.0' },
           cwd = function(path)
             return vim.fn.getcwd()
           end,

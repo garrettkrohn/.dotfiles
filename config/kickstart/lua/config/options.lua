@@ -55,3 +55,5 @@ vim.fn.sign_define('DiagnosticSignError', { text = icons.diagnostics.error, text
 vim.fn.sign_define('DiagnosticSignWarn', { text = icons.diagnostics.warn, texthl = 'DiagnosticSignWarn' })
 vim.fn.sign_define('DiagnosticSignInfo', { text = icons.diagnostics.info, texthl = 'DiagnosticSignInfo' })
 vim.fn.sign_define('DiagnosticSignHint', { text = icons.diagnostics.hint, texthl = 'DiagnosticSignHint' })
+
+vim.o.winborder = 'rounded'

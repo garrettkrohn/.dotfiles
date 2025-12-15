@@ -12,6 +12,8 @@ fi
 tmux new -d -s local -n backend
 tmux send-keys -t local:backend 'beb -d -s -c' Enter
 tmux new-window -t local -n frontend
-tmux send-keys -t local:frontend 'sleep 100 && feb' Enter
+tmux send-keys -t local:frontend 'sleep 150 && feb' Enter
+tmux new-window -t local -n client_ui
+tmux send-keys -t local:client_ui 'sleep 150 && feb -u' Enter
 tmux new-window -t local -n bootstrap
-tmux send-keys -t local:bootstrap 'sleep 100 && boot -r' Enter
+tmux send-keys -t local:bootstrap 'sleep 150 && boot -r' Enter

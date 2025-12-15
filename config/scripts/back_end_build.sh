@@ -4,6 +4,7 @@ destroy_db=false
 skip_tests=false
 clean=false
 debug=false
+newui=false
 
 print_help() {
     echo -e "\nScript for running Platform's backend\n"
@@ -12,6 +13,7 @@ print_help() {
     echo "  -skipTests or -s  -- will skip the tests in the maven build process"
     echo "  -clean or -c      -- perform mvn clean install"
     echo "  -debug            -- enable debug level trace"
+    echo "  -newui or -u      -- build new ui"
     exit 0
 }
 
@@ -32,6 +34,9 @@ for arg in "$@"; do
         ;;
     -debug)
         debug=true
+        ;;
+    -newui | -u)
+        newui=true
         ;;
     esac
 done
@@ -61,7 +66,11 @@ destroy_db_and_auth() {
 
     docker rm $(docker ps -a --filter "name=^/authenticator$" --format "{{.ID}}")
 
-    docker compose up db authenticator -d --build
+    if newui; then
+        docker compose up db authenticator -d --build --env.file .env.client_ui
+    else
+        docker compose up db authenticator -d --build
+    fi
 }
 
 # handle a graceful exit
@@ -90,7 +99,10 @@ print_pink "\nBUILDING PARENT LOCALLY\n"
 
 cd parent
 
-if $skip_tests; then
+if $skip_tests && $clean; then
+    print_pink "Maven Clean Install, skip tests"
+    mvn clean install -DskipTests -Djacoco.skip=true
+elif $skip_tests; then
     print_pink "Maven Install, skip tests"
     mvn install -DskipTests -Djacoco.skip=true
 elif $clean; then
