@@ -8,12 +8,16 @@ repos:
       - .github/workflows
       - scan/scanners/containers
       - warehouse
+      - client-ui
     postScript: ~/dotfiles/config/scripts/platform_build_script.sh
+    bareRepoName: .bare
     autoRunPostScript: false
   treekanga:
-    defaultBranch: dev
+    defaultBranch: main 
     zoxideFolders:
     worktreeTargetDir: /code/treekanga_work #assumes starting in the $HOME directory
+    bareRepoName: .bare
+    listDisplayMode: directory
   attack-surface-management:
     defaultBranch: development
     zoxideFolders:
@@ -21,3 +25,11 @@ repos:
       - backend
   dgsimgo:
     defaultBranch: main 
+  new_ui_platform_work:
+    defaultBranch: platform_next_ui
+    zoxideFolders:
+      - ui
+      - parent
+      - client-ui
+    postScript: ~/dotfiles/config/scripts/platform_build_script.sh
+    autoRunPostScript: false
