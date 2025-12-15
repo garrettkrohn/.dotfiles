@@ -3,8 +3,8 @@ prSections:
   filters: is:open author:@me
 - title: My Closed Requests
   filters: is:closed author:@me repo:netspi/offensive-security-platform
-- title: All Open Platform prs
-  filters: is:pr is:open PFASM in:title 
+- title: All Open Team PRs
+  filters: is:pr is:open author:garrettkrohn author:jekrch author:JSiok author:yrosen author:jcloeter author:pnankar
 - title: All Closed Platform prs
   filters: is:pr is:closed repo:netspi/offensive-security-platform
 - title: My Reviewed (open)
@@ -21,7 +21,8 @@ issuesSections:
 defaults:
   preview:
     open: true
-    width: 150
+    grow: true
+    # width: 150
   prsLimit: 20
   issuesLimit: 20
   view: prs
