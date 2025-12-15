@@ -3,11 +3,6 @@ name = "dotfiles"
 path = "~/dotfiles"
 startup_command = "kick"
 
-# [[session]]
-# name = "MLB"
-# path = "~/side/MLB-StatsAPI/"
-# startup_command = "python hr-k-draft.py"
-
 [[session]]
 name = "local"
 path = "~/code/platform_work"
@@ -51,12 +46,7 @@ startup_command = "ghd"
 [[session]]
 name = "journal"
 path = "~/notes/journal"
-startup_command = "kf"
-
-[[session]]
-name = "daily"
-path = "~/notes/journal"
-startup_command = "kick daily_checklist.md"
+startup_command = "./journal.sh"
 
 [[session]]
 name = "notes"
@@ -111,4 +101,14 @@ startup_command = "db"
 [[session]]
 name = "ssh tunnels"
 path = "~/.ssh"
+startup_command = ""
+
+[[session]]
+name = "treekanga bare"
+path = "~/code/treekanga_work/.bare"
+startup_command = ""
+
+[[session]]
+name = "platform bare"
+path = "~/code/platform_work/.bare"
 startup_command = ""
