@@ -19,6 +19,7 @@ alias ghd="gh dash"
 alias auth="source ~/code/rest/auth.sh"
 alias dap="nvim application/src/main/java/com/netspi/platform/Application.java"
 alias rg="mvn clean install && java -jar -Dspring.profiles.active=local ./target/global-service-0.0.1-SNAPSHOT.jar"
+alias rs="docker compose up -d temporal temporal-admin-tools temporal-ui scan-redis && mvn clean install && java -jar -Dspring.profiles.active=local ./target/temporal-client-0.0.1-SNAPSHOT.jar"
 alias s="sesh connect dotfiles"
 alias sd="~/code/sesh/sesh"
 alias sn="eval '$(fnm env)' && fnm use v18.16.0"
@@ -91,6 +92,7 @@ function tkdev {
   local folder
   folder=$(find ~/code/treekanga_work -mindepth 1 -maxdepth 1 -type d | fzf --prompt="Select a worktree: ")
   if [[ -n "$folder" ]]; then
+    # echo "$folder" # for debugging
     "$folder"/treekanga "$@" || return
   fi
 }
@@ -180,3 +182,10 @@ alias pbs='platform_build_script.sh'
 
 # run jacoco tests
 alias mj='mvn org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven-plugin:report -Djacoco.formats=CSV' 
+
+alias ll='ls -lG'
+
+alias ca='cursor-agent'
+
+alias cb='pnpm clean && pnpm install && pnpm build && pnpm preview'
+alias pb='pnpm clean && pnpm install && pnpm build'
