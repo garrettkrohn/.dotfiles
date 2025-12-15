@@ -125,7 +125,7 @@ alt-b = 'workspace B' # Browser
 alt-c = 'workspace C' # keymapp
 alt-d = 'workspace D' # Discord 
 # alt-e = 'workspace E'
-# alt-f = 'workspace F'
+alt-f = 'workspace F'
 alt-g = 'workspace G' # dataGrip
 alt-i = 'workspace I' # Intellij
 alt-m = 'workspace M' # messaging /media (texting and spotify) 
@@ -158,7 +158,7 @@ alt-shift-b = 'move-node-to-workspace B'
 alt-shift-c = 'move-node-to-workspace C'
 alt-shift-d = 'move-node-to-workspace D'
 # alt-shift-e = 'move-node-to-workspace E'
-# alt-shift-f = 'move-node-to-workspace F'
+alt-shift-f = 'move-node-to-workspace F'
 alt-shift-g = 'move-node-to-workspace G'
 alt-shift-i = 'move-node-to-workspace I'
 alt-shift-m = 'move-node-to-workspace M'
@@ -213,6 +213,10 @@ run = "move-node-to-workspace C"
 [[on-window-detected]]
 if.app-id = 'com.hnc.Discord'
 run = "move-node-to-workspace D"
+
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+run = "move-node-to-workspace F"
 
 [[on-window-detected]]
 if.app-id = 'com.jetbrains.datagrip'
@@ -286,13 +290,14 @@ run = "move-node-to-workspace Z"
 [workspace-to-monitor-force-assignment]
 A = 'DELL'
 B = ['LG', '2', 'built-in']
-C = 'LG'
+C = 'DELL'
 D = 'LG'
+F = 'built-in'
 G = 'LG'
 M = 'LG'
 S = 'LG'
-T = 'LG'
-Z = ['LG','built-in']
+T = 'DELL'
+Z = ['built-in']
 
 # borders bootstrap
 # after-startup-command = [
