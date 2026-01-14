@@ -19,7 +19,7 @@ alias ghd="gh dash"
 alias auth="source ~/code/rest/auth.sh"
 alias dap="nvim application/src/main/java/com/netspi/platform/Application.java"
 alias rg="mvn clean install && java -jar -Dspring.profiles.active=local ./target/global-service-0.0.1-SNAPSHOT.jar"
-alias rs="docker compose up -d temporal temporal-admin-tools temporal-ui scan-redis && mvn clean install && java -jar -Dspring.profiles.active=local ./target/temporal-client-0.0.1-SNAPSHOT.jar"
+alias rs="run_scan_service.sh"
 alias s="sesh connect dotfiles"
 alias sd="~/code/sesh/sesh"
 alias sn="eval '$(fnm env)' && fnm use v18.16.0"
@@ -46,6 +46,8 @@ kf() {
 ks() {
   nvim -c ":lua Snacks.picker.grep({ input = '$1' })"
 }
+
+alias diff="nvim -c ':DiffviewOpen origin/development...HEAD'"
 
 # Telescope
 # kf() {
