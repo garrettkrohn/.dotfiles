@@ -1,6 +1,6 @@
 return {
   'nvim-java/nvim-java',
-  tag = 'v2.1.0',
+  tag = 'v4.0.4',
   ft = { 'java' },
   jdtls = {
     version = 'v1.43.0',
