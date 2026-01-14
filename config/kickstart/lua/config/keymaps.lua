@@ -205,3 +205,8 @@ keymap.set('n', '<leader>en', ':lua vim.diagnostic.goto_next()<cr>')
 keymap.set('n', '<leader>ep', ':lua vim.diagnostic.goto_prev()<cr>')
 
 vim.keymap.set('n', '<leader>st', ':!tmux send-keys -t "ssh tunnels" C-p Enter<cr><cr>')
+
+-- open up diff in a new tab
+vim.keymap.set('n', '<leader>td', function()
+  vim.fn.system "tmux new-window -n diff && tmux send-keys 'diff' Enter"
+end, { desc = 'Open diff in new tmux window' })
