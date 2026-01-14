@@ -39,8 +39,8 @@ path = "~/dotfiles/config/tmux/"
 startup_command = "kick tmux.conf"
 
 [[session]]
-name = "ghd"
-path = "~/"
+name = "review"
+path = "~/code/platform_work/review/"
 startup_command = "ghd"
 
 [[session]]
@@ -86,17 +86,17 @@ startup_command = "db"
 [[session]]
 name = "db_local"
 path = "~"
-startup_command = "db"
+startup_command = "nvim -c ':DadView local'"
 
 [[session]]
 name = "db_dev"
 path = "~"
-startup_command = "db"
+startup_command = "nvim -c ':DadView platform_dev'"
 
 [[session]]
 name = "db_prod"
 path = "~"
-startup_command = "db"
+startup_command = "nvim -c ':DadView platform_prod'"
 
 [[session]]
 name = "ssh tunnels"
@@ -112,3 +112,13 @@ startup_command = ""
 name = "platform bare"
 path = "~/code/platform_work/.bare"
 startup_command = ""
+
+[[session]]
+name = "vtop"
+path = "~"
+startup_command = "vtop"
+
+[[session]]
+name = "design docs"
+path = "/Users/gkrohn/notes/design_docs"
+startup_command = "kick"
