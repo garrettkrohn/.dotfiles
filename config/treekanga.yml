@@ -18,6 +18,7 @@ repos:
     worktreeTargetDir: /code/treekanga_work #assumes starting in the $HOME directory
     bareRepoName: .bare
     listDisplayMode: directory
+    autoPull: true
   attack-surface-management:
     defaultBranch: development
     zoxideFolders:
@@ -33,3 +34,8 @@ repos:
       - client-ui
     postScript: ~/dotfiles/config/scripts/platform_build_script.sh
     autoRunPostScript: false
+  integration-manager-service:
+    defaultBranch: development
+    worktreeTargetDir: /code/integration_manager_work
+    bareRepoName: .bare
+
