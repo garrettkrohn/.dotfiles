@@ -14,11 +14,41 @@ return {
           ██████╔╝██║  ██║██╗     ╚████╔╝ ██║██║ ╚═╝ ██║
           ╚═════╝ ╚═╝  ╚═╝╚═╝      ╚═══╝  ╚═╝╚═╝     ╚═╝
           ]],
+        keys = {
+          {
+            icon = ' ',
+            key = 'f',
+            desc = 'Find File',
+            action = function()
+              require('fff').find_files()
+            end,
+          },
+          {
+            icon = '󰊄 ',
+            key = 'r',
+            desc = 'Recent Files',
+            action = function()
+              Snacks.picker.recent()
+            end,
+          },
+          {
+            icon = ' ',
+            key = 'c',
+            desc = 'Config',
+            action = function()
+              Snacks.picker.files { cwd = vim.fn.stdpath 'config' }
+            end,
+          },
+          { icon = ' ', key = 's', desc = 'Restore Session', section = 'session' },
+          { icon = '󰒲 ', key = 'l', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
+          { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
+        },
       },
     },
     indent = {
       enabled = true,
     },
+    -- rest of your config...
     ---@class snacks.lazygit.Config: snacks.terminal.Opts
     ---@field args? string[]
     ---@field theme? snacks.lazygit.Theme
