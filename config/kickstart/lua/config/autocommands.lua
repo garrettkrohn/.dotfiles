@@ -73,3 +73,20 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     end
   end,
 })
+
+-- lsp attach for diffview
+vim.api.nvim_create_autocmd('BufReadPost', {
+  pattern = '*',
+  callback = function(args)
+    local buftype = vim.bo[args.buf].buftype
+    if buftype == 'nowrite' then
+      -- Get the filetype and manually trigger LSP
+      local ft = vim.bo[args.buf].filetype
+      if ft ~= '' and ft ~= 'diff' then
+        vim.schedule(function()
+          vim.cmd 'LspStart'
+        end)
+      end
+    end
+  end,
+})
