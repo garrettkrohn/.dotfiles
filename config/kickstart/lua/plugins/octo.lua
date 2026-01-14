@@ -8,6 +8,7 @@ return {
     'nvim-tree/nvim-web-devicons',
   },
   config = function()
+    vim.g.octo_logfile = vim.fn.stdpath 'cache' .. '/octo_debug.log'
     require('octo').setup {
       default_remote = { 'upstream', 'origin' }, -- order to try remotes
       enable_builtin = true,
@@ -37,6 +38,7 @@ return {
       file_panel = {
         size = 10, -- changed files panel rows
         use_icons = true, -- use web-devicons in file panel (if false, nvim-web-devicons does not need to be installed)
+        use_local_fs = true,
       },
       mappings = {
         issue = {
