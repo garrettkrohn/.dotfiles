@@ -54,7 +54,7 @@ inner.horizontal = 2
 inner.vertical =   2
 outer.left =       2
 outer.bottom =     2
-outer.top =        [{monitor.built-in = 25}, 2]
+outer.top =        [{monitor.built-in = 2}, 2]
 outer.right =      2
 
 # 'main' binding mode declaration
