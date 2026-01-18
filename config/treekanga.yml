@@ -7,7 +7,7 @@ repos:
       - parent/application/src/main/resources/db/migration
       - .github/workflows
       - scan/scanners/containers
-      - warehouse
+      - scan/scan-engine
       - client-ui
     postScript: ~/dotfiles/config/scripts/platform_build_script.sh
     bareRepoName: .bare
