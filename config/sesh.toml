@@ -86,17 +86,17 @@ startup_command = "db"
 [[session]]
 name = "db_local"
 path = "~"
-startup_command = "nvim -c ':DadView local'"
+startup_command = "nvim -u ~/.config/nvim/minimal.lua -c ':DadView local'"
 
 [[session]]
 name = "db_dev"
 path = "~"
-startup_command = "nvim -c ':DadView platform_dev'"
+startup_command = "nvim -u ~/.config/nvim/minimal.lua -c ':DadView platform_dev'"
 
 [[session]]
 name = "db_prod"
 path = "~"
-startup_command = "nvim -c ':DadView platform_prod'"
+startup_command = "nvim -u ~/.config/nvim/minimal.lua -c ':DadView platform_prod'"
 
 [[session]]
 name = "ssh tunnels"
