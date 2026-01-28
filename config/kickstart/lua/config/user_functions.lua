@@ -238,3 +238,7 @@ vim.api.nvim_create_user_command('RevertToDev', function()
     end,
   })
 end, {})
+
+vim.api.nvim_create_user_command('DiagnosticsToQf', function()
+  vim.diagnostic.setqflist { severity = vim.diagnostic.severity.ERROR }
+end, {})
