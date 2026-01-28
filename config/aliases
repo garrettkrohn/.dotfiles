@@ -89,7 +89,7 @@ alias gw="git worktree"
 alias gwa="git worktree add"
 alias gwr="git worktree remove -f"
 alias gwl="git worktree list"
-alias tkd="/Users/gkrohn/code/treekanga_work/dev/treekanga"
+alias tkd="/Users/gkrohn/code/treekanga_work/tui/treekanga tui"
 function tkdev {
   local folder
   folder=$(find ~/code/treekanga_work -mindepth 1 -maxdepth 1 -type d | fzf --prompt="Select a worktree: ")
@@ -101,7 +101,11 @@ function tkdev {
 
 alias settkd='export TREEKANGA_WORKTREE="$(pwd)"'
 alias tk="/opt/homebrew/bin/treekanga"
-alias tka="/opt/homebrew/bin/treekanga -d /Users/gkrohn/code/platform_work/platform_bare add"
+alias .tk="./treekanga"
+alias tka="/opt/homebrew/bin/treekanga add"
+# alias tkd="/opt/homebrew/bin/treekanga delete"
+alias tkl="/opt/homebrew/bin/treekanga list"
+alias tkt="treekanga tui"
 
 alias p="/Users/gkrohn/code/pluck/pluck"
 
