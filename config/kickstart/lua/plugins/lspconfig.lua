@@ -2,7 +2,6 @@ return {
   -- Main LSP Configuration
   'neovim/nvim-lspconfig',
   event = { 'BufReadPre', 'BufNewFile', 'BufWritePre' },
-  cmds = { 'LspCopilotSignIn' },
   dependencies = {
     { 'mason-org/mason.nvim', opts = {} },
     'mason-org/mason-lspconfig.nvim',
@@ -179,8 +178,6 @@ return {
     --  - settings (table): Override the default settings passed when initializing the server.
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
-      copilot = {},
-
       gopls = {},
 
       eslint = {
@@ -299,11 +296,11 @@ return {
 
     -- vim.lsp.inline_completion.enable()
 
-    vim.keymap.set('i', '<Tab>', function()
-      if not vim.lsp.inline_completion.get() then
-        return '<Tab>'
-      end
-    end, { expr = true, desc = 'Accept the current inline completion' })
+    -- vim.keymap.set('i', '<Tab>', function()
+    --   if not vim.lsp.inline_completion.get() then
+    --     return '<Tab>'
+    --   end
+    -- end, { expr = true, desc = 'Accept the current inline completion' })
 
     require('mason-nvim-dap').setup()
   end,
