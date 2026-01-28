@@ -45,7 +45,6 @@ if $newui; then
         pnpm install
         pnpm api
     fi
-    say "front end build complete"
     pnpm run dev:no-open
 else
     echo "starting old ui"
@@ -68,6 +67,5 @@ else
         yarn api
         yarn build
     fi
-    say "front end build complete"
     yarn start-4444 --no-open
 fi

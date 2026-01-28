@@ -106,12 +106,12 @@ startup_command = ""
 [[session]]
 name = "treekanga bare"
 path = "~/code/treekanga_work/.bare"
-startup_command = ""
+startup_command = "tkt"
 
 [[session]]
 name = "platform bare"
 path = "~/code/platform_work/.bare"
-startup_command = ""
+startup_command = "tkt"
 
 [[session]]
 name = "vtop"

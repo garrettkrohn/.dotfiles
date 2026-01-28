@@ -10,9 +10,9 @@ require 'config.lazy-bootstrap'
 require 'config.lazy-plugins'
 require 'config.keymaps'
 require 'config.treesitter-setup'
-require 'config.lsp-setup'
+-- require 'config.lsp-setup'
 require 'config.autocommands'
-require 'config.snippets'
+-- require 'config.snippets'
 require 'config.user_functions'
 
 vim.cmd [[

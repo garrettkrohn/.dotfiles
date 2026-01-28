@@ -11,6 +11,10 @@ return {
     layout = {
       prompt_position = 'top',
     },
+    keymaps = {
+      move_up = { '<Up>', '<C-k>' },
+      move_down = { '<Down>', '<C-j>' },
+    },
   },
   -- No need to lazy-load with lazy.nvim.
   -- This plugin initializes itself lazily.

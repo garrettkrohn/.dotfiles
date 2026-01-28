@@ -31,7 +31,7 @@ local config = {
     b.get_background(dark_opacity, light_opacity),
   },
 
-  font_size = 13,
+  font_size = 15,
 
   line_height = 1.1,
   font = wezterm.font_with_fallback {
@@ -41,6 +41,7 @@ local config = {
     -- 'CommitMono',
     -- 'Monaspace Argon',
     -- 'Monaspace Krypton',
+    'victor mono',
     'Monaspace Neon',
     'Monaspace Radon',
     'Monaspace Xenon',
