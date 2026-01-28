@@ -1,13 +1,12 @@
 repos:
   offensive-security-platform:
     defaultBranch: development
+    worktreeTargetDir: /code/platform_work #assumes starting in the $HOME directory
     zoxideFolders:
-      - ui
-      - parent
       - parent/application/src/main/resources/db/migration
       - .github/workflows
       - scan/scanners/containers
-      - warehouse
+      - scan/scan-engine
       - client-ui
     postScript: ~/dotfiles/config/scripts/platform_build_script.sh
     bareRepoName: .bare
@@ -16,6 +15,8 @@ repos:
     defaultBranch: main 
     zoxideFolders:
     worktreeTargetDir: /code/treekanga_work #assumes starting in the $HOME directory
+    postScript: ~/dotfiles/config/scripts/test_post_script.sh
+    autoRunPostScript: false
     bareRepoName: .bare
     listDisplayMode: directory
     autoPull: true
