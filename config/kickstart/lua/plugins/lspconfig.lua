@@ -302,7 +302,8 @@ return {
     --   end
     -- end, { expr = true, desc = 'Accept the current inline completion' })
 
-    require('mason-nvim-dap').setup()
+    -- mason-nvim-dap is configured in debug.lua instead
+    -- require('mason-nvim-dap').setup()
   end,
 }
 

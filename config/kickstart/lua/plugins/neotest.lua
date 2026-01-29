@@ -4,7 +4,6 @@ return {
     'nvim-neotest/neotest-jest',
     'nvim-neotest/neotest-python',
     'rcasia/neotest-java',
-    'mfussenegger/nvim-jdtls',
   },
   config = function()
     ---@diagnostic disable: missing-fields
