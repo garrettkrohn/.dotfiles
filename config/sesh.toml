@@ -4,6 +4,11 @@ path = "~/dotfiles"
 startup_command = "kick"
 
 [[session]]
+name = "dotfiles/secrets/scripts"
+path = "~/dotfiles/config/secrets/scripts/"
+startup_command = "kick"
+
+[[session]]
 name = "local"
 path = "~/code/platform_work"
 startup_command = ""
@@ -122,3 +127,8 @@ startup_command = "vtop"
 name = "design docs"
 path = "/Users/gkrohn/notes/design_docs"
 startup_command = "kick"
+
+[[session]]
+name = "daplogs"
+path = "/Users/gkrohn/.cache/nvim"
+startup_command = "kick dap.log"
