@@ -3,6 +3,7 @@ repos:
     defaultBranch: development
     worktreeTargetDir: /code/platform_work #assumes starting in the $HOME directory
     zoxideFolders:
+      - parent
       - parent/application/src/main/resources/db/migration
       - .github/workflows
       - scan/scanners/containers
