@@ -28,35 +28,8 @@ return {
     -- Valid levels: TRACE, DEBUG, INFO, WARN, ERROR
     dap.set_log_level 'DEBUG'
 
-    -- Manual Java DAP setup (nvim-java automatic setup disabled to avoid errors)
-    -- Set up basic Java attach configurations for manual debugging
-    dap.configurations.java = {
-      {
-        type = 'java',
-        request = 'attach',
-        name = 'Attach to Java Process (port 5005)',
-        hostName = '127.0.0.1',
-        port = 5005,
-      },
-      {
-        type = 'java',
-        request = 'attach',
-        name = 'Attach to Custom Port',
-        hostName = '127.0.0.1',
-        port = function()
-          return tonumber(vim.fn.input('Port: ', '5005'))
-        end,
-      },
-    }
-    
-    -- Simple Java adapter that attaches to a running process
-    dap.adapters.java = function(callback, config)
-      callback({
-        type = 'server',
-        host = config.hostName,
-        port = config.port,
-      })
-    end
+    -- Java DAP setup is handled by nvim-java plugin with java_debug_adapter enabled
+    -- No manual adapter configuration needed here
 
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with

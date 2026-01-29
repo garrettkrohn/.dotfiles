@@ -3,9 +3,9 @@ return {
   -- Load eagerly so it's available when lspconfig sets up jdtls
   lazy = false,
   config = function()
-    -- Setup nvim-java WITHOUT automatic DAP - we'll configure it manually
+    -- Setup nvim-java without automatic DAP - we'll configure manually
     require('java').setup {
-      -- Completely disable automatic DAP setup to avoid repeated errors
+      -- Disable automatic DAP to avoid workspace command issues
       java_debug_adapter = {
         enable = false,
       },

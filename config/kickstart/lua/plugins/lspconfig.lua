@@ -183,7 +183,13 @@ return {
     local servers = {
       gopls = {},
 
-      jdtls = {},
+      jdtls = {
+        init_options = {
+          bundles = {
+            vim.fn.glob(vim.fn.stdpath('data') .. '/mason/packages/java-debug-adapter/extension/server/*.jar', 1),
+          },
+        },
+      },
 
       eslint = {
         settings = { workingDirectories = { mode = 'auto' } },
