@@ -19,14 +19,6 @@ return {
     'nvim-neotest/nvim-nio',
 
     'leoluz/nvim-dap-go',
-    
-    -- Add nvim-java as a dependency so it loads before DAP tries to use it
-    {
-      'nvim-java/nvim-java',
-      dependencies = {
-        'nvim-java/nvim-java-dap',
-      },
-    },
   },
   config = function()
     local dap = require 'dap'
@@ -36,17 +28,34 @@ return {
     -- Valid levels: TRACE, DEBUG, INFO, WARN, ERROR
     dap.set_log_level 'DEBUG'
 
-    -- Setup nvim-java first to ensure Java adapter is registered
-    local ok, java = pcall(require, 'java')
-    if ok then
-      java.setup {
-        java_debug_adapter = {
-          enable = true,
-        },
-        dap = {
-          config_overrides = {},
-        },
-      }
+    -- Manual Java DAP setup (nvim-java automatic setup disabled to avoid errors)
+    -- Set up basic Java attach configurations for manual debugging
+    dap.configurations.java = {
+      {
+        type = 'java',
+        request = 'attach',
+        name = 'Attach to Java Process (port 5005)',
+        hostName = '127.0.0.1',
+        port = 5005,
+      },
+      {
+        type = 'java',
+        request = 'attach',
+        name = 'Attach to Custom Port',
+        hostName = '127.0.0.1',
+        port = function()
+          return tonumber(vim.fn.input('Port: ', '5005'))
+        end,
+      },
+    }
+    
+    -- Simple Java adapter that attaches to a running process
+    dap.adapters.java = function(callback, config)
+      callback({
+        type = 'server',
+        host = config.hostName,
+        port = config.port,
+      })
     end
 
     require('mason-nvim-dap').setup {
@@ -65,34 +74,8 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
-        -- java-debug-adapter is handled by nvim-java, not mason
       },
     }
-    
-    -- Set up Java debug configurations
-    -- Wait a moment for nvim-java to register the adapter
-    vim.defer_fn(function()
-      if dap.adapters.java then
-        dap.configurations.java = {
-          {
-            type = 'java',
-            request = 'attach',
-            name = 'Attach to Application (port 5005)',
-            hostName = '127.0.0.1',
-            port = 5005,
-          },
-          {
-            type = 'java',
-            request = 'attach',
-            name = 'Attach to Custom Port',
-            hostName = '127.0.0.1',
-            port = function()
-              return tonumber(vim.fn.input('Port: ', '5005'))
-            end,
-          },
-        }
-      end
-    end, 200)
     
     -- Install golang specific config
     require('dap-go').setup()
