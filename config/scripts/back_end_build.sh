@@ -122,10 +122,10 @@ fi
 print_pink "run java container"
 
 if $debug; then
-    java -jar -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Dspring.profiles.active=local ./application/target/application-1.0-SNAPSHOT.jar --logging.level.root=DEBUG &
+    java -jar -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Dspring.profiles.active=local ./application/target/application-1.0-SNAPSHOT.jar -Dcglib.debugLocation=/tmp --logging.level.root=DEBUG &
     java_pid=$!
 else
-    java -jar -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Dspring.profiles.active=local ./application/target/application-1.0-SNAPSHOT.jar &
+    java -jar -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Dspring.profiles.active=local ./application/target/application-1.0-SNAPSHOT.jar -Dcglib.debugLocation=/tmp &
     java_pid=$!
 fi
 
