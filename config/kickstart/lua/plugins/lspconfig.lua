@@ -7,6 +7,9 @@ return {
     'mason-org/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
 
+    -- Java support
+    'nvim-java/nvim-java',
+
     -- dap
     'mfussenegger/nvim-dap',
     { 'jay-babu/mason-nvim-dap.nvim' },
@@ -180,6 +183,8 @@ return {
     local servers = {
       gopls = {},
 
+      jdtls = {},
+
       eslint = {
         settings = { workingDirectories = { mode = 'auto' } },
         filetypes = {
@@ -291,7 +296,13 @@ return {
         capabilities = capabilities,
       }, config)
 
-      lspconfig[server_name].setup(server_config)
+      -- Handle jdtls specially - nvim-java must be initialized first
+      if server_name == 'jdtls' then
+        -- nvim-java is already set up in java-nvim.lua, just configure lspconfig
+        lspconfig.jdtls.setup(server_config)
+      else
+        lspconfig[server_name].setup(server_config)
+      end
     end
 
     -- vim.lsp.inline_completion.enable()
