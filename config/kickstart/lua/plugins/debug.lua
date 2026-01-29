@@ -60,7 +60,8 @@ return {
     vim.keymap.set('n', '<F1>', dap.step_over, { desc = 'Debug: Step Over' })
     vim.keymap.set('n', '<F2>', dap.step_into, { desc = 'Debug: Step Into' })
     vim.keymap.set('n', '<F3>', dap.step_out, { desc = 'Debug: Step Out' })
-    vim.keymap.set('n', '<leader>ds', dap.close, { desc = 'Debug: Stop' })
+    vim.keymap.set('n', '<leader>ds', ':Dap<CR>', { desc = 'Debug: Start Java Debugger' })
+    vim.keymap.set('n', '<leader>dx', dap.close, { desc = 'Debug: Stop' })
     vim.keymap.set('n', '<leader>do', dapui.open, { desc = 'Dapui: Open' })
     vim.keymap.set('n', '<leader>dc', dapui.close, { desc = 'Dapui: Close' })
     vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
@@ -75,6 +76,7 @@ return {
       --    Feel free to remove or use ones that you like more! :)
       --    Don't feel like these are good choices.
       icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
+      expand_lines = false, -- Disable hover popup for long lines
       controls = {
         enabled = false,
         element = 'repl',
