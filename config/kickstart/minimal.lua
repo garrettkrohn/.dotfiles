@@ -500,7 +500,8 @@ require('lazy').setup {
       --   end
       -- end, { expr = true, desc = 'Accept the current inline completion' })
 
-      require('mason-nvim-dap').setup()
+      -- mason-nvim-dap is configured in debug.lua instead
+      -- require('mason-nvim-dap').setup()
     end,
   },
   {
@@ -570,71 +571,24 @@ require('lazy').setup {
       vim.cmd.colorscheme 'catppuccin'
     end,
   },
+  {
+    'christoomey/vim-tmux-navigator', -- tmux & split window navigation
+    event = 'BufEnter *',
+  },
+  {
+    lazy = false,
+    'stevearc/oil.nvim',
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {
+      show_hidden = true,
+    },
+    -- Optional dependencies
+    dependencies = { { 'echasnovski/mini.icons', opts = {} } },
+    -- dependencies = { 'nvim-tree/nvim-web-devicons' }, -- use if prefer nvim-web-devicons
+  },
 }
 
 require 'config.keymaps'
 require 'config.autocommands'
 require 'config.user_functions'
-vim.api.nvim_create_user_command('MemoryCheck', function(opts)
-  local pid = opts.args
-
-  -- If no PID provided, try to get it from current buffer
-  if pid == '' then
-    -- Try to get PID from buffer name (common for terminal buffers)
-    local bufname = vim.api.nvim_buf_get_name(0)
-
-    -- Check if it's a terminal buffer
-    if vim.bo.buftype == 'terminal' then
-      -- Get the job ID and then the PID
-      local chan_id = vim.b.terminal_job_id
-      if chan_id then
-        pid = vim.fn.jobpid(chan_id)
-      end
-    end
-
-    -- If still no PID, check buffer name for patterns like "term://...//12345:..."
-    if not pid then
-      pid = bufname:match ':(%d+):'
-    end
-
-    -- Last resort: use Neovim's own PID
-    if not pid then
-      pid = vim.fn.getpid()
-      print('No process found in buffer, using Neovim PID: ' .. pid)
-    end
-  end
-
-  -- Use ps to get memory info
-  local result = vim.fn.system(string.format('ps -p %s -o rss,vsz,%%mem,command', pid))
-
-  if vim.v.shell_error ~= 0 then
-    print('Error: Process not found or invalid PID: ' .. pid)
-    return
-  end
-
-  -- Display in a floating window
-  local lines = vim.split(result, '\n')
-  local buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
-
-  local width = 80
-  local height = #lines
-  local win = vim.api.nvim_open_win(buf, true, {
-    relative = 'editor',
-    width = width,
-    height = height,
-    col = (vim.o.columns - width) / 2,
-    row = (vim.o.lines - height) / 2,
-    style = 'minimal',
-    border = 'rounded',
-    title = ' Memory Usage for PID ' .. pid .. ' ',
-    title_pos = 'center',
-  })
-
-  -- Close on any key
-  vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = buf })
-  vim.keymap.set('n', '<Esc>', '<cmd>close<cr>', { buffer = buf })
-end, {
-  nargs = '?', -- Optional argument
-  desc = 'Check memory usage for a given PID or current buffer process',
-})
