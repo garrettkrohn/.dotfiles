@@ -1,12 +1,17 @@
 return {
   'mfussenegger/nvim-dap',
-  ft = { 'java' },
+  -- Load lazily on first use, but make commands available
+  cmd = { 'DapContinue', 'DapToggleBreakpoint', 'DapStepOver', 'DapStepInto', 'DapStepOut' },
+  keys = {
+    { '<leader>dg', desc = 'Debug: Start/Continue' },
+    { '<leader>b', desc = 'Debug: Toggle Breakpoint' },
+    { '<F1>', desc = 'Debug: Step Over' },
+    { '<F2>', desc = 'Debug: Step Into' },
+    { '<F3>', desc = 'Debug: Step Out' },
+  },
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
-
-    'igorlfs/nvim-dap-view',
-    opts = {},
 
     -- Installs the debug adapters for you
     'williamboman/mason.nvim',
@@ -14,47 +19,87 @@ return {
     'nvim-neotest/nvim-nio',
 
     'leoluz/nvim-dap-go',
+    
+    -- Add nvim-java as a dependency so it loads before DAP tries to use it
+    {
+      'nvim-java/nvim-java',
+      dependencies = {
+        'nvim-java/nvim-java-dap',
+      },
+    },
   },
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
+
+    -- Set DAP log level before any debug sessions
+    -- Valid levels: TRACE, DEBUG, INFO, WARN, ERROR
+    dap.set_log_level 'DEBUG'
+
+    -- Setup nvim-java first to ensure Java adapter is registered
+    local ok, java = pcall(require, 'java')
+    if ok then
+      java.setup {
+        java_debug_adapter = {
+          enable = true,
+        },
+        dap = {
+          config_overrides = {},
+        },
+      }
+    end
 
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
       -- reasonable debug configurations
       automatic_setup = true,
 
-      -- You can provide additional configuration to the handlers,
-      -- see mason-nvim-dap README for more information
-      handlers = {},
+      handlers = {
+        function(config)
+          require('mason-nvim-dap').default_setup(config)
+        end,
+      },
 
       -- You'll need to check that you have the required things installed
       -- online, please don't ask me how to install them :)
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
+        -- java-debug-adapter is handled by nvim-java, not mason
       },
     }
+    
+    -- Set up Java debug configurations
+    -- Wait a moment for nvim-java to register the adapter
+    vim.defer_fn(function()
+      if dap.adapters.java then
+        dap.configurations.java = {
+          {
+            type = 'java',
+            request = 'attach',
+            name = 'Attach to Application (port 5005)',
+            hostName = '127.0.0.1',
+            port = 5005,
+          },
+          {
+            type = 'java',
+            request = 'attach',
+            name = 'Attach to Custom Port',
+            hostName = '127.0.0.1',
+            port = function()
+              return tonumber(vim.fn.input('Port: ', '5005'))
+            end,
+          },
+        }
+      end
+    end, 200)
+    
     -- Install golang specific config
     require('dap-go').setup()
 
-    -- dap.adapters.java = {
-    --   type = 'server',
-    --   port = 8082,
-    -- }
-    --
-    -- dap.configurations.java = {
-    --   {
-    --     type = 'java',
-    --     request = 'attach',
-    --     name = 'Debug (Attach)-application',
-    --     hostName = '127.0.0.1',
-    --     port = 8082,
-    --   },
-    -- }
-
     -- Basic debugging keymaps, feel free to change to your liking!
     vim.keymap.set('n', '<leader>dg', dap.continue, { desc = 'Debug: Start/Continue' })
+    
     -- vim.keymap.set('n', '<F1>', dap.continue, { desc = 'Debug: Start/Continue' })
     vim.keymap.set('n', '<F1>', dap.step_over, { desc = 'Debug: Step Over' })
     vim.keymap.set('n', '<F2>', dap.step_into, { desc = 'Debug: Step Into' })
@@ -113,6 +158,16 @@ return {
 
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
     vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
+
+    -- Disable hover popups in dapui windows
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'dapui_*',
+      callback = function(event)
+        -- Disable LSP hover keymaps in dapui buffers
+        vim.keymap.set('n', 'K', '<Nop>', { buffer = event.buf })
+        vim.keymap.set('n', '<leader>ty', '<Nop>', { buffer = event.buf })
+      end,
+    })
 
     -- dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     -- dap.listeners.before.event_terminated['dapui_config'] = dapui.close

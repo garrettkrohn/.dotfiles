@@ -20,7 +20,17 @@ return {
             key = 'f',
             desc = 'Find File',
             action = function()
-              require('fff').find_files()
+              -- Use pcall to catch errors and fallback to Snacks picker
+              local ok, fff = pcall(require, 'fff')
+              if ok then
+                local success = pcall(fff.find_files, { cwd = vim.fn.getcwd() })
+                if not success then
+                  vim.notify('fff.nvim error, falling back to Snacks picker', vim.log.levels.WARN)
+                  Snacks.picker.files()
+                end
+              else
+                Snacks.picker.files()
+              end
             end,
           },
           {
@@ -64,11 +74,11 @@ return {
       },
     },
     picker = {
-      enabled = false,
+      enabled = true,
     },
     notifier = {
       enabled = true,
-      timeout = 2000,
+      timeout = 10000,
     },
     scratch = {
       enabled = true,

@@ -1,5 +1,6 @@
 return {
   lazy = true,
+  enabled = false,
   'sindrets/diffview.nvim',
   cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles' },
   config = function()
