@@ -86,3 +86,10 @@ export PATH="$HOME/.local/bin:/usr/local/opt/python/libexec/bin:$PATH"
 
 # bob path
 . "/Users/gkrohn/.local/share/bob/env/env.sh"
+
+
+export EDITOR="nvim"
+export VISUAL="nvim"
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
