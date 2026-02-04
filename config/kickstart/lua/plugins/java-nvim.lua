@@ -15,6 +15,8 @@ return {
       jdk = {
         auto_install = false,
       },
+      -- Use Java 21 instead of the Mason-installed Java 17
+      java_home = '/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home',
     }
   end,
 }
