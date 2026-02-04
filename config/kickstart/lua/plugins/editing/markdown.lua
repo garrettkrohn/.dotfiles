@@ -6,7 +6,7 @@ return {
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
-    config = {
+    config = function()
       require('render-markdown').setup {
         link = {
           enabled = true,
@@ -109,8 +109,8 @@ return {
           above = 0,
           below = 0,
         },
-      },
-    },
+      }
+    end,
   },
   {
     'OXY2DEV/markview.nvim',
