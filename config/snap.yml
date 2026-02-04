@@ -1,0 +1,89 @@
+commands:
+  tmux-kill:
+    targetDir: ~
+    command: tmux kill-server
+  rebuild-snap:
+    targetDir: ~/code/snap_work/main
+    command: gb
+  open-docker:
+    targetDir: ~
+    command: do
+  clear-jdtls-cache:
+    targetDir: ~
+    command: rm -rf ~/.cache/jdtls/workspace/*
+
+
+  restart-ssh:
+    tmuxSession: ssh tunnels
+    tmuxWindow: ssh
+    command: t dev01
+    createIfNotExist: true
+
+  platform-full-build:
+    sequence:
+      - stop-back-end
+      - stop-client-ui
+      - set-worktree-path
+      - beb -c -s -d
+      - delay: 150
+      - build-client-ui
+      - run-bootstrap
+
+  #client ui
+  restart-client-ui:
+    sequence:
+      - stop-client-ui
+      - delay: 1
+      - start-client-ui
+  start-client-ui:
+    sequence:
+      - start-client-ui
+  build-client-ui:
+    sequence:
+      - build-client-ui
+
+  # backend
+  restart-back-end:
+    sequence:
+      - kill-back-end
+      - delay: 2
+      - beb -c -s
+      - delay: 150
+      - run-bootstrap
+  start-back-end:
+    sequence:
+      - beb -c -s -d
+      
+  # legacy ui
+  start-legacy-ui:
+    sequence:
+      - start-legacy-ui
+  restart-legacy-ui:
+    sequence:
+      - kill-legacy-ui
+      - delay: 2
+      - start-legacy-ui
+
+
+  # scan engine
+  restart-scan-engine:
+    sequence:
+      - kill-scan-engine
+      - delay: 2
+      - run-scan-engine
+
+  nuclear-restart-platform:
+    sequence:
+      - kill-client-ui
+      - kill-back-end
+      - kill-legacy-ui
+      - kill-scan-engine
+      - kill-global-service
+      - delay: 3
+      - set-worktree-path
+      - beb -c -s -d
+      - delay: 150
+      - build-client-ui
+      - run-bootstrap
+
+
