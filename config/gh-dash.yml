@@ -4,7 +4,7 @@ prSections:
 - title: My Closed Requests
   filters: is:closed author:@me repo:netspi/offensive-security-platform
 - title: All Open Team PRs
-  filters: is:pr is:open author:garrettkrohn author:jekrch author:JSiok author:yrosen author:jcloeter author:pnankar author:mfaradzheva-hubble -is:draft
+  filters: is:pr is:open author:garrettkrohn author:jekrch author:JSiok author:yrosen author:jcloeter author:pnankar author:mfaradzheva-hubble author:vghugenetspi -is:draft
 - title: All Closed Platform prs
   filters: is:pr is:closed repo:netspi/offensive-security-platform
 - title: My Reviewed (open)
