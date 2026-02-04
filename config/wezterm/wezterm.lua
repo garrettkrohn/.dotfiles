@@ -65,7 +65,7 @@ local config = {
 
   -- general options
   adjust_window_size_when_changing_font_size = false,
-  debug_key_events = false,
+  debug_key_events = true,
   enable_tab_bar = false,
   native_macos_fullscreen_mode = false,
   window_close_confirmation = 'NeverPrompt',
@@ -108,12 +108,17 @@ local config = {
     -- k.cmd_to_tmux_prefix('g', 'g'),
     k.cmd_to_tmux_prefix('j', 'j'),
     k.cmd_to_tmux_prefix('K', 'T'),
-    k.cmd_to_tmux_prefix('k', 'K'),
+    k.cmd_to_tmux_prefix('k', 'k'),
+    k.cmd_to_tmux_prefix('r', 'r'),
+    k.cmd_to_tmux_prefix('R', 'R'),
+    k.cmd_to_tmux_prefix('f', 'f'),
+    k.cmd_to_tmux_prefix('d', 'd'),
     k.cmd_to_tmux_prefix('l', 'L'),
     k.cmd_to_tmux_prefix('n', 'n'),
     k.cmd_to_tmux_prefix('N', '"'),
     k.cmd_to_tmux_prefix('o', 'u'),
     k.cmd_to_tmux_prefix('p', 'p'),
+    k.cmd_to_tmux_prefix('s', 's'),
     k.cmd_to_tmux_prefix('T', 'B'),
     k.cmd_to_tmux_prefix('Y', 'Y'),
     k.cmd_to_tmux_prefix('t', 'c'),
@@ -122,21 +127,21 @@ local config = {
     k.cmd_to_tmux_prefix('Z', 'Z'),
     k.cmd_ctrl_to_tmux_prefix('t', 'J'),
 
-    k.cmd_key(
-      'R',
-      act.Multiple {
-        act.SendKey { key = '\x1b' }, -- escape
-        k.multiple_actions ':source %',
-      }
-    ),
+    -- k.cmd_key(
+    --   'R',
+    --   act.Multiple {
+    --     act.SendKey { key = '\x1b' }, -- escape
+    --     k.multiple_actions ':source %',
+    --   }
+    -- ),
 
-    k.cmd_key(
-      's',
-      act.Multiple {
-        act.SendKey { key = '\x1b' }, -- escape
-        k.multiple_actions ':w',
-      }
-    ),
+    -- k.cmd_key(
+    --   's',
+    --   act.Multiple {
+    --     act.SendKey { key = '\x1b' }, -- escape
+    --     k.multiple_actions ':w',
+    --   }
+    -- ),
 
     {
       mods = 'CMD|SHIFT',
@@ -188,6 +193,15 @@ local config = {
       key = '~',
       action = act.Multiple {
         act.SendKey { mods = 'CTRL', key = 'b' },
+        act.SendKey { key = 'p' },
+      },
+    },
+    -- Alternative: Cmd+Shift+h for previous window
+    {
+      mods = 'CMD|SHIFT',
+      key = 'h',
+      action = act.Multiple {
+        act.SendKey { mods = 'CTRL', key = 'a' },
         act.SendKey { key = 'p' },
       },
     },
