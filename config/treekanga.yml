@@ -9,9 +9,11 @@ repos:
       - scan/scanners/containers
       - scan/scan-engine
       - client-ui
+      - ui
     postScript: ~/dotfiles/config/scripts/platform_build_script.sh
     bareRepoName: .bare
     autoRunPostScript: false
+    tuiTheme: kanagawa
   treekanga:
     defaultBranch: main 
     zoxideFolders:
@@ -21,6 +23,15 @@ repos:
     bareRepoName: .bare
     listDisplayMode: directory
     autoPull: true
+    tuiTheme: catppuccin-mocha
+  snap:
+    defaultBranch: main 
+    zoxideFolders:
+    worktreeTargetDir: /code/snap_work #assumes starting in the $HOME directory
+    autoRunPostScript: false
+    listDisplayMode: directory
+    autoPull: true
+    tuiTheme: catppuccin-mocha
   attack-surface-management:
     defaultBranch: development
     zoxideFolders:
