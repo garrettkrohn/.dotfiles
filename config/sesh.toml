@@ -4,9 +4,9 @@ path = "~/dotfiles"
 startup_command = "kick"
 
 [[session]]
-name = "dotfiles/secrets/scripts"
+name = "platform sql bootstrap"
 path = "~/dotfiles/config/secrets/scripts/"
-startup_command = "kick"
+startup_command = "kick platform_startup_script.sql"
 
 [[session]]
 name = "local"
@@ -129,6 +129,11 @@ path = "/Users/gkrohn/notes/design_docs"
 startup_command = "kick"
 
 [[session]]
-name = "daplogs"
+name = "dap logs"
 path = "/Users/gkrohn/.cache/nvim"
 startup_command = "kick dap.log"
+
+[[session]]
+name = "lsp logs"
+path = "/Users/gkrohn/.local/state/nvim"
+startup_command = "kick lsp.log"
