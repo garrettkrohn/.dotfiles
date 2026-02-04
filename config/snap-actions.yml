@@ -1,0 +1,105 @@
+actions:
+  # add an action that sets an env variable in the tmux session
+
+  set-worktree-path:
+    tmuxSession: local
+    selectTargetDir: true
+    targetDirCommand: "fd --base-directory ~/code/platform_work --max-depth 1 --type d --absolute-path | fzf --prompt \"select target worktree: \""
+    setTmuxEnv: "worktree_path"              # Store selected directory in tmux env var 'worktree_path'
+    createIfNotExist: true
+
+  #client ui
+  stop-client-ui:
+    tmuxSession: local
+    tmuxWindow: client-ui
+    command: C-c
+  build-client-ui:
+    tmuxSession: local
+    tmuxWindow: client-ui
+    selectTargetDir: true
+    targetDirCommand: "{tmux:local:worktree_path}"
+    createIfNotExist: true
+    command: feb -u
+  start-client-ui:
+    tmuxSession: local
+    tmuxWindow: client-ui
+    selectTargetDir: true
+    targetDirCommand: "{tmux:local:worktree_path}"
+    command: feb -u -s
+  kill-client-ui:
+    tmuxSession: local
+    tmuxWindow: client-ui
+    killWindow: true
+
+
+  #legacy ui
+  start-legacy-ui:
+    tmuxSession: local
+    tmuxWindow: frontend
+    selectTargetDir: true
+    createIfNotExist: true
+    targetDirCommand: "{tmux:local:worktree_path}"
+    command: feb 
+  kill-legacy-ui:
+    tmuxSession: local
+    tmuxWindow: frontend
+    killWindow: true
+
+  #backend
+  kill-back-end:
+    tmuxSession: local
+    tmuxWindow: backend
+    killWindow: true
+  beb -c -s:
+    tmuxSession: local
+    tmuxWindow: backend
+    createIfNotExist: true
+    selectTargetDir: true
+    targetDirCommand: "{tmux:local:worktree_path}"
+    command: beb -c -s
+  beb -c -s -d:
+    tmuxSession: local
+    tmuxWindow: backend
+    createIfNotExist: true
+    selectTargetDir: true
+    targetDirCommand: "{tmux:local:worktree_path}"
+    command: beb -c -s -d
+
+  # bootstrap
+  kill-bootstrap:
+    tmuxSession: local
+    tmuxWindow: bootstrap 
+    killWindow: true
+  run-bootstrap:
+    tmuxSession: local
+    tmuxWindow: bootstrap 
+    selectTargetDir: true
+    targetDirCommand: "{tmux:local:worktree_path}"
+    createIfNotExist: true
+    command: boot -r
+
+  # global service
+  run-global-service:
+    tmuxSession: local
+    tmuxWindow: global-service 
+    selectTargetDir: true
+    targetDirCommand: "{tmux:local:worktree_path}"
+    createIfNotExist: true
+    command: rg
+  kill-global-service:
+    tmuxSession: local
+    tmuxWindow: global-service
+    killWindow: true
+
+  # scan engine
+  kill-scan-engine:
+    tmuxSession: local
+    tmuxWindow: scan-engine
+    killWindow: true
+  run-scan-engine:
+    tmuxSession: local
+    tmuxWindow: scan-engine
+    selectTargetDir: true
+    targetDirCommand: "{tmux:local:worktree_path}"
+    createIfNotExist: true
+    command: cd scan/scan-engine && rs
