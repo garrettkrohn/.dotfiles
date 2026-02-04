@@ -107,6 +107,8 @@ alias tka="/opt/homebrew/bin/treekanga add"
 alias tkl="/opt/homebrew/bin/treekanga list"
 alias tkt="treekanga tui"
 
+alias snap="~/code/snap_work/main/snap"
+
 alias p="/Users/gkrohn/code/pluck/pluck"
 
 # docker
@@ -195,3 +197,5 @@ alias ca='cursor-agent'
 
 alias cb='pnpm clean && pnpm install && pnpm build && pnpm preview'
 alias pb='pnpm clean && pnpm install && pnpm build'
+
+alias rolo='/Users/gkrohn/code/rolo/rolo'
