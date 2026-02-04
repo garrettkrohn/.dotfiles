@@ -184,9 +184,23 @@ return {
       gopls = {},
 
       jdtls = {
+        -- Use Java 21 explicitly
+        cmd = {
+          vim.fn.stdpath 'data' .. '/mason/bin/jdtls',
+          '--java-executable',
+          '/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home/bin/java',
+        },
         init_options = {
           bundles = {
             vim.fn.glob(vim.fn.stdpath 'data' .. '/mason/packages/java-debug-adapter/extension/server/*.jar', 1),
+          },
+        },
+        -- Add this to properly configure multi-module projects
+        settings = {
+          java = {
+            configuration = {
+              updateBuildConfiguration = 'automatic',
+            },
           },
         },
       },
@@ -302,9 +316,19 @@ return {
         capabilities = capabilities,
       }, config)
 
-      -- Handle jdtls specially - nvim-java must be initialized first
+      -- Handle jdtls specially - force parent directory as root
       if server_name == 'jdtls' then
-        -- nvim-java is already set up in java-nvim.lua, just configure lspconfig
+        server_config.root_dir = function(fname)
+          -- Always use the parent directory if we're in it or below it
+          local parent_dir = vim.fn.expand '~/code/platform_work/ENG-131_scanner_dsl_setup/parent'
+          if fname:match('^' .. vim.pesc(parent_dir)) then
+            return parent_dir
+          end
+
+          -- Fallback to normal detection
+          local util = require 'lspconfig.util'
+          return util.root_pattern('pom.xml', 'build.gradle', '.git')(fname)
+        end
         lspconfig.jdtls.setup(server_config)
       else
         lspconfig[server_name].setup(server_config)

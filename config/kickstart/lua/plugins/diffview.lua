@@ -1,6 +1,6 @@
 return {
   lazy = true,
-  enabled = false,
+  enabled = true,
   'sindrets/diffview.nvim',
   cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles' },
   config = function()
@@ -24,5 +24,13 @@ return {
         },
       },
     }
+    -- Make diff backgrounds transparent
+    -- Option 1: Remove background, keep colored foreground (most "transparent")
+    vim.api.nvim_set_hl(0, 'DiffAdd', { bg = 'NONE', fg = '#a6e3a1', blend = 95 }) -- or your theme's green
+    vim.api.nvim_set_hl(0, 'DiffDelete', { bg = 'NONE', fg = '#f38ba8', blend = 95 }) -- or your theme's red
+
+    -- Option 2: Use more subtle background colors (adjust the hex values to your preference)
+    vim.api.nvim_set_hl(0, 'DiffAdd', { bg = '#1a2a1a', blend = 95 }) -- very dark green
+    vim.api.nvim_set_hl(0, 'DiffDelete', { bg = '#2a1a1a', blend = 95 }) -- very dark red
   end,
 }
