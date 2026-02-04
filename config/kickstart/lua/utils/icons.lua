@@ -1,10 +1,15 @@
-local icons = {
-  lsp = {
-    error = '🚨',
-    warn = '🚧',
-    info = '📖',
-    hint = '💁',
+local M = {
+  diagnostics = {
+    error = " ",
+    warn = " ",
+    hint = " ",
+    info = " ",
+  },
+  git = {
+    added = "",
+    changed = "",
+    deleted = "",
   },
 }
 
-return icons
+return M
