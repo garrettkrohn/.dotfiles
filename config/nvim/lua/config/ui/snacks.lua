@@ -4,6 +4,15 @@ return {
   lazy = false,
   ---@type snacks.Config
   opts = {
+    -- Define window styles for transparency
+    styles = {
+      lazygit = {
+        backdrop = false,
+        wo = {
+          winblend = 0,
+        },
+      },
+    },
     dashboard = {
       preset = {
         header = [[
@@ -71,6 +80,10 @@ return {
           -- set to an empty string "" to disable icons
           nerdFontsVersion = '3',
         },
+      },
+      -- Terminal window options for transparency
+      win = {
+        style = 'lazygit',
       },
     },
     picker = {
@@ -381,4 +394,22 @@ return {
       desc = 'LSP Symbols',
     },
   },
+  config = function(_, opts)
+    require('snacks').setup(opts)
+    
+    -- Ensure floating windows and terminals are transparent
+    vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'NONE' })
+    
+    -- Ensure terminal backgrounds are transparent
+    vim.api.nvim_create_autocmd('TermOpen', {
+      pattern = '*',
+      callback = function()
+        vim.cmd('setlocal winblend=0')
+        -- Make sure terminal Normal highlight is transparent
+        vim.api.nvim_set_hl(0, 'TermNormal', { bg = 'NONE' })
+        vim.api.nvim_set_hl(0, 'TermNormalNC', { bg = 'NONE' })
+      end,
+    })
+  end,
 }
