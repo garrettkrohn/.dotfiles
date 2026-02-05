@@ -3,7 +3,7 @@ return {
   enabled = true,
   lazy = false,
   name = 'catppuccin',
-  priority = 1000,
+  priority = 1001, -- Load before snacks (which has priority 1000)
   flavour = 'mocha',
   transparent_background = true,
   config = function()
@@ -40,9 +40,16 @@ return {
         -- miscs = {}, -- Uncomment to turn off hard-coded styles
       },
       color_overrides = {},
-      custom_highlights = {
-        LineNr = { fg = '#f8f8f2' },
-      },
+      custom_highlights = function(colors)
+        return {
+          LineNr = { fg = '#f8f8f2' },
+          -- Ensure floating windows and terminals are transparent
+          NormalFloat = { bg = 'NONE' },
+          FloatBorder = { bg = 'NONE' },
+          TermNormal = { bg = 'NONE' },
+          TermNormalNC = { bg = 'NONE' },
+        }
+      end,
       default_integrations = true,
       integrations = {
         blink_cmp = true,
@@ -57,11 +64,23 @@ return {
           enabled = true,
           indentscope_color = '',
         },
+        snacks = true,
         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
       },
     }
 
     -- setup must be called before loading
     vim.cmd.colorscheme 'catppuccin'
+    
+    -- Ensure transparency is applied after colorscheme loads
+    vim.api.nvim_create_autocmd('ColorScheme', {
+      pattern = 'catppuccin*',
+      callback = function()
+        vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'NONE' })
+        vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'NONE' })
+        vim.api.nvim_set_hl(0, 'TermNormal', { bg = 'NONE' })
+        vim.api.nvim_set_hl(0, 'TermNormalNC', { bg = 'NONE' })
+      end,
+    })
   end,
 }
