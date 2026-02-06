@@ -127,13 +127,7 @@ local config = {
     k.cmd_to_tmux_prefix('Z', 'Z'),
     k.cmd_ctrl_to_tmux_prefix('t', 'J'),
 
-    -- k.cmd_key(
-    --   'R',
-    --   act.Multiple {
-    --     act.SendKey { key = '\x1b' }, -- escape
-    --     k.multiple_actions ':source %',
-    --   }
-    -- ),
+    k.cmd_key('R', act.ReloadConfiguration),
 
     -- k.cmd_key(
     --   's',

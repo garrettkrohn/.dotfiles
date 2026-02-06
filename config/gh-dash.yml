@@ -63,6 +63,9 @@ keybindings:
     - key: c
       command: >
         gh pr checkout {{.PrNumber}}
+    - key: e
+      command: >
+        gh enhance {{.PrNumber}}
 repoPaths: 
   netspi/offensive-security-platform: ~/code/platform_work
 theme:
