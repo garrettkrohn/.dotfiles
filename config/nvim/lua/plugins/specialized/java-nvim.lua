@@ -9,20 +9,41 @@ return {
     'leoluz/nvim-dap-go',
   },
   config = function()
-    -- Setup nvim-java without automatic DAP - we'll configure manually
     require('java').setup {
-      -- Disable automatic DAP to avoid workspace command issues
+      -- Enable Java debug adapter
       java_debug_adapter = {
-        enable = false,
+        enable = true,
       },
       java_test = {
-        enable = false,
+        enable = true,
       },
       jdk = {
-        auto_install = false,
+        -- Enable auto_install to use nvim-java's managed Java installation (Java 25)
+        -- This avoids conflicts with system Java installations
+        auto_install = true,
       },
-      -- Use Java 21 instead of the Mason-installed Java 17
-      java_home = '/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home',
+      root_markers = {
+        'settings.gradle',
+        'settings.gradle.kts',
+        'pom.xml',
+        'build.gradle',
+        'mvnw',
+        'gradlew',
+        'build.gradle.kts',
+        '.git',
+      },
     }
+    
+    -- Ensure JDTLS is enabled after nvim-java configures it
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'java',
+      callback = function()
+        -- Enable JDTLS if it's not already running
+        local clients = vim.lsp.get_clients({ bufnr = 0, name = 'jdtls' })
+        if #clients == 0 then
+          vim.lsp.enable('jdtls')
+        end
+      end,
+    })
   end,
 }
