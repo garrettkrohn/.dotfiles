@@ -24,6 +24,7 @@ actions:
     tmuxSession: local
     tmuxWindow: client-ui
     selectTargetDir: true
+    createIfNotExist: true
     targetDirCommand: "{tmux:local:worktree_path}"
     command: feb -u -s
   kill-client-ui:

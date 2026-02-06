@@ -1,7 +1,8 @@
 return {
   'stevearc/oil.nvim',
+  lazy = false,
   keys = {
-    { '<leader><leader>', '<cmd>Oil<CR>', desc = 'Toggle oil' },
+    { '<leader><leader>', ':Oil<CR>', desc = 'Toggle oil' },
   },
   ---@module 'oil'
   ---@type oil.SetupOpts

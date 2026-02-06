@@ -5,26 +5,8 @@ local M = {}
 M.servers = {
   gopls = {},
 
-  jdtls = {
-    -- Use Java 21 explicitly
-    cmd = {
-      vim.fn.stdpath 'data' .. '/mason/bin/jdtls',
-      '--java-executable',
-      '/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home/bin/java',
-    },
-    init_options = {
-      bundles = {
-        vim.fn.glob(vim.fn.stdpath 'data' .. '/mason/packages/java-debug-adapter/extension/server/*.jar', 1),
-      },
-    },
-    settings = {
-      java = {
-        configuration = {
-          updateBuildConfiguration = 'automatic',
-        },
-      },
-    },
-  },
+  -- Note: jdtls is managed by nvim-java plugin, not here
+  -- See config/nvim/lua/plugins/specialized/java-nvim.lua
 
   eslint = {
     settings = { workingDirectories = { mode = 'auto' } },
@@ -179,26 +161,6 @@ function M.setup()
     local server_config = vim.tbl_deep_extend('force', {
       capabilities = capabilities,
     }, config)
-
-    -- Handle jdtls specially - force parent directory as root
-    if server_name == 'jdtls' then
-      server_config.root_dir = function(bufnr, on_dir)
-        local fname = vim.api.nvim_buf_get_name(bufnr)
-        local parent_dir = vim.fn.expand '~/code/platform_work/ENG-131_scanner_dsl_setup/parent'
-        
-        -- Check if file is in the parent directory
-        if fname:match('^' .. vim.pesc(parent_dir)) then
-          on_dir(parent_dir)
-          return
-        end
-
-        -- Fallback to standard root markers
-        local root = vim.fs.root(bufnr, { 'pom.xml', 'build.gradle', '.git' })
-        if root then
-          on_dir(root)
-        end
-      end
-    end
 
     -- Register the LSP server configuration using the new API
     vim.lsp.config[server_name] = server_config

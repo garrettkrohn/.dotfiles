@@ -175,7 +175,7 @@ keymap.set('n', '<leader>p', function()
 end, { desc = 'print and copy file path' })
 
 -- auth
-keymap.set('n', '<leader>au', ':terminal ~/code/rest/auth.sh<CR>', { desc = 'Platform auth for rest' })
+-- keymap.set('n', '<leader>au', ':terminal ~/code/rest/auth.sh<CR>', { desc = 'Platform auth for rest' })
 
 -- diagnostics
 keymap.set('n', '<leader>tc', ':lua vim.diagnostic.hide()<CR>', { desc = 'Hide diagnostics' })
@@ -210,3 +210,9 @@ vim.keymap.set('n', '<leader>st', ':!tmux send-keys -t "ssh tunnels" C-p Enter<c
 vim.keymap.set('n', '<leader>td', function()
   vim.fn.system "tmux new-window -n diff && tmux send-keys 'diff' Enter"
 end, { desc = 'Open diff in new tmux window' })
+
+vim.keymap.set('n', '<leader>au', function()
+  local auth_file = vim.fn.expand '~/code/kulala/auth.http'
+  vim.cmd('edit ' .. auth_file)
+  require('kulala').run()
+end, { desc = 'Run auth.http' })

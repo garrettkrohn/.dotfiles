@@ -15,8 +15,8 @@ startup_command = ""
 
 [[session]]
 name = "rest"
-path = "~/code/rest"
-startup_command = "kick"
+path = "~/code/kulala"
+startup_command = "k"
 
 [[session]]
 name = "wezterm"
