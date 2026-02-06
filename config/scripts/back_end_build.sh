@@ -99,6 +99,11 @@ print_pink "\nBUILDING PARENT LOCALLY\n"
 
 cd parent
 
+if $clean; then
+  print_pink "Force cleaning target directory"
+  rm -rf application/target
+fi
+
 if $skip_tests && $clean; then
     print_pink "Maven Clean Install, skip tests"
     mvn clean install -DskipTests -Djacoco.skip=true
