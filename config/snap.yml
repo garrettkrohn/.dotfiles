@@ -35,7 +35,7 @@ commands:
       - stop-client-ui
       - delay: 1
       - start-client-ui
-  start-client-ui:
+  run-client-ui:
     sequence:
       - start-client-ui
   build-client-ui:
