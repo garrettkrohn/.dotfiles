@@ -137,3 +137,8 @@ startup_command = "kick dap.log"
 name = "lsp logs"
 path = "/Users/gkrohn/.local/state/nvim"
 startup_command = "kick lsp.log"
+
+[[session]]
+name = "qmk"
+path = "/Users/gkrohn/.config/qmk_firmware/"
+startup_command = ""
