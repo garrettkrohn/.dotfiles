@@ -19,7 +19,7 @@
     ~/.config/starship.toml:
       path: ./config/starship.toml
     ~/.config/nvim:
-      path: ./config/kickstart
+      path: ./config/nvim
     ~/.config/sesh/sesh.toml:
       path: ./config/sesh.toml
     ~/.config/gh-dash/config.yml:
@@ -38,6 +38,9 @@
       path: ./config/snap.yml
     ~/.config/snap/snap-actions.yml:
       path: ./config/snap-actions.yml
+    # moonlander2 config qmk
+    ~/.config/qmk_firmware/keyboards/zsa/moonlander/keymaps/moonlander2:
+      path: ./config/keyboards/moonlander2/
 
 
 - shell:
