@@ -75,8 +75,8 @@ const uint16_t PROGMEM combo0[] = { MT(MOD_LGUI, KC_D), MT(MOD_LSFT, KC_F), COMB
 const uint16_t PROGMEM combo1[] = { MT(MOD_RSFT, KC_J),MT(MOD_RGUI, KC_K), COMBO_END}; // enter
 const uint16_t PROGMEM combo2[] = { MT(MOD_RALT, KC_S), MT(MOD_LSFT, KC_F), COMBO_END}; // tab
 const uint16_t PROGMEM combo3[] = { MT(MOD_RSFT, KC_J), MT(MOD_RALT, KC_L), COMBO_END}; // escape
-const uint16_t PROGMEM combo4[] = { KC_M, KC_COMMA, COMBO_END}; //minus
-const uint16_t PROGMEM combo5[] = { LT(3, KC_V), LT(3, KC_C), COMBO_END}; // underscore
+const uint16_t PROGMEM combo4[] = { LT(4, KC_M), KC_COMMA, COMBO_END}; //minus
+const uint16_t PROGMEM combo5[] = { KC_C, LT(3, KC_V), COMBO_END}; // underscore
 const uint16_t PROGMEM combo6[] = { KC_E, KC_R, KC_U, KC_I, COMBO_END}; // bootloader mode
 
 combo_t key_combos[COMBO_COUNT] = {
