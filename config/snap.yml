@@ -85,5 +85,11 @@ commands:
       - delay: 150
       - build-client-ui
       - run-bootstrap
+       
+  #qmk
+  compile-qmk:
+    targetDir: ~/.config/qmk_firmware/
+    command: qmk compile -kb zsa/moonlander/reva -km moonlander2    
+
 
 
