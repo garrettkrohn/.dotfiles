@@ -48,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ST_MACRO_0,     ST_MACRO_1,     RGB_TOG,        LGUI(LSFT(KC_4)),KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_MINUS,       KC_4,           KC_5,           KC_6,           KC_DOT,
     KC_F4,          KC_F3,          KC_F2,          KC_F1,          KC_NO,          KC_NO,          KC_NO,                                                                          KC_NO,          KC_NO,          KC_0,           KC_1,           KC_2,           KC_3,           KC_COLN,
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT,                                 KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,
+    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT,                                                  KC_TRANSPARENT, KC_TRANSPARENT,          KC_NO,          KC_NO,          KC_NO,          KC_NO,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
     // navigation activated by V key
