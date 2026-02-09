@@ -39,7 +39,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_EQUAL,       KC_RABK,        KC_LPRN,        KC_RPRN,        KC_TAB,         KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_UNDS,        KC_QUOTE,       KC_DQUO,        KC_GRAVE,       KC_AMPR,
     KC_PERC,        KC_HASH,        KC_LBRC,        KC_RBRC,        KC_MINUS,       KC_NO,          KC_NO,                                                                          KC_NO,          KC_NO,          KC_NO,          KC_DLR,         KC_RIGHT_GUI,   KC_BSLS,        KC_PIPE,
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,
+    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
     //numbers activated by left thumb
