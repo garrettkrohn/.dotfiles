@@ -96,3 +96,7 @@ bindkey '^x^e' edit-command-line
 
 # opencode
 export PATH=/Users/gkrohn/.opencode/bin:$PATH
+
+#java
+export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+
