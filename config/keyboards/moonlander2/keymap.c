@@ -14,13 +14,6 @@ enum custom_keycodes {
   ST_MACRO_1,
 };
 
-
-
-#define DUAL_FUNC_0 LT(11, KC_C)
-#define DUAL_FUNC_1 LT(15, KC_1)
-#define DUAL_FUNC_2 LT(10, KC_F8)
-#define DUAL_FUNC_3 LT(4, KC_F3)
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // base layer
   [0] = LAYOUT_moonlander(
@@ -37,28 +30,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [1] = LAYOUT_moonlander(
     KC_EXLM,        KC_AT,          KC_LCBR,        KC_RCBR,        KC_PLUS,        KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          KC_TILD,        KC_ASTR,        KC_CIRC,        KC_NO,
     KC_EQUAL,       KC_RABK,        KC_LPRN,        KC_RPRN,        KC_TAB,         KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_UNDS,        KC_QUOTE,       KC_DQUO,        KC_GRAVE,       KC_AMPR,
-    KC_PERC,        KC_HASH,        KC_LBRC,        KC_RBRC,        KC_MINUS,       KC_NO,          KC_NO,                                                                          KC_NO,          KC_NO,          KC_NO,          KC_DLR,         KC_RIGHT_GUI,   KC_BSLS,        KC_PIPE,
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
+    KC_PERC,        KC_HASH,        KC_LBRC,        KC_RBRC,        KC_MINUS,       KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          KC_DLR,         KC_RIGHT_GUI,   KC_BSLS,        KC_PIPE,
+    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,                                                          KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,
+    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
     //numbers activated by left thumb
   [2] = LAYOUT_moonlander(
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_NO,          KC_7,           KC_8,           KC_9,           KC_NO,
+    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,                                           KC_NO,          KC_NO,          KC_NO,          KC_7,           KC_8,           KC_9,           KC_NO,
     ST_MACRO_0,     ST_MACRO_1,     RGB_TOG,        LGUI(LSFT(KC_4)),KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_NO,          KC_MINUS,       KC_4,           KC_5,           KC_6,           KC_DOT,
-    KC_F4,          KC_F3,          KC_F2,          KC_F1,          KC_NO,          KC_NO,          KC_NO,                                                                          KC_NO,          KC_NO,          KC_0,           KC_1,           KC_2,           KC_3,           KC_COLN,
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT,                                 KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,
+    KC_F4,          KC_F3,          KC_F2,          KC_F1,          KC_NO,          KC_NO,          KC_NO,                                           KC_NO,          KC_NO,          KC_0,           KC_1,           KC_2,           KC_3,           KC_COLN,
+    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT,                                                  KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT,                                                  KC_TRANSPARENT, KC_TRANSPARENT,          KC_NO,          KC_NO,          KC_NO,          KC_NO,
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                  KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
     // navigation activated by V key
   [3] = LAYOUT_moonlander(
     KC_NO,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_CAPS,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_NO,        RGB_SPI,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_LEFT,        KC_DOWN,        KC_UP,          KC_RIGHT,       KC_TRANSPARENT,
-    KC_NO,        RGB_SPD,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_F5,          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_NO,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_NO, KC_TRANSPARENT, HSV_0_245_245,  HSV_74_255_206, HSV_152_255_255,KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_NO,                  KC_NO,               KC_NO,                                                                                                       KC_NO,               KC_NO,               KC_NO
+    KC_NO,        RGB_SPD,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_F5,          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_NO,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_NO, KC_TRANSPARENT, HSV_0_245_245,  HSV_74_255_206, HSV_152_255_255,KC_TRANSPARENT,                                                        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_NO,                  KC_NO,               KC_NO,                                                                                           KC_NO,               KC_NO,               KC_NO
   ),
     // media, activated by the M key
   [4] = LAYOUT_moonlander(
@@ -88,132 +81,3 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo5, KC_UNDS),
     COMBO(combo6, QK_BOOT),
 };
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-  case QK_MODS ... QK_MODS_MAX:
-    // Mouse and consumer keys (volume, media) with modifiers work inconsistently across operating systems,
-    // this makes sure that modifiers are always applied to the key that was pressed.
-    if (IS_MOUSE_KEYCODE(QK_MODS_GET_BASIC_KEYCODE(keycode)) || IS_CONSUMER_KEYCODE(QK_MODS_GET_BASIC_KEYCODE(keycode))) {
-      if (record->event.pressed) {
-        add_mods(QK_MODS_GET_MODS(keycode));
-        send_keyboard_report();
-        wait_ms(2);
-        register_code(QK_MODS_GET_BASIC_KEYCODE(keycode));
-        return false;
-      } else {
-        wait_ms(2);
-        del_mods(QK_MODS_GET_MODS(keycode));
-      }
-    }
-    break;
-    case ST_MACRO_0:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LALT(SS_TAP(X_Z))SS_DELAY(100)  SS_LGUI(SS_LSFT(SS_TAP(X_A))));
-    }
-    break;
-    case ST_MACRO_1:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LALT(SS_TAP(X_Z))SS_DELAY(100)  SS_LGUI(SS_LSFT(SS_TAP(X_V))));
-    }
-    break;
-
-    case DUAL_FUNC_0:
-      if (record->tap.count > 0) {
-        if (record->event.pressed) {
-          register_code16(KC_MS_LEFT);
-        } else {
-          unregister_code16(KC_MS_LEFT);
-        }
-      } else {
-        if (record->event.pressed) {
-          register_code16(KC_MS_LEFT);
-        } else {
-          unregister_code16(KC_MS_LEFT);
-        }
-      }
-      return false;
-    case DUAL_FUNC_1:
-      if (record->tap.count > 0) {
-        if (record->event.pressed) {
-          register_code16(KC_MS_DOWN);
-        } else {
-          unregister_code16(KC_MS_DOWN);
-        }
-      } else {
-        if (record->event.pressed) {
-          register_code16(KC_MS_DOWN);
-        } else {
-          unregister_code16(KC_MS_DOWN);
-        }
-      }
-      return false;
-    case DUAL_FUNC_2:
-      if (record->tap.count > 0) {
-        if (record->event.pressed) {
-          register_code16(KC_MS_UP);
-        } else {
-          unregister_code16(KC_MS_UP);
-        }
-      } else {
-        if (record->event.pressed) {
-          register_code16(KC_MS_UP);
-        } else {
-          unregister_code16(KC_MS_UP);
-        }
-      }
-      return false;
-    case DUAL_FUNC_3:
-      if (record->tap.count > 0) {
-        if (record->event.pressed) {
-          register_code16(KC_MS_RIGHT);
-        } else {
-          unregister_code16(KC_MS_RIGHT);
-        }
-      } else {
-        if (record->event.pressed) {
-          register_code16(KC_MS_RIGHT);
-        } else {
-          unregister_code16(KC_MS_RIGHT);
-        }
-      }
-      return false;
-    case RGB_SLD:
-        if (rawhid_state.rgb_control) {
-            return false;
-        }
-        if (record->event.pressed) {
-            rgblight_mode(1);
-        }
-        return false;
-    case HSV_0_245_245:
-        if (rawhid_state.rgb_control) {
-            return false;
-        }
-        if (record->event.pressed) {
-            rgblight_mode(1);
-            rgblight_sethsv(0,245,245);
-        }
-        return false;
-    case HSV_74_255_206:
-        if (rawhid_state.rgb_control) {
-            return false;
-        }
-        if (record->event.pressed) {
-            rgblight_mode(1);
-            rgblight_sethsv(74,255,206);
-        }
-        return false;
-    case HSV_152_255_255:
-        if (rawhid_state.rgb_control) {
-            return false;
-        }
-        if (record->event.pressed) {
-            rgblight_mode(1);
-            rgblight_sethsv(152,255,255);
-        }
-        return false;
-  }
-  return true;
-}
-
