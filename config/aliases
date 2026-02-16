@@ -198,7 +198,7 @@ alias ca='cursor-agent'
 alias cb='pnpm clean && pnpm install && pnpm build && pnpm preview'
 alias pb='pnpm clean && pnpm install && pnpm build'
 
-alias rolo='/Users/gkrohn/code/rolo/rolo'
+alias rolodev='/Users/gkrohn/code/rolo/rolo'
 
 alias qc='qmk compile -kb zsa/moonlander/reva -km moonlander2'
 alias qf='qmk flash -kb zsa/moonlander/reva -km moonlander2'
