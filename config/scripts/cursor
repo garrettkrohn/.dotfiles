@@ -28,5 +28,5 @@ else
     echo "Or, install Cursor at https://cursor.com/download" 1>&2
     exit 1
   fi
-  exec "$HOME/.local/bin/cursor-agent" "$@"
+  exec "$HOME/.local/bin/agent" "$@"
 fi

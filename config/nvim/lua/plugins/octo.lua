@@ -1,5 +1,6 @@
 return {
-  'pwntester/octo.nvim',
+  -- 'pwntester/octo.nvim',
+  dir = '/Users/gkrohn/code/octo.nvim',
   -- lazy = false,
   cmd = 'Octo',
   dependencies = {

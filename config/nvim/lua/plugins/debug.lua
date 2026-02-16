@@ -104,7 +104,7 @@ return {
       
       local jdtls_client = clients[1]
       
-      -- Request JDTLS to start debug session (get port)
+      -- Request JDTLS to start debug session (get port for adapter)
       jdtls_client.request('workspace/executeCommand', {
         command = 'vscode.java.startDebugSession',
         arguments = {},
@@ -124,33 +124,20 @@ return {
           port = debug_port,
         }
         
-        -- Add attach configuration
-        dap.configurations.java = dap.configurations.java or {}
+        vim.notify('Attaching to port 5005...', vim.log.levels.INFO)
         
-        -- Clear existing attach configs and add new one
-        local new_configs = {}
-        for _, config in ipairs(dap.configurations.java) do
-          if config.request ~= 'attach' then
-            table.insert(new_configs, config)
-          end
-        end
-        
-        table.insert(new_configs, {
+        -- Directly run the attach configuration without showing picker
+        dap.run({
           type = 'java',
           request = 'attach',
           name = 'Attach to Java Process (port 5005)',
           hostName = '127.0.0.1',
           port = 5005,
+          -- Additional options for better debugging
+          projectName = vim.fn.fnamemodify(vim.fn.getcwd(), ':t'),
+          -- Enable source lookup in multiple locations
+          sourcePaths = { vim.fn.getcwd() .. '/src/main/java', vim.fn.getcwd() .. '/src' },
         })
-        
-        dap.configurations.java = new_configs
-        
-        vim.notify('Attach configuration ready. Starting attach...', vim.log.levels.INFO)
-        
-        -- Automatically start the attach
-        vim.defer_fn(function()
-          dap.continue()
-        end, 100)
       end, 0)
     end, { desc = 'Debug: Attach to Java Process' })
     
@@ -172,26 +159,35 @@ return {
     
     -- Show DAP status
     vim.keymap.set('n', '<leader>di', function()
-      local configs = dap.configurations.java
-      if not configs or #configs == 0 then
-        vim.notify('No Java debug configurations. Run <leader>ds first.', vim.log.levels.WARN)
-        return
-      end
-      
       local breakpoints = require('dap.breakpoints').get()
       local total_bps = 0
-      for _, buf_bps in pairs(breakpoints) do
+      local bp_details = {}
+      
+      for bufnr, buf_bps in pairs(breakpoints) do
         total_bps = total_bps + #buf_bps
+        local bufname = vim.api.nvim_buf_get_name(bufnr)
+        local filename = vim.fn.fnamemodify(bufname, ':t')
+        for _, bp in ipairs(buf_bps) do
+          table.insert(bp_details, string.format('  %s:%d', filename, bp.line))
+        end
       end
       
-      local session_status = dap.session() and 'ACTIVE' or 'not started'
+      local session = dap.session()
+      local session_status = session and 'ACTIVE' or 'not started'
       
       local status = string.format(
-        'Java Debug Status:\nConfigs: %d | Breakpoints: %d | Session: %s',
-        #configs,
+        'Debug Status:\nBreakpoints: %d | Session: %s',
         total_bps,
         session_status
       )
+      
+      if #bp_details > 0 then
+        status = status .. '\n\nBreakpoints:\n' .. table.concat(bp_details, '\n')
+      end
+      
+      if session then
+        status = status .. '\n\nSession active - breakpoints should trigger'
+      end
       
       vim.notify(status, vim.log.levels.INFO)
     end, { desc = 'Debug: Show Status' })
@@ -200,6 +196,23 @@ return {
     vim.keymap.set('n', '<leader>dl', function()
       vim.cmd('e ' .. vim.fn.stdpath('cache') .. '/dap.log')
     end, { desc = 'Debug: View Logs' })
+    
+    -- Check if port 5005 is listening and show process info
+    vim.keymap.set('n', '<leader>dp', function()
+      local handle = io.popen('lsof -i :5005 2>/dev/null')
+      if not handle then
+        vim.notify('Could not check port 5005', vim.log.levels.ERROR)
+        return
+      end
+      local result = handle:read('*a')
+      handle:close()
+      
+      if result == '' then
+        vim.notify('❌ No process listening on port 5005\n\nStart your Java app with:\n-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005', vim.log.levels.ERROR)
+      else
+        vim.notify('✓ Port 5005 status:\n' .. result, vim.log.levels.INFO)
+      end
+    end, { desc = 'Debug: Check port 5005' })
     
     -- Open REPL for debugging
     vim.keymap.set('n', '<leader>dr', function()
@@ -270,6 +283,31 @@ return {
     -- DAP event listeners - minimal notifications
     dap.listeners.after.event_terminated['user_notify'] = function()
       vim.notify('Debug session terminated', vim.log.levels.WARN)
+    end
+    
+    dap.listeners.after.event_initialized['user_notify'] = function()
+      vim.notify('✓ Debugger attached and ready', vim.log.levels.INFO)
+    end
+    
+    -- Notify when breakpoints are set/verified
+    dap.listeners.after.setBreakpoints['user_notify'] = function(session, body)
+      if body and body.breakpoints then
+        local verified = 0
+        local unverified = 0
+        for _, bp in ipairs(body.breakpoints) do
+          if bp.verified then
+            verified = verified + 1
+          else
+            unverified = unverified + 1
+          end
+        end
+        if unverified > 0 then
+          vim.notify(
+            string.format('⚠️  Breakpoints: %d verified, %d unverified (may not stop)', verified, unverified),
+            vim.log.levels.WARN
+          )
+        end
+      end
     end
     
     -- Optionally auto-open/close dapui

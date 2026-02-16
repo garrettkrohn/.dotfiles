@@ -19,11 +19,8 @@ require 'config.core.lazy-bootstrap'
 -- Plugin Management
 -- ============================================================================
 require('lazy').setup({
-  -- Import plugin configurations from organized directories
-  { import = 'plugins.core' },
-  { import = 'plugins.editing' },
-  { import = 'plugins.navigation' },
-  { import = 'plugins.specialized' },
+  -- Import plugin configurations
+  { import = 'plugins' },
   { import = 'config.ui' },
 }, {
   defaults = { lazy = true },

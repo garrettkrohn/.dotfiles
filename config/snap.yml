@@ -88,8 +88,15 @@ commands:
        
   #qmk
   compile-qmk:
+    tmuxSession: qmk
+    tmuxWindow: qmk
     targetDir: ~/.config/qmk_firmware/
+    createIfNotExist: true
     command: qmk compile -kb zsa/moonlander/reva -km moonlander2    
-
-
+  qmk-svg:
+    tmuxSession: qmk
+    tmuxWindow: qmk
+    targetDir: ~/.config/qmk_firmware/
+    createIfNotExist: true
+    command: qmk c2json --no-cpp ./keyboards/zsa/moonlander/keymaps/moonlander2/keymap.c | keymap parse -c 10 -q - | sed 's/LAYOUT_moonlander/LAYOUT/' >moonlander.yaml && keymap draw moonlander.yaml >moonlander.svg
 
