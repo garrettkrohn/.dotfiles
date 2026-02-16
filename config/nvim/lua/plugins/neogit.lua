@@ -18,4 +18,7 @@ return {
   keys = {
     { '<leader>gg', '<cmd>Neogit<cr>', desc = 'Show Neogit UI' },
   },
+  opts = {
+    kind = 'replace',
+  },
 }
