@@ -14,16 +14,17 @@ enum custom_keycodes {
   ST_MACRO_1,
 };
 
+//TODO: flipped the first layer right side
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // base layer
   [0] = LAYOUT_moonlander(
     // main rows
-    KC_Q,                   KC_W,                KC_E,                KC_R,                KC_T,                KC_NO,               KC_NO,                   KC_NO,               KC_NO,               KC_Y,                KC_U,                KC_I,                KC_O,                KC_P,
-    MT(MOD_LCTL, KC_A),     MT(MOD_RALT, KC_S),  MT(MOD_LGUI, KC_D),  MT(MOD_LSFT, KC_F),  KC_G,                KC_NO,               KC_NO,                   KC_NO,               KC_NO,               KC_H,                MT(MOD_RSFT, KC_J),  MT(MOD_RGUI, KC_K),  MT(MOD_RALT, KC_L),  MT(MOD_RCTL, KC_SCLN),
-    KC_Z,                   KC_X,                KC_C,                LT(3, KC_V),         KC_B,                KC_NO,               KC_NO,                   KC_NO,               KC_NO,               KC_N,                LT(4, KC_M),         KC_COMMA,            KC_DOT,              KC_SLASH,
-    KC_NO,                  KC_NO,               KC_NO,               KC_NO,               KC_NO,               LT(2, KC_SPACE),                              LT(1, KC_BSPC),      KC_NO,               KC_NO,               KC_NO,               KC_NO,               KC_NO,
+    KC_Q,                   KC_W,                KC_E,                KC_R,                KC_T,                KC_NO,               KC_NO,                   KC_NO,               LT(2, KC_SPACE),     KC_NO,               KC_NO,               KC_NO,               KC_NO,               KC_NO,
+    MT(MOD_LCTL, KC_A),     MT(MOD_RALT, KC_S),  MT(MOD_LGUI, KC_D),  MT(MOD_LSFT, KC_F),  KC_G,                KC_NO,               KC_NO,                   KC_NO,               KC_NO,               KC_NO,               KC_NO,               KC_NO,               KC_NO,               KC_NO,
+    KC_Z,                   KC_X,                KC_C,                LT(3, KC_V),         KC_B,                KC_NO,               KC_NO,                   KC_NO,               KC_NO,               KC_B,                LT(3, KC_V),         KC_C,                KC_X,                KC_Z,
+    KC_NO,                  KC_NO,               KC_NO,               KC_NO,               KC_NO,               KC_NO,                                        KC_NO,               KC_G,                MT(MOD_LSFT, KC_F),  MT(MOD_LGUI, KC_D),  MT(MOD_RALT, KC_S),  MT(MOD_LCTL, KC_A),
     // includes the red thumb keys                                                                              Red thumb key                                 Red thumb key
-    KC_NO,                  KC_NO,               KC_NO,               KC_NO,               LT(2, KC_SPACE),     KC_NO,                                        KC_NO,               LT(1, KC_BSPC),      KC_NO,               KC_NO,               KC_NO,               KC_NO,
+    KC_NO,                  KC_NO,               KC_NO,               KC_NO,               LT(2, KC_SPACE),     KC_NO,                                        KC_NO,               KC_T,                KC_R,                KC_E,                KC_W,                KC_Q,
     KC_NO,                  KC_NO,               KC_NO,                                                                                                       KC_NO,               KC_NO,               KC_NO
   ),
     // symbols activated by right thumb
