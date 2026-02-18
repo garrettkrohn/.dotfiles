@@ -41,6 +41,8 @@
     # moonlander2 config qmk
     ~/.config/qmk_firmware/keyboards/zsa/moonlander/keymaps/moonlander2:
       path: ./config/keyboards/moonlander2/
+    ~/wallpapers:
+      path: ./config/wallpapers/
 
 
 - shell:
