@@ -45,6 +45,8 @@
       path: ./config/wallpapers/
     ~/.gitconfig:
       path: ./config/.gitconfig/
+    ~/.config/yazi/theme.toml:
+      path: ./config/yazi/theme.toml
 
 
 - shell:
