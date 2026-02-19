@@ -44,7 +44,9 @@ zinit light jeffreytse/zsh-vi-mode
 
 # sources the alias file
 source $HOME/dotfiles/config/aliases
-source $HOME/dotfiles/config/secrets/scripts
+
+# Source secrets if they exist
+[ -f "$HOME/dotfiles/config/secrets/scripts/secret_aliases" ] && source "$HOME/dotfiles/config/secrets/scripts/secret_aliases"
 
 # ~/.tmux/plugins
 export PATH="$PATH:$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin"
