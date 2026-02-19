@@ -77,6 +77,7 @@ brew "bat"                   # Better cat
 brew "fd"                    # Better find
 brew "ripgrep"               # Better grep (rg)
 brew "lsd"                   # Better ls
+brew "eza"                   # Modern ls replacement
 brew "zoxide"                # Better cd
 
 # ============================================================================
@@ -102,6 +103,7 @@ brew "dos2unix"
 # Editor & Development
 # ============================================================================
 brew "neovim"
+brew "bob"                   # Neovim version manager
 brew "clang-format"
 
 # ============================================================================
