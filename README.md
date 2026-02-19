@@ -12,13 +12,19 @@ A comprehensive development environment configuration for macOS, featuring a hig
 
 2. Install Homebrew dependencies:
    ```bash
-   ./dotfiles/config/scripts/brew_install.sh
+   cd ~/dotfiles
+   brew bundle install
    ```
 
 3. Run the installer from your home directory:
    ```bash
    cd ~
    ./dotfiles/install
+   ```
+
+4. Run the post-install script:
+   ```bash
+   ./dotfiles/post-install.sh
    ```
 
 **Note:** The dotfiles folder must be in your home directory and named `dotfiles` for the installation to work correctly.
