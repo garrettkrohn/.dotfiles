@@ -2,32 +2,106 @@
 
 A comprehensive development environment configuration for macOS, featuring a highly customized Neovim setup, window management, and terminal tooling.
 
-## Quick Start
+## Setup Guide for New Machine
 
-1. Clone this repository to your home directory:
+Follow these steps in order to set up your dotfiles on a new machine:
+
+1. **Install Homebrew**
    ```bash
-   cd ~
-   git clone <repository-url> dotfiles
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    ```
 
-2. Install Homebrew dependencies:
+2. **Clone dotfiles repository**
+   ```bash
+   cd ~
+   git clone https://github.com/garrettkrohn/.dotfiles.git dotfiles
+   ```
+
+3. **Install Homebrew packages**
    ```bash
    cd ~/dotfiles
    brew bundle install
    ```
 
-3. Run the installer from your home directory:
+4. **Run dotbot installer**
    ```bash
-   cd ~
-   ./dotfiles/install
+   ./install
    ```
 
-4. Run the post-install script:
+5. **Run post-install script**
    ```bash
-   ./dotfiles/post-install.sh
+   ./post-install.sh
    ```
+   This installs: QMK CLI, QMK firmware, Tmux Plugin Manager, Zinit, Bob (Neovim version manager), and creates a secrets file template
+
+6. **Configure macOS defaults (optional but recommended)**
+   ```bash
+   ./config/scripts/macos-defaults.sh
+   ```
+
+7. **Add your secrets (optional)**
+   ```bash
+   nvim ~/dotfiles/config/secrets/scripts/secret_aliases
+   ```
+   Add your private aliases, API tokens, and environment variables to this file.
+
+8. **Generate/Transfer SSH Keys**
+   ```bash
+   ssh-keygen -t ed25519 -C "your_email@example.com"
+   # Add to GitHub/GitLab/etc.
+   ```
+
+9. **Sign in to services**
+   - GitHub CLI: `gh auth login`
+   - AWS CLI: `aws configure` (if needed)
+   - Docker Hub: Open Docker Desktop and sign in
+   - NPM registry: `npm login` (if using private packages)
+
+10. **Configure and start services**
+    ```bash
+    # Start borders (window borders)
+    brew services start borders
+    
+    # Start PostgreSQL (if needed)
+    brew services start postgresql@15
+    ```
+
+11. **Grant permissions to applications**
+    - Aerospace: System Settings > Privacy & Security > Accessibility
+    - WezTerm/Alacritty: System Settings > Privacy & Security > Accessibility (if needed)
+
+12. **Install application-specific plugins**
+    - **Tmux**: Open tmux and press `prefix + I` to install TPM plugins
+    - **Neovim**: Run `nvim` then `:Lazy sync` and `:checkhealth`
+
+13. **Configure Node.js**
+    ```bash
+    # Create NVM directory
+    mkdir ~/.nvm
+    
+    # Install and set default Node version
+    fnm install 18.16.0
+    fnm default 18.16.0
+    ```
+
+14. **Configure Python**
+    ```bash
+    # Set default Python version
+    pyenv global 3.13.0  # or your preferred version
+    ```
+
+15. **Restart shell or reboot**
+    ```bash
+    # Restart shell
+    source ~/.zshrc
+    
+    # Or reboot for all changes to take effect
+    sudo reboot
+    ```
 
 **Note:** The dotfiles folder must be in your home directory and named `dotfiles` for the installation to work correctly.
+
+For detailed troubleshooting and additional manual steps, see `MIGRATION_CHECKLIST.md` and `MIGRATION_CHECKLIST_ADDITIONAL.md`.
 
 ## What's Included
 
@@ -155,10 +229,11 @@ The Neovim configuration is located in `config/nvim/`. Key files:
 ## Scripts
 
 Located in `config/scripts/`:
-- `brew_install.sh` - Install Homebrew packages
+- `macos-defaults.sh` - Configure macOS system preferences (keyboard, Finder, Dock, etc.)
+- `bootstrap.sh` - Bootstrap database with user info
 - `cursor` - Cursor editor integration
 - `cursor-agent` - Cursor AI agent helper
-- Various utility scripts
+- Various build and development utility scripts
 
 ## Keyboard Configuration
 

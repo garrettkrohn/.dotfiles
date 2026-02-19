@@ -3,3 +3,7 @@ test.sh
 .luarc.json
 secret_aliases
 config/aliases.local
+
+# Ignore secrets directory except template files
+config/secrets/scripts/*
+!config/secrets/scripts/*.example

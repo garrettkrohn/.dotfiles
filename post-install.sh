@@ -5,6 +5,31 @@ set -e
 echo "🚀 Running post-install setup..."
 
 # ============================================================================
+# Secrets Setup
+# ============================================================================
+echo ""
+echo "🔐 Setting up secrets directory..."
+
+SECRETS_DIR="$HOME/dotfiles/config/secrets/scripts"
+SECRETS_FILE="$SECRETS_DIR/secret_aliases"
+SECRETS_TEMPLATE="$SECRETS_DIR/secret_aliases.example"
+
+if [ ! -f "$SECRETS_FILE" ]; then
+    if [ -f "$SECRETS_TEMPLATE" ]; then
+        echo "Creating secret_aliases from template..."
+        cp "$SECRETS_TEMPLATE" "$SECRETS_FILE"
+        echo "✓ Created $SECRETS_FILE"
+        echo "  Edit this file to add your private aliases and tokens"
+    else
+        echo "⚠️  Template not found, creating empty secret_aliases"
+        mkdir -p "$SECRETS_DIR"
+        touch "$SECRETS_FILE"
+    fi
+else
+    echo "✓ secret_aliases already exists"
+fi
+
+# ============================================================================
 # Python Packages
 # ============================================================================
 echo ""
