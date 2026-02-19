@@ -43,6 +43,8 @@
       path: ./config/keyboards/moonlander2/
     ~/wallpapers:
       path: ./config/wallpapers/
+    ~/.gitconfig:
+      path: ./config/.gitconfig/
 
 
 - shell:
