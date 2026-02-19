@@ -84,9 +84,10 @@ export PATH="$PATH:/opt/homebrew/opt/postgresql@15/bin"
 # Python paths
 export PATH="$HOME/.local/bin:/usr/local/opt/python/libexec/bin:$PATH"
 
-# bob path
-. "/Users/gkrohn/.local/share/bob/env/env.sh"
-
+# bob path (Neovim version manager)
+if [ -f "$HOME/.local/share/bob/env/env.sh" ]; then
+  . "$HOME/.local/share/bob/env/env.sh"
+fi
 
 export EDITOR="nvim"
 export VISUAL="nvim"
@@ -95,7 +96,9 @@ zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
 # opencode
-export PATH=/Users/gkrohn/.opencode/bin:$PATH
+if [ -d "$HOME/.opencode/bin" ]; then
+  export PATH="$HOME/.opencode/bin:$PATH"
+fi
 
 #java
 export JAVA_HOME=$(/usr/libexec/java_home -v 21)
