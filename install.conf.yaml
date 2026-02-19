@@ -10,8 +10,6 @@
 - link:
     ~/.zshrc:
       path: ./config/zshrc
-    ~/.oh-my-zsh/custom/aliases.zsh~:
-      path: ./config/aliases
     ~/.config/tmux/tmux.conf:
       path: ./config/tmux/tmux.conf
     ~/.config/tmux/tmux-nerd-font-window-name.yml:
