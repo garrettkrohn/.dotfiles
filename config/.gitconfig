@@ -1,0 +1,8 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Garrett Krohn
+	email = garrettkrohn@gmail.com
+[core]
+	ignorecase = true
+[alias]
+	desc = !git config branch.$(git symbolic-ref --short HEAD).description
