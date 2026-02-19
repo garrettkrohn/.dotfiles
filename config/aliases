@@ -1,45 +1,35 @@
-#Aliases here
-alias awslogin="aws ecr get-login-password --region us-east-1 | docker 
-login --username AWS --password-stdin 
-776290407496.dkr.ecr.us-east-1.amazonaws.com"
+# ============================================================================
+# General Aliases
+# ============================================================================
 alias lg="lazygit"
 alias ld="lazydocker"
 alias q="exit"
-alias nrs="npm run start"
 alias c="clear"
-alias w="cd ~/vimwiki && n"
-alias sql="nvim ~/code/aep_cs_scripts"
-alias post="cd ~/code/postman && nvim ."
-alias le="cd ~/code/liv-env-scripts/scripts/"
-alias n="cd ~/notes && kick netspi_notes.md"
+alias nrs="npm run start"
 alias term="nvim -c ':terminal'"
-alias or="nvim -c ':silent Octo pr edit " #open review
-alias review="checkout_and_open_pr.sh" # checkout the branch and open the pr # include the -c flag to checkout
 alias ghd="gh dash"
-alias auth="source ~/code/rest/auth.sh"
-alias dap="nvim application/src/main/java/com/netspi/platform/Application.java"
-alias rg="mvn clean install && java -jar -Dspring.profiles.active=local ./target/global-service-0.0.1-SNAPSHOT.jar"
-alias rs="run_scan_service.sh"
 alias s="sesh connect dotfiles"
-alias sd="~/code/sesh/sesh"
 alias sn="eval '$(fnm env)' && fnm use v18.16.0"
 alias j='function _j(){ javac "$1" && java "${1%.*}"; }; _j'
 alias nvimt='NVIM_APPNAME=nvimtest nvim'
-alias db="nvim -c 'DBUI'"
 
+# ============================================================================
+# Git & PR Management
+# ============================================================================
+alias review="checkout_and_open_pr.sh"
+
+# ============================================================================
+# Build Aliases
+# ============================================================================
 alias gb='go build .'
 alias gr='go run .'
 alias gbr='go build . && go run .'
 alias gt='go test -v ./...'
-
-alias ln='$HOME/code/nuclei/bin/nuclei' # local nuclei
+alias rg="mvn clean install && java -jar -Dspring.profiles.active=local ./target/global-service-0.0.1-SNAPSHOT.jar"
+alias rs="run_scan_service.sh"
 
 # opening neovim
 alias kick="nvim"
-f() {
-    nvim $(fzf --filter="$1" | head -n 1)
-}
-
 kf() {
   nvim -c ":lua Snacks.picker.files({ input = '$1' })"
 }
@@ -64,52 +54,33 @@ alias k="nvim -c ':Oil'"
 #
 # alias feb="corepack enable && corepack prepare yarn@3.5.1 --activate && yarn cache clean && yarn install && yarn api && yarn build && yarn start-4444 --no-open"
 
-# -db to destroy db
-# -skipTests to skip tests
-alias beb="back_end_build.sh"
+# ============================================================================
+# Build Scripts
+# ============================================================================
+alias beb="back_end_build.sh"        # -db to destroy db, -skipTests to skip tests
 alias bebh="echo '-db to destroy db\n-skipTests to skip test'"
-
-# -skipbuild skips the build process
-alias feb="front_end_build.sh"
+alias feb="front_end_build.sh"       # -skipbuild skips the build process
 alias cb="client_front_end_build.sh"
-
-
 alias boot="bootstrap.sh"
+alias pbs='platform_build_script.sh'
 
-alias nw="create_platform_worktree.sh"
-alias rw="remove_platform_worktree.sh"
-alias bare="cd ~/code/platform_work/platform_bare"
-
+# ============================================================================
+# Maven & Build Tools
+# ============================================================================
 alias mci="mvn clean install"
 alias mt="mvn test"
+alias mj='mvn org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven-plugin:report -Djacoco.formats=CSV'
 alias ys="fnm use 18.16.0 && yarn start-4444 --no-open"
 
-# git worktree
-alias gw="git worktree"
-alias gwa="git worktree add"
-alias gwr="git worktree remove -f"
-alias gwl="git worktree list"
-alias tkd="/Users/gkrohn/code/treekanga_work/tui/treekanga tui"
-function tkdev {
-  local folder
-  folder=$(find ~/code/treekanga_work -mindepth 1 -maxdepth 1 -type d | fzf --prompt="Select a worktree: ")
-  if [[ -n "$folder" ]]; then
-    # echo "$folder" # for debugging
-    "$folder"/treekanga "$@" || return
-  fi
-}
-
+# ============================================================================
+# Treekanga (Git Worktree Manager)
+# ============================================================================
 alias settkd='export TREEKANGA_WORKTREE="$(pwd)"'
-alias tk="/opt/homebrew/bin/treekanga"
+alias tk="treekanga"
 alias .tk="./treekanga"
-alias tka="/opt/homebrew/bin/treekanga add"
-# alias tkd="/opt/homebrew/bin/treekanga delete"
-alias tkl="/opt/homebrew/bin/treekanga list"
+alias tka="treekanga add"
+alias tkl="treekanga list"
 alias tkt="treekanga tui"
-
-alias snap="~/code/snap_work/main/snap"
-
-alias p="/Users/gkrohn/code/pluck/pluck"
 
 # docker
 alias do="open -n ~/../../Applications/Docker.app"
@@ -158,14 +129,9 @@ alias reload='RELOAD=1 source ~/.zshrc'
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
-# Side projects
-alias ivan="nvim ~/ivan/ivan_website"
-alias westman="nvim ~/sideProjects/westman"
-
-# Ranger
-alias r="ranger"
-alias rr="ranger ~"
-
+# ============================================================================
+# File Managers
+# ============================================================================
 # Borders
 alias borders="brew services start borders"
 alias bordersr="brew services restart borders"
@@ -180,25 +146,29 @@ alias activate='source .venv/bin/activate'
 # goose up
 alias gooseup='goose -dir db/migrations postgres "user=postgres password=postgres dbname=db host=localhost port=3333 sslmode=disable" up'
 
-# awslocal
-alias awslocal='aws --endpoint-url=http://localhost:4566'
-
-# tunnels
-alias t='/Users/gkrohn/code/tunnels/tunnels'
-
-alias pbs='platform_build_script.sh'
-
-# run jacoco tests
-alias mj='mvn org.jacoco:jacoco-maven-plugin:prepare-agent test org.jacoco:jacoco-maven-plugin:report -Djacoco.formats=CSV' 
-
+# ============================================================================
+# Miscellaneous
+# ============================================================================
 alias ll='ls -lG'
-
 alias ca='cursor-agent'
 
+# ============================================================================
+# PNPM
+# ============================================================================
 alias cb='pnpm clean && pnpm install && pnpm build && pnpm preview'
 alias pb='pnpm clean && pnpm install && pnpm build'
 
-alias rolodev='/Users/gkrohn/code/rolo/rolo'
-
+# ============================================================================
+# QMK (Keyboard Firmware)
+# ============================================================================
 alias qc='qmk compile -kb zsa/moonlander/reva -km moonlander2'
 alias qf='qmk flash -kb zsa/moonlander/reva -km moonlander2'
+
+# ============================================================================
+# Local Project Aliases
+# ============================================================================
+# Source local project-specific aliases if they exist
+# Copy aliases.local.example to ~/.config/aliases.local and customize
+if [ -f "$HOME/.config/aliases.local" ]; then
+  source "$HOME/.config/aliases.local"
+fi
