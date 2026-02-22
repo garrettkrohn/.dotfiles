@@ -27,7 +27,7 @@ brew "gh"                    # GitHub CLI
 brew "lazygit"
 brew "git-filter-repo"
 brew "gitmux"
-brew "gittype"
+# brew "gittype"
 
 # ============================================================================
 # Programming Languages & Runtimes
@@ -155,7 +155,7 @@ brew "mockery"
 # ============================================================================
 # Window Management (macOS)
 # ============================================================================
-brew "borders"
+# brew "borders"
 
 # ============================================================================
 # Custom Projects
@@ -172,7 +172,7 @@ brew "qrencode"
 brew "spotifyd"
 brew "w3m"                   # Terminal web browser
 brew "xclip"
-brew "rip"                   # Safe rm replacement
+# brew "rip"                   # Safe rm replacement
 
 # ============================================================================
 # GUI Applications (Casks)
