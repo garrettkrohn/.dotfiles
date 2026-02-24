@@ -51,10 +51,10 @@ local config = {
   color_scheme = cs.get_color_scheme(),
 
   window_padding = {
-    left = 0,
+    left = 8,
     right = 8,
     top = 8,
-    bottom = 0,
+    bottom = 8,
   },
 
   set_environment_variables = {
@@ -106,9 +106,8 @@ local config = {
     -- k.cmd_to_tmux_prefix('d', 'D'),
     -- k.cmd_to_tmux_prefix('G', 'G'),
     -- k.cmd_to_tmux_prefix('g', 'g'),
+    k.cmd_to_tmux_prefix('e', '['),
     k.cmd_to_tmux_prefix('j', 'j'),
-    k.cmd_to_tmux_prefix('K', 'T'),
-    k.cmd_to_tmux_prefix('k', 'k'),
     k.cmd_to_tmux_prefix('r', 'r'),
     k.cmd_to_tmux_prefix('R', 'R'),
     k.cmd_to_tmux_prefix('f', 'f'),
