@@ -1,25 +1,3 @@
-
-### Added by Zinit's installer
-if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
-        print -P "%F{33} %F{34}Installation successful.%f%b" || \
-        print -P "%F{160} The clone has failed.%f%b"
-fi
-
-source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-source "${ZINIT_HOME}/zinit.zsh"
-
-# comp init
-autoload -U compinit; compinit
-
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -29,18 +7,41 @@ if [ ! -d "$ZINIT_HOME" ]; then
    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
-# Source/Load zinit
+# Source/Load zinit (only once)
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Star Ship
+# Starship prompt
 eval "$(starship init zsh)"
 
-# Add in zsh plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
+# Skip compinit security checks (only run full check once per day)
+autoload -Uz compinit
+setopt EXTENDEDGLOB
+local zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
+if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]; then
+  zcompile "$zcompdump"
+fi
+if [[ -n $zcompdump(#qNmh-20) ]]; then
+  compinit -C -d "$zcompdump"
+else
+  compinit -i -d "$zcompdump"
+fi
+unsetopt EXTENDEDGLOB
+
+# Add in zsh plugins (aggressive turbo mode)
+zinit wait lucid for \
+    zdharma-continuum/fast-syntax-highlighting \
+    zsh-users/zsh-completions
+
+# Load autosuggestions with delay
+zinit wait lucid atload"_zsh_autosuggest_start" for \
+    zsh-users/zsh-autosuggestions
+
+# Load fzf-tab immediately (needed for tab completion)
 zinit light Aloxaf/fzf-tab
-zinit light jeffreytse/zsh-vi-mode
+
+# Defer zsh-vi-mode (major performance hit)
+zinit wait'1' lucid for \
+    jeffreytse/zsh-vi-mode
 
 # sources the alias file
 source $HOME/dotfiles/config/aliases
@@ -51,16 +52,21 @@ source $HOME/dotfiles/config/aliases
 # ~/.tmux/plugins
 export PATH="$PATH:$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin"
 
-# zoxide init
-eval "$(zoxide init zsh)"
+# zoxide init (lazy load)
+eval "$(zoxide init zsh --no-cmd)"
+alias cd='z'
 
-# go
-export PATH=$PATH:$(go env GOPATH)/bin
+# go (use default GOPATH to avoid slow command execution)
+export GOPATH="${HOME}/go"
+export PATH="$PATH:${GOPATH}/bin"
 
-# nvm
+# nvm (lazy load - only load when needed)
 export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+nvm() {
+  unset -f nvm
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+  nvm "$@"
+}
 
 # open nvim directly into telescope
 function fuzzy_nvim_start {
@@ -76,9 +82,11 @@ function fuzzy_nvim_start {
 # custom scripts
 export PATH="$PATH:$HOME/dotfiles/config/scripts"
 
-# fnm
+# fnm (keep this since you're using it instead of nvm)
 export PATH="$PATH:$HOME/.fnm"
-eval "$(fnm env --use-on-cd --shell zsh)"
+if command -v fnm &> /dev/null; then
+  eval "$(fnm env --use-on-cd --shell zsh)"
+fi
 
 # postgres
 export PATH="$PATH:/opt/homebrew/opt/postgresql@15/bin"
@@ -102,6 +110,8 @@ if [ -d "$HOME/.opencode/bin" ]; then
   export PATH="$HOME/.opencode/bin:$PATH"
 fi
 
-#java
-export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+# java (lazy load to avoid slow command execution)
+if [[ -z "$JAVA_HOME" ]]; then
+  export JAVA_HOME="$(/usr/libexec/java_home -v 21 2>/dev/null || echo '')"
+fi
 

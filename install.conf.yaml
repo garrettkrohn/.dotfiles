@@ -45,6 +45,8 @@
       path: ./config/.gitconfig/
     ~/.config/yazi/theme.toml:
       path: ./config/yazi/theme.toml
+    ~/.config/tunnels/config.yaml:
+      path: ./config/secrets/tunnels/config.yaml
 
 
 - shell:

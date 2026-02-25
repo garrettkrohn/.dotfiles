@@ -1,8 +1,6 @@
 return {
   'garrettkrohn/dadview.nvim',
   -- dir = '/Users/gkrohn/code/neovim_plugins/dadview.nvim',
-  -- IMPORTANT: Use lazy loading triggers instead of config function
-  -- This prevents the plugin from loading at startup
   cmd = {
     'DadView',
     'DadViewToggle',

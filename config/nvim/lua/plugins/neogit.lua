@@ -20,5 +20,6 @@ return {
   },
   opts = {
     kind = 'replace',
+    fetch_after_checkout = true,
   },
 }

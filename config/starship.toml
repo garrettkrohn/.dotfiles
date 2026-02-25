@@ -4,6 +4,9 @@
 # Inserts a blank line between shell prompts
 add_newline = false
 
+# Use single-line format (removes the default line break before character)
+format = """$directory$git_branch$character"""
+
 # Replace the ‘❯’ symbol in the prompt with ‘➜’
 [character] # The name of the module we are configuring is ‘character’
 success_symbol = "[\uf054](white)" # 
@@ -13,7 +16,6 @@ error_symbol = "[\uf467](red)" # 
 [directory]
 style = "blue bold"
 
-# Disable the package module, hiding it from the prompt completely
 [package]
 disabled = true
 [username]
