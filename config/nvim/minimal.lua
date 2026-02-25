@@ -357,7 +357,7 @@ require('lazy').setup {
 
         -- Register the LSP server configuration using the new API
         vim.lsp.config[server_name] = server_config
-        
+
         -- Enable the server (this replaces lspconfig[server_name].setup())
         vim.lsp.enable(server_name)
       end
@@ -440,6 +440,15 @@ require('lazy').setup {
       show_hidden = true,
     },
     dependencies = { { 'echasnovski/mini.icons', opts = {} } },
+  },
+  {
+    'yarospace/lua-console.nvim',
+    lazy = true,
+    keys = {
+      { '`', desc = 'Lua-console - toggle' },
+      { '<Leader>`', desc = 'Lua-console - attach to buffer' },
+    },
+    opts = {},
   },
 }
 

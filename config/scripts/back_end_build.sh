@@ -102,6 +102,11 @@ cd parent
 if $clean; then
   print_pink "Force cleaning target directory"
   rm -rf application/target
+  rm -rf base/target
+  rm -rf bas/target
+  rm -rf asm/target
+  rm -rf labs/target
+  rm -rf ptaas/target
 fi
 
 if $skip_tests && $clean; then

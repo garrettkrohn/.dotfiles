@@ -108,6 +108,7 @@ local config = {
     -- k.cmd_to_tmux_prefix('g', 'g'),
     k.cmd_to_tmux_prefix('e', '['),
     k.cmd_to_tmux_prefix('j', 'j'),
+    k.cmd_to_tmux_prefix('k', 'k'),
     k.cmd_to_tmux_prefix('r', 'r'),
     k.cmd_to_tmux_prefix('R', 'R'),
     k.cmd_to_tmux_prefix('f', 'f'),
@@ -207,6 +208,13 @@ wezterm.on('user-var-changed', function(window, pane, name, value)
   local overrides = window:get_config_overrides() or {}
   wezterm.log_info('name', name)
   wezterm.log_info('value', value)
+
+  if name == 'WALLPAPER_CHANGE' then
+    overrides.background = {
+      w.get_wallpaper(wallpapers_glob),
+      b.get_background(dark_opacity, light_opacity),
+    }
+  end
 
   if name == 'SHARE' then
     if value == 'true' then

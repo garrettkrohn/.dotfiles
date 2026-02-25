@@ -3,13 +3,31 @@ local h = require 'utils/helpers'
 local M = {}
 
 M.get_wallpaper = function(dir)
-  local wallpapers = {}
-  for _, v in ipairs(wezterm.glob(dir)) do
-    if not string.match(v, '%.DS_Store$') then
-      table.insert(wallpapers, v)
+  local cache_file = os.getenv 'HOME' .. '/.cache/wezterm_wallpaper'
+  local wallpaper = nil
+
+  local f = io.open(cache_file, 'r')
+  if f then
+    wallpaper = f:read '*line'
+    f:close()
+    local file_exists = io.open(wallpaper, 'r')
+    if not file_exists then
+      wallpaper = nil
+    else
+      file_exists:close()
     end
   end
-  local wallpaper = h.get_random_entry(wallpapers)
+
+  if not wallpaper then
+    local wallpapers = {}
+    for _, v in ipairs(wezterm.glob(dir)) do
+      if not string.match(v, '%.DS_Store$') then
+        table.insert(wallpapers, v)
+      end
+    end
+    wallpaper = h.get_random_entry(wallpapers)
+  end
+
   return {
     source = { File = { path = wallpaper } },
     height = 'Cover',
