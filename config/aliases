@@ -37,6 +37,8 @@ ks() {
   nvim -c ":lua Snacks.picker.grep({ input = '$1' })"
 }
 
+alias kg="nvim -c 'Neogit'"
+
 alias diff="nvim -c ':DiffviewOpen origin/development...HEAD'"
 
 # Telescope
@@ -151,6 +153,7 @@ alias gooseup='goose -dir db/migrations postgres "user=postgres password=postgre
 # ============================================================================
 alias ll='ls -lG'
 alias ca='cursor-agent'
+alias wp='select_wallpaper.sh'
 
 # ============================================================================
 # PNPM
