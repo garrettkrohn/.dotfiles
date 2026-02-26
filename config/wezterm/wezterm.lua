@@ -41,7 +41,7 @@ local config = {
     -- 'CommitMono',
     -- 'Monaspace Argon',
     -- 'Monaspace Krypton',
-    -- 'victor mono',
+    'victor mono',
     'Monaspace Neon',
     'Monaspace Radon',
     'Monaspace Xenon',

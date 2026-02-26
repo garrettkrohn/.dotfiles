@@ -73,6 +73,8 @@ require('lazy').setup {
         width = 40,
         position = 'left',
         auto_open_query_buffer = true,
+        result_split = 'vertical',
+        reuse_query_buffer = true,
       }
     end,
   },
