@@ -47,6 +47,8 @@
       path: ./config/yazi/theme.toml
     ~/.config/tunnels/config.yaml:
       path: ./config/secrets/tunnels/config.yaml
+    ~/.config/goread/urls.yml:
+      path: ./config/goread/urls.yml
 
 
 - shell:

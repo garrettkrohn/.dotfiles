@@ -1,0 +1,42 @@
+categories:
+    - name: Neovim
+      desc: From neovim sub reddit
+      subscriptions:
+        - name: Neovim
+          desc: Neovim
+          url: https://www.reddit.com/r/neovim/.rss
+          blacklist_words:
+            - "101"
+        - name: TLDR
+          desc: TLDR
+          url: https://bullrich.dev/tldr-rss/tech.rss
+          blacklist_words:
+            - Sponsor
+    - name: Sports
+      desc: From neovim sub reddit
+      subscriptions:
+        - name: Vikings reddit
+          desc: Vikings reddit
+          url: https://www.reddit.com/r/minnesotavikings/.rss
+          blacklist_words:
+            - example
+        - name: Twins reddit
+          desc: Twins reddit
+          url: https://www.reddit.com/r/minnesotatwins/.rss
+          blacklist_words:
+            - pre game
+        - name: Baseball reddit
+          desc: Baseball reddit
+          url: https://www.reddit.com/r/baseball/top/.rss
+          blacklist_words:
+            - video
+        - name: Purple Insider
+          desc: Purple Insider
+          url: https://www.purpleinsider.football/p/feed
+          blacklist_words:
+            - video
+        - name: MLB Trade Rumors
+          desc: MLB Trade Rumors
+          url: https://www.mlbtraderumors.com/feed
+          blacklist_words:
+            - video
