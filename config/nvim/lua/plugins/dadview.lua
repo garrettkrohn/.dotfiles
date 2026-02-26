@@ -1,6 +1,6 @@
 return {
-  'garrettkrohn/dadview.nvim',
-  -- dir = '/Users/gkrohn/code/neovim_plugins/dadview.nvim',
+  -- 'garrettkrohn/dadview.nvim',
+  dir = '/Users/gkrohn/code/neovim_plugins/dadview.nvim',
   cmd = {
     'DadView',
     'DadViewToggle',
@@ -59,6 +59,7 @@ return {
       width = 40,
       position = 'left',
       auto_open_query_buffer = true,
+      result_split = 'vertical',
     }
   end,
 }
