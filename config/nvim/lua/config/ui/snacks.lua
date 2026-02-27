@@ -86,6 +86,9 @@ return {
         style = 'lazygit',
       },
     },
+    git = {
+      enabled = true,
+    },
     picker = {
       enabled = true,
     },
