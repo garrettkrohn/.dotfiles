@@ -25,6 +25,9 @@ categories:
           url: https://www.reddit.com/r/minnesotatwins/.rss
           blacklist_words:
             - pre game
+            - GAME THREAD
+            - twins lost
+            - twins win
         - name: Baseball reddit
           desc: Baseball reddit
           url: https://www.reddit.com/r/baseball/top/.rss

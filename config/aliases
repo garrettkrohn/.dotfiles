@@ -154,6 +154,7 @@ alias gooseup='goose -dir db/migrations postgres "user=postgres password=postgre
 alias ll='ls -lG'
 alias ca='cursor-agent'
 alias wp='select_wallpaper.sh'
+alias .g='./goread --urls_readonly --reset_cache'
 
 # ============================================================================
 # PNPM
