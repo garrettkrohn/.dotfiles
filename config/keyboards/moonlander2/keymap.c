@@ -23,7 +23,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Z,                   KC_X,                KC_C,                LT(3, KC_V),         KC_B,                KC_NO,               KC_NO,                   KC_NO,               KC_NO,               KC_N,                LT(4, KC_M),         KC_COMMA,            KC_DOT,              KC_SLASH,
     KC_NO,                  KC_NO,               KC_NO,               KC_NO,               KC_NO,               LT(2, KC_SPACE),                              LT(1, KC_BSPC),      KC_NO,               KC_NO,               KC_NO,               KC_NO,               KC_NO,
     // includes the red thumb keys                                                                              Red thumb key                                 Red thumb key
-    KC_NO,                  KC_NO,               KC_NO,               KC_NO,               LT(2, KC_SPACE),     KC_NO,                                        KC_NO,               LT(1, KC_BSPC),      KC_NO,               KC_NO,               KC_NO,               KC_NO,
+    KC_NO,                  KC_NO,               KC_NO,               KC_NO,               KC_NO,               KC_NO,                                        KC_NO,               KC_NO,               KC_NO,               KC_NO,               KC_NO,               KC_NO,
     KC_NO,                  KC_NO,               KC_NO,                                                                                                       KC_NO,               KC_NO,               KC_NO
   ),
     // symbols activated by right thumb

@@ -12,6 +12,11 @@ categories:
           url: https://bullrich.dev/tldr-rss/tech.rss
           blacklist_words:
             - Sponsor
+        - name: Will Larson
+          desc: Irrational Exuberance
+          url: https://lethain.com/feeds.xml
+          blacklist_words:
+            - Sponsor
     - name: Sports
       desc: From neovim sub reddit
       subscriptions:

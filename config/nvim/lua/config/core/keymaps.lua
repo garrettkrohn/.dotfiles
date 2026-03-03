@@ -179,7 +179,7 @@ end, { desc = 'print and copy file path' })
 
 -- diagnostics
 keymap.set('n', '<leader>tc', ':lua vim.diagnostic.hide()<CR>', { desc = 'Hide diagnostics' })
-keymap.set('n', '<leader>to', ':lua vim.diagnostic.show()<CR>', { desc = 'Show diagnostics' })
+-- keymap.set('n', '<leader>to', ':lua vim.diagnostic.show()<CR>', { desc = 'Show diagnostics' })
 -- suppress all vim diagnostics besides ERROR
 keymap.set(
   'n',
