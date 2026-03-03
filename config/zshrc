@@ -53,8 +53,7 @@ source $HOME/dotfiles/config/aliases
 export PATH="$PATH:$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin"
 
 # zoxide init (lazy load)
-eval "$(zoxide init zsh --no-cmd)"
-alias cd='z'
+eval "$(zoxide init zsh)"
 
 # go (use default GOPATH to avoid slow command execution)
 export GOPATH="${HOME}/go"

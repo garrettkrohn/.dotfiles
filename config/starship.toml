@@ -15,6 +15,7 @@ error_symbol = "[\uf467](red)" # 
 
 [directory]
 style = "blue bold"
+truncation_length = 1
 
 [package]
 disabled = true
@@ -28,6 +29,8 @@ disabled = true
 disabled = true
 [git_branch]
 disabled = false
+truncation_length = 30
+truncation_symbol = "…"
 [git_commit]
 disabled = true
 [git_state]

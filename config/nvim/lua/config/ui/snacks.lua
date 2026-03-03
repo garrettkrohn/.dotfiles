@@ -99,6 +99,9 @@ return {
     scratch = {
       enabled = true,
     },
+    scroll = {
+      enabled = false,
+    },
   },
   keys = {
     {
