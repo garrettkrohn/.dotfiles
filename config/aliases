@@ -79,10 +79,22 @@ alias ys="fnm use 18.16.0 && yarn start-4444 --no-open"
 # ============================================================================
 alias settkd='export TREEKANGA_WORKTREE="$(pwd)"'
 alias tk="treekanga"
+alias tk2="/Users/gkrohn/code/treekanga_work/v2/treekanga"
 alias .tk="./treekanga"
 alias tka="treekanga add"
 alias tkl="treekanga list"
 alias tkt="treekanga tui"
+
+ tkc() {
+    local selected=$(tk2 --log error list --all 2>/dev/null | fzf --height 40% --reverse --border --header "Select worktree/directory")
+    if [ -n "$selected" ]; then
+      if [ -n "$TMUX" ]; then
+        tk2 --log error connect --switch "$selected"
+      else
+        tk2 --log error connect "$selected"
+      fi
+    fi
+  }
 
 # docker
 alias do="open -n ~/../../Applications/Docker.app"
