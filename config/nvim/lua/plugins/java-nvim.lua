@@ -18,8 +18,10 @@ return {
         enable = false,
       },
       jdk = {
-        auto_install = true,
+        auto_install = false,
       },
+      -- Use existing Java installation
+      java_executable = '/Users/gkrohn/Library/Java/JavaVirtualMachines/ms-21.0.10/Contents/Home/bin/java',
     }
 
     vim.schedule(function()

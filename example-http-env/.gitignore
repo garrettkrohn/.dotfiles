@@ -1,0 +1,7 @@
+# Keep private environment variables secret
+http-client.private.env.json
+*.private.env.json
+
+# Ignore response files
+*.response.json
+*.response.txt

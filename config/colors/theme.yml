@@ -1,0 +1,32 @@
+# Color Theme Configuration
+# This file defines the color scheme used across starship, tmux, and other tools
+#
+# Colors can be specified as:
+# - Hex: "#cbe3b3"
+# - Named colors: "white", "red", "magenta", etc.
+# - ANSI codes: "brightblack"
+
+theme_name: "custom"
+
+# Semantic color definitions
+colors:
+  # Primary colors
+  directory: "#cbe3b3"
+  git_branch: "#fae6ef"
+  session: "#cbe3b3"
+
+  # Status colors
+  success: "white"
+  error: "red"
+  warning: "yellow"
+  info: "cyan"
+
+  # UI elements
+  accent: "magenta"
+  muted: "gray"
+  border_active: "magenta"
+  border_inactive: "brightblack"
+
+  # Special states
+  highlight: "yellow"
+  transparent: "default"

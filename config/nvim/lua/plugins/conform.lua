@@ -13,10 +13,15 @@ return {
         typescriptreact = { 'prettier' },
         svelte = { 'prettier' },
         css = { 'prettier' },
-        markdown = { 'prettier' },
+        markdown = { 'injected' }, -- Use Neovim's built-in formatter
         graphql = { 'prettier' },
         lua = { 'stylua' },
         python = { 'isort', 'black' },
+      },
+      formatters = {
+        prettier = {
+          prepend_args = { '--tab-width', '4' },
+        },
       },
       format_on_save = {
         lsp_fallback = true,

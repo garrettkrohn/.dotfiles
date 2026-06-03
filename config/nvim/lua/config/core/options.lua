@@ -57,3 +57,11 @@ vim.fn.sign_define('DiagnosticSignInfo', { text = icons.diagnostics.info, texthl
 vim.fn.sign_define('DiagnosticSignHint', { text = icons.diagnostics.hint, texthl = 'DiagnosticSignHint' })
 
 vim.o.winborder = 'rounded'
+
+-- Ensure Neovim inherits shell PATH
+if vim.fn.executable 'zsh' == 1 then
+  local zsh_path = vim.fn.system 'zsh -l -c "echo $PATH"'
+  if vim.v.shell_error == 0 then
+    vim.env.PATH = vim.trim(zsh_path)
+  end
+end

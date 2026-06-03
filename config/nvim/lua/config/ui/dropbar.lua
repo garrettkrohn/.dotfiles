@@ -70,6 +70,11 @@ return {
     ---@class dropbar_source_t
     require('dropbar').setup {
       bar = {
+        enable = function(buf, win, _)
+          return vim.fn.win_gettype(win) == ''
+            and vim.wo[win].winbar == ''
+            and vim.bo[buf].bt == ''
+        end,
         sources = function()
           local sources = require 'dropbar.sources'
 

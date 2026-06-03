@@ -71,7 +71,7 @@ return {
     },
 
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'emoji', 'nerdfont' },
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'emoji', 'nerdfont', 'dadview' },
       providers = {
         git = {
           module = 'blink-cmp-git',
@@ -107,6 +107,11 @@ return {
           name = 'Emoji',
           score_offset = 25,
           opts = { insert = true },
+        },
+        dadview = {
+          module = 'dadview.completion.blink',
+          name = 'DadView',
+          score_offset = 15, -- Higher priority for SQL completion
         },
       },
       per_filetype = {

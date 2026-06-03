@@ -123,6 +123,7 @@ keymap.set('n', 'ca', "<cmd>lua require('fastaction').code_action()<CR>", { desc
 -- lsp
 -- TODO: add a copy contents
 keymap.set('n', '<leader>ge', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = 'show diagnostics for a line' }) -- show  diagnostics for line
+keymap.set('n', '<leader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', { desc = 'go to implementation' })
 
 -- gitsigns
 keymap.set('n', 'gj', '<cmd>Gitsigns next_hunk<CR>', { desc = 'go to next hunk' })
@@ -157,6 +158,18 @@ keymap.set('n', '<leader>tw', "<cmd>lua require('neotest').run.run({ jestCommand
 keymap.set('n', '<leader>tf', ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>", { desc = 'Neotest run file' }) -- run tests for file
 keymap.set('n', '<leader>tt', ":lua require('neotest').run.run()<CR>", { desc = 'Neotest run test' }) -- run tests for file
 keymap.set('n', '<leader>ts', ":lua require('neotest').summary.toggle()<CR>", { desc = 'Neotest toggle summary' }) -- run tests for file
+keymap.set('n', '<leader>tc', function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  -- Clear all neotest namespaces (signs, virtual text, diagnostics)
+  for ns_name, ns_id in pairs(vim.api.nvim_get_namespaces()) do
+    if ns_name:match 'neotest' then
+      vim.api.nvim_buf_clear_namespace(bufnr, ns_id, 0, -1)
+    end
+  end
+  -- Also clear signs from neotest groups
+  vim.fn.sign_unplace('*', { buffer = bufnr })
+  vim.notify('Test signs cleared', vim.log.levels.INFO)
+end, { desc = '[T]est signs [C]lear' })
 
 -- Type peaking
 -- TODO: I would like to do this with a border
@@ -171,14 +184,14 @@ keymap.set('n', '<leader>fe', vim.diagnostic.open_float, { desc = 'Show diagnost
 keymap.set('n', '<leader>p', function()
   local filepath = vim.api.nvim_buf_get_name(0)
   print(filepath)
-  vim.fn.setreg('+', filepath)
+  vim.fn.system('pbcopy', filepath)
 end, { desc = 'print and copy file path' })
 
 -- auth
 -- keymap.set('n', '<leader>au', ':terminal ~/code/rest/auth.sh<CR>', { desc = 'Platform auth for rest' })
 
 -- diagnostics
-keymap.set('n', '<leader>tc', ':lua vim.diagnostic.hide()<CR>', { desc = 'Hide diagnostics' })
+-- keymap.set('n', '<leader>tc', ':lua vim.diagnostic.hide()<CR>', { desc = 'Hide diagnostics' })
 -- keymap.set('n', '<leader>to', ':lua vim.diagnostic.show()<CR>', { desc = 'Show diagnostics' })
 -- suppress all vim diagnostics besides ERROR
 keymap.set(
@@ -216,3 +229,7 @@ vim.keymap.set('n', '<leader>au', function()
   vim.cmd('edit ' .. auth_file)
   require('kulala').run()
 end, { desc = 'Run auth.http' })
+
+keymap.set('n', 'T', function()
+  require('user.functions.peek_type').peek_type()
+end, { desc = 'Peek type in popup' })

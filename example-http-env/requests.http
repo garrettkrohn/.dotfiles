@@ -1,0 +1,18 @@
+### Get Calendar History
+GET {{base_url}}/pub/v1/calendar/connected/{{user_id}}/history HTTP/1.1
+Accept: application/json
+Authorization: Bearer {{token}}
+Ofw-Client: {{client}}
+Ofw-Version: {{version}}
+
+###
+
+### Another Example Request
+POST {{base_url}}/api/example HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "user_id": "{{user_id}}",
+  "data": "example"
+}

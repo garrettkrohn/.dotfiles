@@ -37,19 +37,20 @@
     ~/.config/snap/snap-actions.yml:
       path: ./config/snap-actions.yml
     # moonlander2 config qmk
-    ~/.config/qmk_firmware/keyboards/zsa/moonlander/keymaps/moonlander2:
-      path: ./config/keyboards/moonlander2/
+    # ~/.config/qmk_firmware/keyboards/zsa/moonlander/keymaps/moonlander2:
+    #   path: ./config/keyboards/moonlander2/
     ~/wallpapers:
       path: ./config/wallpapers/
     ~/.gitconfig:
       path: ./config/.gitconfig/
     ~/.config/yazi/theme.toml:
       path: ./config/yazi/theme.toml
-    ~/.config/tunnels/config.yaml:
-      path: ./config/secrets/tunnels/config.yaml
+    # ~/.config/tunnels/config.yaml:
+    #   path: ./config/secrets/tunnels/config.yaml
     ~/.config/goread/urls.yml:
       path: ./config/goread/urls.yml
-
+    ~/.config/gitignore_global:
+      path: ./config/gitignore_global
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]

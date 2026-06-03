@@ -4,5 +4,8 @@
 	email = garrettkrohn@gmail.com
 [core]
 	ignorecase = true
+	excludesFile = ~/.config/gitignore_global
 [alias]
 	desc = !git config branch.$(git symbolic-ref --short HEAD).description
+[credential]
+	helper = store

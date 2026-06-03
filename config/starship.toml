@@ -14,7 +14,7 @@ vicmd_symbol = "[\ue62b](white)" # 
 error_symbol = "[\uf467](red)" # 
 
 [directory]
-style = "blue bold"
+style = "#cbe3b3 bold"
 truncation_length = 1
 
 [package]
@@ -31,6 +31,7 @@ disabled = true
 disabled = false
 truncation_length = 30
 truncation_symbol = "…"
+style = "#fae6ef"
 [git_commit]
 disabled = true
 [git_state]

@@ -1,5 +1,6 @@
 return {
   'waldnzwrld/cursor-agent.nvim',
+  enabled = false,
   lazy = true,
   event = 'VeryLazy',
   branch = 'sidebar-instead-of-floating-window',

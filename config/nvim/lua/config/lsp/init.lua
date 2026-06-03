@@ -143,31 +143,30 @@ function M.setup()
     callback = M.on_attach,
   })
 
-  -- Setup mason-lspconfig
+  -- Get capabilities from blink.cmp
+  local capabilities = require('blink.cmp').get_lsp_capabilities()
+
+  -- Setup mason-lspconfig with handlers
   require('mason-lspconfig').setup {
-    automatic_enable = vim.tbl_keys(M.servers or {}),
+    ensure_installed = vim.tbl_keys(M.servers or {}),
+    automatic_installation = true,
+    handlers = {
+      -- Default handler for all servers
+      function(server_name)
+        local config = M.servers[server_name] or {}
+        local server_config = vim.tbl_deep_extend('force', {
+          capabilities = capabilities,
+        }, config)
+
+        require('lspconfig')[server_name].setup(server_config)
+      end,
+    },
   }
 
   -- Setup mason-tool-installer
   -- Only install additional tools (formatters, linters, debug adapters)
   -- LSP servers are handled by mason-lspconfig automatically
   require('mason-tool-installer').setup { ensure_installed = M.ensure_installed }
-
-  -- Get capabilities from blink.cmp
-  local capabilities = require('blink.cmp').get_lsp_capabilities()
-
-  -- Setup each LSP server using vim.lsp.config (new API in nvim 0.11)
-  for server_name, config in pairs(M.servers) do
-    local server_config = vim.tbl_deep_extend('force', {
-      capabilities = capabilities,
-    }, config)
-
-    -- Register the LSP server configuration using the new API
-    vim.lsp.config[server_name] = server_config
-    
-    -- Enable the server (this replaces lspconfig[server_name].setup())
-    vim.lsp.enable(server_name)
-  end
 end
 
 return M

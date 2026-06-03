@@ -1,4 +1,24 @@
 # ============================================================================
+# Repo Commands - Centralized build/test/run
+# ============================================================================
+alias b='rx build'
+alias t='rx test'
+alias r='rx run'
+
+# Interactive environment switcher with fzf
+setenv() {
+  local selected
+  selected=$("$HOME/dotfiles/config/scripts/setenv.sh")
+
+  if [[ -n "$selected" ]]; then
+    repo-env "$selected"
+  else
+    echo "No environment selected"
+    return 1
+  fi
+}
+
+# ============================================================================
 # General Aliases
 # ============================================================================
 alias lg="lazygit"
@@ -12,6 +32,16 @@ alias s="sesh connect dotfiles"
 alias sn="eval '$(fnm env)' && fnm use v18.16.0"
 alias j='function _j(){ javac "$1" && java "${1%.*}"; }; _j'
 alias nvimt='NVIM_APPNAME=nvimtest nvim'
+
+# Base64 encode username:password and copy to clipboard
+b64() {
+  if [[ $# -ne 2 ]]; then
+    echo "Usage: b64 <username> <password>"
+    return 1
+  fi
+  echo -n "$1:$2" | base64 | pbcopy
+  echo "Base64 encoded credentials copied to clipboard"
+}
 
 # ============================================================================
 # Git & PR Management
@@ -39,7 +69,7 @@ ks() {
 
 alias kg="nvim -c 'Neogit'"
 
-alias diff="nvim -c ':DiffviewOpen origin/development...HEAD'"
+alias diff="nvim -c ':DiffviewOpen origin/master...HEAD'"
 
 # Telescope
 # kf() {
@@ -77,27 +107,33 @@ alias ys="fnm use 18.16.0 && yarn start-4444 --no-open"
 # ============================================================================
 # Treekanga (Git Worktree Manager)
 # ============================================================================
-alias settkd='export TREEKANGA_WORKTREE="$(pwd)"'
-alias tk="treekanga"
-alias tk2="/Users/gkrohn/code/treekanga_work/v2/treekanga"
+settkd() {
+  local selected=$(find ~/code/treekanga_work -mindepth 1 -maxdepth 1 -type d | fzf --prompt="Select Treekanga worktree: ")
+  if [ -n "$selected" ]; then
+    export TREEKANGA_WORKTREE="$selected"
+    echo "TREEKANGA_WORKTREE set to: $selected"
+  fi
+}
+alias tkd='"${TREEKANGA_WORKTREE}/treekanga"'
+alias tk="/Users/gkrohn/code/treekanga_work/implement_select/treekanga"
 alias .tk="./treekanga"
 alias tka="treekanga add"
 alias tkl="treekanga list"
 alias tkt="treekanga tui"
 
- tkc() {
-    local selected=$(tk2 --log error list --all 2>/dev/null | fzf --height 40% --reverse --border --header "Select worktree/directory")
-    if [ -n "$selected" ]; then
-      if [ -n "$TMUX" ]; then
-        tk2 --log error connect --switch "$selected"
-      else
-        tk2 --log error connect "$selected"
-      fi
+tkc() {
+  local selected=$(tk2 list -p -e 2>/dev/null | fzf --height 40% --reverse --border --header "Select worktree/directory")
+  if [ -n "$selected" ]; then
+    if [ -n "$TMUX" ]; then
+      tk2 --log error connect --switch "$selected"
+    else
+      tk2 --log error connect "$selected"
     fi
-  }
+  fi
+}
 
 # docker
-alias do="open -n ~/../../Applications/Docker.app"
+alias do="open -n ~/../../Applications/Docker.app &"
 alias d="Docker"
 alias dcu="docker compose up -d"
 alias dcd="docker compose down"
@@ -188,3 +224,29 @@ alias qf='qmk flash -kb zsa/moonlander/reva -km moonlander2'
 if [ -f "$HOME/.config/aliases.local" ]; then
   source "$HOME/.config/aliases.local"
 fi
+
+alias ai='claude'
+alias rc='rolo claude'
+
+# AWS
+alias al='aws sso login --profile in-tandem-ai'
+alias awscache='rm -rf ~/.aws/cli/cache/* ~/.aws/sso/cache/*'
+
+# calendar service build, eventually move this into a script
+alias gradlebuild='./gradlew clean build -x test -x generateGitProperties'
+
+# confluent cloud
+alias con='confluent'
+
+# clear jdtls
+alias clearjdtls='echo "Clearing jdtls cache..." && rm -rf ~/.cache/nvim/jdtls/workspace/* && echo "Done. Restart nvim for changes to take effect."'
+
+# cut new release branch
+alias cr='tk-add-release.sh'
+
+# test and open quickfix list
+alias tq='t 2>&1 | grep "src/test.*\.java:[0-9]" > /tmp/quickfix.txt && nvim -q /tmp/quickfix.txt'
+
+alias splunk='claude mcp add splunk --scope project -- npx -y mcp-remote https://ourfamilywizard.splunkcloud.com:8089/services/mcp --header "Authorization:Bearer biFh7bF8rs8dRwuD7VhDwxqdoF3JxMlm9pPk5HSkcjcHC7qMDtFxBZpJq9tMgMvdGOSUjgiSPcmE2nN6toX4R09OzwFjiIfYArxKPJ/WMxCP1skKW/g7Gx4KqefXsInLzRjIYmQTdn2LbjmkxDmgDQ43GZJgNdLj9vlM2sJXIZXb3EGJOQb1fv+/7QJO0TJfYfk7u1QQca7EDX/Q8NTRqWblpkF2w8lBm7xUrdFrKJ2iTCmdseZNVyZbvuyKxTp3W/Be/yORQIawYFD4WHoFoYKas3K7sB4QUPAsnuj7iU8l7oRgkznz/M+oOYXuoammhJGXlbcYMOI/pipibcHYEA==.Q9w4W2QwpmRoWMtGFTGhBCpWug7TuGRibv7XRKCZQE36RLdvJHfL2XAhF1lSsX+Lg98su5AIk4f4tODK52KS6dqpFZrwEIqyQqjEIxWA3QDJ3po7FJF4e+gPg47VbH7Wrt+7/4BGIehQljaqpcu3T+wRaqAnOkKs2CARXvOT+71VRYWPviPCP0Vp8v2GaWRvWAgR7wem3e0Y2BbzE5sPP/t4i+HnyJ52tqXbNK3hnaZkDKfOj021JiGKL56n8bQAlfdDirYSqx5YgNZmaZCkiSYOY6wj5w1nyv5WfQMMfm6WtPVziyyYtBPqD1un6wI+pGM360ZLSjjbD21p68O5CQ==.BP2K34jYS+ctI5TzJdct+TEDdmaToWS6sUxrhZIywu31IxpVfKTwESYb0vmdpWyoH9WEI1H+n/yK4xA/ZAqBBZtC2Ia6VkZFL9a1iopKp+SEuY/X6CITQFG0M5EwPN9Lfi9GUGWF72A8xb2fQ/uUZcqQfIbO4yXAGhicxHAg8R6ZE6uY86p5moI+u4KukgeloWPgQTCNBXgmBFrY5TO8UEcMXTlx7v7BABZC6/+CDTNONYL5NKQ2rs+IajWakrQQn3+D3e4d2NIJlgt7yYrabt6N2q/Ww1d/cTSoj6l2OEHxYuoVUFVOKoOVUAAIODFVuRb6G67nRbg7ovbu7PPPQw=="'
+
+alias testreport='open -a "Arc" "./build/reports/tests/test/index.html"'

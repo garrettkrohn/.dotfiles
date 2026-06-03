@@ -1,24 +1,107 @@
+selectorMode: fzf
 repos:
-  offensive-security-platform:
-    defaultBranch: development
-    worktreeTargetDir: /code/platform_work #assumes starting in the $HOME directory
+  ofw-calendar-service:
+    defaultBranch: master
     zoxideFolders:
-      - parent
-      - parent/application/src/main/resources/db/migration
-      - .github/workflows
-      - scan/scanners/containers
-      - scan/scan-engine
-      - client-ui
-      - ui
-    postScript: ~/dotfiles/config/scripts/platform_build_script.sh
-    bareRepoName: .bare
+    worktreeTargetDir: ~/code/cal_work #assumes starting in the $HOME directory
     autoRunPostScript: false
-    tuiTheme: kanagawa
+    listDisplayMode: directory
+    autoPull: true
+    tuiTheme: catppuccin-mocha
+  ofw-core-api:
+    defaultBranch: master
+    zoxideFolders:
+      - src/main/resources/db/changelog/changes
+    worktreeTargetDir: /code/core_work #assumes starting in the $HOME directory
+    autoRunPostScript: false
+    listDisplayMode: directory
+    autoPull: true
+    tuiTheme: catppuccin-mocha
+  ofw-public-api:
+    defaultBranch: master
+    zoxideFolders:
+    worktreeTargetDir: /code/pub_work #assumes starting in the $HOME directory
+    autoRunPostScript: false
+    listDisplayMode: directory
+    autoPull: true
+    tuiTheme: catppuccin-mocha
+  ofw-web-appv2:
+    defaultBranch: master
+    zoxideFolders:
+    worktreeTargetDir: /code/front_end_work #assumes starting in the $HOME directory
+    autoRunPostScript: false
+    listDisplayMode: directory
+    autoPull: true
+    tuiTheme: catppuccin-mocha
+  ofw-event-service:
+    defaultBranch: master
+    zoxideFolders:
+    worktreeTargetDir: /code/event_work #assumes starting in the $HOME directory
+    autoRunPostScript: false
+    listDisplayMode: directory
+    autoPull: true
+    tuiTheme: catppuccin-mocha
+  ofw-notification-api:
+    defaultBranch: master
+    zoxideFolders:
+    worktreeTargetDir: /code/notification_api_work #assumes starting in the $HOME directory
+    autoRunPostScript: false
+    listDisplayMode: directory
+    autoPull: true
+    tuiTheme: catppuccin-mocha
+  ofw-notification-processor:
+    defaultBranch: master
+    zoxideFolders:
+    worktreeTargetDir: /code/notification_processor_work #assumes starting in the $HOME directory
+    autoRunPostScript: false
+    listDisplayMode: directory
+    autoPull: true
+    tuiTheme: catppuccin-mocha
+  ofw-segment:
+    defaultBranch: master
+    zoxideFolders:
+    worktreeTargetDir: /code/segment_work #assumes starting in the $HOME directory
+    autoRunPostScript: false
+    listDisplayMode: directory
+    autoPull: true
+    tuiTheme: catppuccin-mocha
+  ofw-shared-tools:
+    defaultBranch: main
+    zoxideFolders:
+    worktreeTargetDir: /code/ofw-shared-tools-work #assumes starting in the $HOME directory
+    autoRunPostScript: false
+    listDisplayMode: directory
+    autoPull: true
+    tuiTheme: catppuccin-mocha
+  ofw-api-common:
+    defaultBranch: main
+    zoxideFolders:
+    worktreeTargetDir: /code/common_work #assumes starting in the $HOME directory
+    autoRunPostScript: false
+    listDisplayMode: directory
+    autoPull: true
+    tuiTheme: catppuccin-mocha
+  ofw-eng-api-tests:
+    defaultBranch: main
+    zoxideFolders:
+    worktreeTargetDir: /code/api-tests
+    autoRunPostScript: false
+    listDisplayMode: directory
+    autoPull: true
+    tuiTheme: catppuccin-mocha
   treekanga:
     defaultBranch: main 
     zoxideFolders:
     worktreeTargetDir: /code/treekanga_work #assumes starting in the $HOME directory
-    postScript: ~/dotfiles/config/scripts/test_post_script.sh
+    autoRunPostScript: false
+    bareRepoName: .bare
+    listDisplayMode: directory
+    autoPull: true
+    tuiTheme: catppuccin-mocha
+  sesh:
+    defaultBranch: main 
+    zoxideFolders:
+    worktreeTargetDir: /code/sesh_work #assumes starting in the $HOME directory
     autoRunPostScript: false
     bareRepoName: .bare
     listDisplayMode: directory
@@ -32,23 +115,13 @@ repos:
     listDisplayMode: directory
     autoPull: true
     tuiTheme: catppuccin-mocha
-  attack-surface-management:
-    defaultBranch: development
+  rolo:
+    defaultBranch: main 
     zoxideFolders:
-      - frontend
-      - backend
+    worktreeTargetDir: /code/rolo_work #assumes starting in the $HOME directory
+    autoRunPostScript: false
+    listDisplayMode: directory
+    autoPull: true
+    tuiTheme: catppuccin-mocha
   dgsimgo:
     defaultBranch: main 
-  new_ui_platform_work:
-    defaultBranch: platform_next_ui
-    zoxideFolders:
-      - ui
-      - parent
-      - client-ui
-    postScript: ~/dotfiles/config/scripts/platform_build_script.sh
-    autoRunPostScript: false
-  integration-manager-service:
-    defaultBranch: development
-    worktreeTargetDir: /code/integration_manager_work
-    bareRepoName: .bare
-

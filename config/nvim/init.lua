@@ -61,6 +61,7 @@ vim.defer_fn(function()
       'markdown_inline',
       'go',
       'properties',
+      'java',
     },
     auto_install = false,
     sync_install = false,

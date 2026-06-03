@@ -1,0 +1,10 @@
+# Global gitignore patterns
+# Used by Git and tools like fff.nvim
+
+# Ignore bin directories everywhere
+bin/
+
+# Environment files with sensitive data
+*.private.env
+
+**/.claude/settings.local.json

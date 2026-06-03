@@ -1,6 +1,6 @@
 return {
   'catppuccin/nvim',
-  enabled = true,
+  enabled = false,
   lazy = false,
   name = 'catppuccin',
   priority = 1001, -- Load before snacks (which has priority 1000)
@@ -71,7 +71,7 @@ return {
 
     -- setup must be called before loading
     vim.cmd.colorscheme 'catppuccin'
-    
+
     -- Ensure transparency is applied after colorscheme loads
     vim.api.nvim_create_autocmd('ColorScheme', {
       pattern = 'catppuccin*',

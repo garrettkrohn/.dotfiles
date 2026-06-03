@@ -4,6 +4,7 @@ test.sh
 secret_aliases
 config/aliases.local
 .install.conf.yaml.un~
+config/repo-envs/*
 
 # Ignore secrets directory except template files
 config/secrets/scripts/*

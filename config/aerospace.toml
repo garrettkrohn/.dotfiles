@@ -123,14 +123,14 @@ alt-shift-equal = 'resize smart +50'
 alt-a = 'workspace A' # second monitor?
 alt-b = 'workspace B' # Browser
 alt-c = 'workspace C' # keymapp
-alt-d = 'workspace D' # Discord 
+# alt-d = 'workspace D' # Discord 
 alt-e = 'workspace E' # Email
 alt-f = 'workspace F'
 alt-g = 'workspace G' # dataGrip
 alt-i = 'workspace I' # Intellij
 alt-m = 'workspace M' # messaging /media (texting and spotify) 
 alt-n = 'workspace N'
-# alt-o = 'workspace O'
+alt-o = 'workspace O'
 alt-p = 'workspace P' # Postman
 # alt-q = 'workspace Q'
 # alt-r = 'workspace R'
@@ -156,14 +156,14 @@ alt-z = 'workspace Z' # zoom
 alt-shift-a = 'move-node-to-workspace A'
 alt-shift-b = 'move-node-to-workspace B'
 alt-shift-c = 'move-node-to-workspace C'
-alt-shift-d = 'move-node-to-workspace D'
+# alt-shift-d = 'move-node-to-workspace D'
 alt-shift-e = 'move-node-to-workspace E'
 alt-shift-f = 'move-node-to-workspace F'
 alt-shift-g = 'move-node-to-workspace G'
 alt-shift-i = 'move-node-to-workspace I'
 alt-shift-m = 'move-node-to-workspace M'
 alt-shift-n = 'move-node-to-workspace N'
-# alt-shift-o = 'move-node-to-workspace O'
+alt-shift-o = 'move-node-to-workspace O'
 alt-shift-p = 'move-node-to-workspace P'
 # alt-shift-q = 'move-node-to-workspace Q'
 # alt-shift-r = 'move-node-to-workspace R'
@@ -183,6 +183,7 @@ alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 alt-shift-semicolon = 'mode service'
+alt-shift-r = 'exec-and-forget /Users/gkrohn/dotfiles/config/scripts/aerospace-recording-toggle.sh'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -257,6 +258,10 @@ run = "move-node-to-workspace M"
 [[on-window-detected]]
 if.app-id = 'com.apple.MobileSMS'
 run = "move-node-to-workspace M"
+
+[[on-window-detected]]
+if.app-id = 'com.obsproject.obs-studio'
+run = "move-node-to-workspace O"
 
 [[on-window-detected]]
 if.app-id = 'com.postmanlabs.mac'

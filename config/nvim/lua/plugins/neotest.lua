@@ -42,7 +42,12 @@ return {
           -- instances for files containing a parametrize mark (default: false)
           pytest_discover_instances = true,
         },
-        require 'neotest-java' {},
+        require 'neotest-java' {
+          -- Ignore wrapper test-classes
+          ignore_wrapper_classes = true,
+          -- Configure DAP support
+          -- This will automatically call JavaDapConfig when running tests with strategy = 'dap'
+        },
       },
       floating = {
         enter = true,

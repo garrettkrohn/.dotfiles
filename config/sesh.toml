@@ -4,17 +4,12 @@ path = "~/dotfiles"
 startup_command = "kick"
 
 [[session]]
-name = "platform sql bootstrap"
-path = "~/dotfiles/config/secrets/scripts/"
-startup_command = "kick platform_startup_script.sql"
-
-[[session]]
 name = "local"
 path = "~/code/platform_work"
 startup_command = ""
 
 [[session]]
-name = "rest"
+name = "kulala"
 path = "~/code/kulala"
 startup_command = "k"
 
@@ -51,7 +46,7 @@ startup_command = "ghd"
 [[session]]
 name = "journal"
 path = "~/notes/journal"
-startup_command = "./journal.sh"
+startup_command = "kick journal.md"
 
 [[session]]
 name = "notes"
@@ -74,34 +69,29 @@ path = "~/.config/nvimtest"
 startup_command = "kick"
 
 [[session]]
-name = "hrkdraft"
-path = "/Users/gkrohn/side/pybaseball"
-startup_command = "python hr-k-draft.py"
-
-[[session]]
 name = "scratch"
 path = "~"
 startup_command = ""
 
 [[session]]
-name = "db"
+name = "db|calendar-events"
 path = "~"
-startup_command = "db"
+startup_command = "nvim -u ~/.config/nvim/minimal.lua -c ':DadView calendar-events'"
 
 [[session]]
-name = "db_local"
+name = "db|chronos"
 path = "~"
-startup_command = "nvim -u ~/.config/nvim/minimal.lua -c ':DadView local'"
+startup_command = "nvim -u ~/.config/nvim/minimal.lua -c ':DadView chronos'"
 
 [[session]]
-name = "db_dev"
+name = "db|PROD"
 path = "~"
-startup_command = "nvim -u ~/.config/nvim/minimal.lua -c ':DadView platform_dev'"
+startup_command = "nvim -u ~/.config/nvim/minimal.lua -c ':DadView PROD'"
 
 [[session]]
-name = "db_prod"
+name = "db|test"
 path = "~"
-startup_command = "nvim -u ~/.config/nvim/minimal.lua -c ':DadView platform_prod'"
+startup_command = "nvim -u ~/.config/nvim/minimal.lua -c ':DadView test'"
 
 [[session]]
 name = "ssh tunnels"
@@ -111,11 +101,6 @@ startup_command = ""
 [[session]]
 name = "treekanga bare"
 path = "~/code/treekanga_work/.bare"
-startup_command = "tkt"
-
-[[session]]
-name = "platform bare"
-path = "~/code/platform_work/.bare"
 startup_command = "tkt"
 
 [[session]]
@@ -142,3 +127,44 @@ startup_command = "kick lsp.log"
 name = "qmk"
 path = "/Users/gkrohn/.config/qmk_firmware/"
 startup_command = ""
+
+# clean up this folder
+[[session]]
+name = "cal bare"
+path = "~/code/cal_work/.bare"
+startup_command = "tkt"
+
+[[session]]
+name = "core bare"
+path = "~/code/core_work/.bare"
+startup_command = "tkt"
+
+[[session]]
+name = "pub bare"
+path = "~/code/pub_work/.bare"
+startup_command = "tkt"
+
+[[session]]
+name = "kafka producer"
+path = "~/code/ofw-shared-tools-work/initial_kafka_producer/kafka_producer"
+startup_command = ""
+
+[[session]]
+name = "kafka local"
+path = "~/code/kafka_local/"
+startup_command = ""
+
+[[session]]
+name = "rx"
+path = "~/code/rx/"
+startup_command = ""
+
+[[session]]
+name = "ecs"
+path = "~/code/IAC/ofw-ecs-scripts"
+startup_command = ""
+
+[[session]]
+name = "jira"
+path = "~"
+startup_command = "claude"

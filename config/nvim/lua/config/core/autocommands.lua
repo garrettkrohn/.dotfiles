@@ -58,19 +58,110 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 -- reload current color scheme to pick up colors override if it was set up in a lazy plugin definition fashion
 vim.cmd.colorscheme(vim.g.colors_name)
 
--- set text width to 80 for md files
+-- markdown soft wrap and formatting configuration
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'markdown',
   callback = function()
-    vim.opt.textwidth = 80
-  end,
-})
-vim.api.nvim_create_autocmd('BufReadPost', {
-  pattern = '*',
-  callback = function()
-    if vim.bo.filetype ~= 'markdown' then
-      vim.opt.textwidth = 0
-    end
+    -- Command to copy markdown without line breaks for Confluence
+    vim.api.nvim_buf_create_user_command(0, 'CopyForConfluence', function()
+      local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+      local result = {}
+      local in_code_block = false
+      local current_para = {}
+
+      for _, line in ipairs(lines) do
+        -- Check for code block delimiter
+        if line:match('^```') then
+          -- Flush current paragraph before code block
+          if #current_para > 0 then
+            table.insert(result, table.concat(current_para, ' '))
+            current_para = {}
+          end
+          in_code_block = not in_code_block
+          table.insert(result, line)
+        elseif in_code_block then
+          -- Preserve code block lines as-is
+          table.insert(result, line)
+        elseif line:match('^%s*$') then
+          -- Empty line - flush current paragraph
+          if #current_para > 0 then
+            table.insert(result, table.concat(current_para, ' '))
+            current_para = {}
+          end
+          table.insert(result, '')
+        else
+          -- Regular text line - add to current paragraph
+          table.insert(current_para, line)
+        end
+      end
+
+      -- Flush any remaining paragraph
+      if #current_para > 0 then
+        table.insert(result, table.concat(current_para, ' '))
+      end
+
+      -- Copy to clipboard
+      vim.fn.setreg('+', table.concat(result, '\n'))
+      vim.notify('Copied to clipboard (code blocks preserved)', vim.log.levels.INFO)
+    end, {})
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+    vim.opt_local.breakindent = true
+    vim.opt_local.textwidth = 80
+    vim.opt_local.colorcolumn = ''
+    -- Remove 't' and 'c' from formatoptions to disable auto-formatting while typing
+    -- But keep formatoptions that work with gq for format-on-save
+    vim.opt_local.formatoptions:remove({ 't', 'c' })
+    vim.opt_local.formatoptions:append({ 'n' }) -- Recognize numbered lists
+
+    -- Create :Zen command to toggle centered layout
+    vim.api.nvim_buf_create_user_command(0, 'Zen', function()
+      -- Check if we're already in zen mode by looking for side windows
+      local current_win = vim.api.nvim_get_current_win()
+      local wins = vim.api.nvim_list_wins()
+
+      -- If we have more than 1 window, assume zen mode is active and close side windows
+      if #wins > 1 then
+        -- Close all windows except current
+        vim.cmd('only')
+        return
+      end
+
+      -- Enter zen mode
+      local width = vim.api.nvim_win_get_width(0)
+      local content_width = 100
+
+      -- Only center if window is wide enough
+      if width > content_width + 10 then
+        local margin = math.floor((width - content_width) / 2)
+
+        -- Create left padding window
+        vim.cmd('topleft ' .. margin .. 'vsplit')
+        local left_buf = vim.api.nvim_create_buf(false, true)
+        vim.api.nvim_win_set_buf(0, left_buf)
+        vim.wo.winfixwidth = true
+        vim.wo.number = false
+        vim.wo.relativenumber = false
+        vim.wo.signcolumn = 'no'
+        vim.wo.foldcolumn = '0'
+
+        -- Go back to the markdown window
+        vim.cmd('wincmd l')
+
+        -- Create right padding window
+        vim.cmd('botright vsplit')
+        local right_buf = vim.api.nvim_create_buf(false, true)
+        vim.api.nvim_win_set_buf(0, right_buf)
+        vim.wo.winfixwidth = true
+        vim.wo.number = false
+        vim.wo.relativenumber = false
+        vim.wo.signcolumn = 'no'
+        vim.wo.foldcolumn = '0'
+
+        -- Go back to the markdown window
+        vim.cmd('wincmd h')
+      end
+    end, { desc = 'Toggle zen mode for markdown' })
   end,
 })
 
