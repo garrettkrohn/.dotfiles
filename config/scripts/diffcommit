@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# diffcommit - Pick two commits via fzf and open a diffview in nvim between them
+# Usage: diffcommit
+
+set -e
+
+if ! git rev-parse --abbrev-ref HEAD >/dev/null 2>&1; then
+    echo "Error: Not in a git repository"
+    exit 1
+fi
+
+log_format='%C(yellow)%h%Creset %C(cyan)%ad%Creset %s %C(green)(%an)%Creset'
+
+pick_commit() {
+    { printf '\033[33mHEAD\033[m %s\n' "(current)"; \
+      git log --color=always --date=short --pretty="format:${log_format}"; } | \
+        fzf --ansi --prompt="$1" --height=40% --reverse --border --no-sort | \
+        sed -E 's/\x1b\[[0-9;]*m//g' | \
+        awk '{print $1}'
+}
+
+first_commit=$(pick_commit "Select first commit: ")
+
+if [ -z "$first_commit" ]; then
+    echo "No commit selected"
+    exit 1
+fi
+
+second_commit=$(pick_commit "Select second commit: ")
+
+if [ -z "$second_commit" ]; then
+    echo "No commit selected"
+    exit 1
+fi
+
+echo "Comparing $first_commit against $second_commit"
+
+nvim "+DiffviewOpen ${first_commit}..${second_commit}"

@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# diffstack - Open a diffview in nvim showing changes since the branch point
+# Usage: diffstack [base_branch]
+
+set -e
+
+# Get current branch
+current_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+
+if [ -z "$current_branch" ]; then
+    echo "Error: Not in a git repository"
+    exit 1
+fi
+
+# Determine base branch
+if [ -n "$1" ]; then
+    # Use provided argument
+    base_branch="$1"
+else
+    # Use fzf to select base branch
+    base_branch=$(git for-each-ref --format='%(refname:short)' refs/heads/ refs/remotes/ | \
+        grep -v "^${current_branch}$" | \
+        fzf --prompt="Select base branch to diff against: " \
+            --height=40% \
+            --reverse \
+            --border)
+
+    if [ -z "$base_branch" ]; then
+        echo "No branch selected"
+        exit 1
+    fi
+fi
+
+# Find merge-base
+merge_base=$(git merge-base HEAD "$base_branch")
+
+echo "Comparing $current_branch against $base_branch (merge-base: ${merge_base:0:8})"
+echo "Including all uncommitted and unstaged changes"
+
+# Open nvim with diffview (no range means compare working tree to merge-base)
+nvim "+DiffviewOpen ${merge_base}"

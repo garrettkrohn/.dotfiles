@@ -1,0 +1,92 @@
+#!/bin/bash
+
+# claude2herdr - Resume the Claude session from the current directory in a herdr tab
+#
+# Flow: inside tmux, exit your claude session, then run this from the same
+# shell. It finds the most recent claude session for the current directory
+# and resumes it in a new tab in a herdr session (via `claude --resume`).
+#
+# Usage: claude2herdr [-s herdr-session] [-i session-id] [tab-label]
+#   -s herdr-session  target herdr session (default: one matching the current
+#                     tmux session name, else "default")
+#   -i session-id     resume this claude session id instead of the most
+#                     recent one for the current directory
+#   tab-label         herdr tab label (default: basename of cwd)
+
+set -e
+
+session=""
+sid=""
+while getopts "s:i:h" opt; do
+    case $opt in
+        s) session=$OPTARG ;;
+        i) sid=$OPTARG ;;
+        h) sed -n '3,14p' "$0"; exit 0 ;;
+        *) exit 1 ;;
+    esac
+done
+shift $((OPTIND - 1))
+
+cwd=$PWD
+label=${1:-$(basename "$cwd")}
+
+# Pick the target herdr session: -s flag, else the one matching the current
+# tmux session name, else "default".
+if [ -z "$session" ]; then
+    tmux_name=$(tmux display -p '#{session_name}' 2>/dev/null || true)
+    if [ -n "$tmux_name" ] && herdr session list 2>/dev/null | awk 'NR>1 {print $1}' | grep -qx "$tmux_name"; then
+        session=$tmux_name
+    else
+        session=default
+    fi
+fi
+
+if [ "$session" = "default" ]; then
+    socket="$HOME/.config/herdr/herdr.sock"
+else
+    socket="$HOME/.config/herdr/sessions/$session/herdr.sock"
+fi
+if [ ! -S "$socket" ]; then
+    echo "Error: herdr session '$session' has no socket at $socket" >&2
+    echo "Running sessions:" >&2
+    herdr session list >&2 || true
+    exit 1
+fi
+hd() {
+    env -u HERDR_ENV -u HERDR_PANE_ID -u HERDR_TAB_ID -u HERDR_WORKSPACE_ID \
+        -u HERDR_SESSION HERDR_SOCKET_PATH="$socket" herdr "$@"
+}
+
+# Session files live under ~/.claude/projects/<cwd with / . _ replaced by ->
+proj="$HOME/.claude/projects/$(echo "$cwd" | sed 's|[/._]|-|g')"
+if [ ! -d "$proj" ]; then
+    echo "Error: no claude project dir for '$cwd' ($proj)" >&2
+    exit 1
+fi
+if [ -z "$sid" ]; then
+    # shellcheck disable=SC2012
+    sid=$(basename "$(ls -t "$proj"/*.jsonl 2>/dev/null | head -1)" .jsonl)
+fi
+if [ -z "$sid" ] || [ "$sid" = "*" ]; then
+    echo "Error: no session files found in $proj" >&2
+    exit 1
+fi
+if [ ! -f "$proj/$sid.jsonl" ]; then
+    echo "Error: no session file $proj/$sid.jsonl" >&2
+    exit 1
+fi
+
+echo "Session:       $sid"
+echo "Herdr session: $session"
+
+out=$(hd tab create --cwd "$cwd" --label "$label" --focus)
+pane=$(jq -r '.result.root_pane.pane_id' <<<"$out")
+if [ -z "$pane" ] || [ "$pane" = "null" ]; then
+    echo "Error: herdr tab create failed: $out" >&2
+    exit 1
+fi
+
+name=$(echo "moved-$label" | tr -c 'a-z0-9_-' '-' | cut -c1-32 | sed 's/-*$//')
+hd agent start "$name" --kind claude --pane "$pane" -- --resume "$sid" >/dev/null
+
+echo "Resumed session $sid in herdr session '$session', tab '$label' (pane $pane)"

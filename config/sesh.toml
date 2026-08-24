@@ -1,170 +1,227 @@
+[tui]
+show_icons = true
+
 [[session]]
 name = "dotfiles"
 path = "~/dotfiles"
 startup_command = "kick"
-
-[[session]]
-name = "local"
-path = "~/code/platform_work"
-startup_command = ""
+alias = "do"
+alias_auto_connect = true
+icon = "🛠️ "
 
 [[session]]
 name = "kulala"
 path = "~/code/kulala"
 startup_command = "k"
+alias = "ku"
+alias_auto_connect = true
+icon = "🌐"
 
 [[session]]
 name = "wezterm"
 path = "~/dotfiles/config/wezterm"
 startup_command = "kick wezterm.lua"
+icon = "🖥️ "
 
 [[session]]
 name = "aerospace"
 path = "~/dotfiles/config"
 startup_command = "kick aerospace.toml"
+icon = "🚀"
 
 [[session]]
 name = "zshrc"
 path = "~/dotfiles/config/"
 startup_command = "kick .zshrc"
+icon = "🐚"
 
 [[session]]
 name = "root"
 path = "~/"
 startup_command = ""
+icon = "🏠"
 
 [[session]]
 name = "tmux"
 path = "~/dotfiles/config/tmux/"
 startup_command = "kick tmux.conf"
-
-[[session]]
-name = "review"
-path = "~/code/platform_work/review/"
-startup_command = "ghd"
+icon = "🪟"
 
 [[session]]
 name = "journal"
 path = "~/notes/journal"
 startup_command = "kick journal.md"
+alias = "jo"
+alias_auto_connect = true
+icon = "📔"
 
 [[session]]
 name = "notes"
 path = "~/notes"
 startup_command = "kf"
+icon = "📓"
 
 [[session]]
 name = "lazy plugins"
 path = "~/.local/share/nvim/lazy"
 startup_command = "sesh connect $(ls | fzf --ansi --no-border --preview 'glow -s light {}/README.md' --preview-window=right:70,border-none) && exit"
+icon = "🧩"
 
 [[session]]
 name = "new blog post"
 path = "/Users/gkrohn/side/new_blog/src/content/blog"
 startup_command = "kick"
+icon = "✍️ "
 
 [[session]]
 name = "neovim test"
 path = "~/.config/nvimtest"
 startup_command = "kick"
+icon = "🧪"
 
 [[session]]
 name = "scratch"
 path = "~"
 startup_command = ""
+icon = "📝"
 
 [[session]]
 name = "db|calendar-events"
 path = "~"
 startup_command = "nvim -u ~/.config/nvim/minimal.lua -c ':DadView calendar-events'"
+icon = "🗄️ "
+alias = "dbcal"
+alias_auto_connect = true
 
 [[session]]
 name = "db|chronos"
 path = "~"
 startup_command = "nvim -u ~/.config/nvim/minimal.lua -c ':DadView chronos'"
+icon = "🗄️ "
 
 [[session]]
 name = "db|PROD"
 path = "~"
 startup_command = "nvim -u ~/.config/nvim/minimal.lua -c ':DadView PROD'"
+icon = "🔴"
+
+[[session]]
+name = "db|PROD-WRITE"
+path = "~"
+startup_command = "nvim -u ~/.config/nvim/minimal.lua -c ':DadView PROD-WRITE'"
+icon = "⛔"
 
 [[session]]
 name = "db|test"
 path = "~"
 startup_command = "nvim -u ~/.config/nvim/minimal.lua -c ':DadView test'"
-
-[[session]]
-name = "ssh tunnels"
-path = "~/.ssh"
-startup_command = ""
+icon = "🗄️ "
 
 [[session]]
 name = "treekanga bare"
 path = "~/code/treekanga_work/.bare"
 startup_command = "tkt"
+icon = "🌳"
 
 [[session]]
 name = "vtop"
 path = "~"
 startup_command = "vtop"
+icon = "📊"
 
 [[session]]
 name = "design docs"
 path = "/Users/gkrohn/notes/design_docs"
 startup_command = "kick"
+icon = "📐"
 
 [[session]]
 name = "dap logs"
 path = "/Users/gkrohn/.cache/nvim"
 startup_command = "kick dap.log"
+icon = "🐛"
 
 [[session]]
 name = "lsp logs"
 path = "/Users/gkrohn/.local/state/nvim"
 startup_command = "kick lsp.log"
+icon = "📜"
 
 [[session]]
 name = "qmk"
 path = "/Users/gkrohn/.config/qmk_firmware/"
 startup_command = ""
+icon = "⌨️ "
 
 # clean up this folder
 [[session]]
 name = "cal bare"
 path = "~/code/cal_work/.bare"
 startup_command = "tkt"
+icon = "📅"
 
 [[session]]
 name = "core bare"
 path = "~/code/core_work/.bare"
 startup_command = "tkt"
+icon = "🧱"
 
 [[session]]
 name = "pub bare"
 path = "~/code/pub_work/.bare"
 startup_command = "tkt"
+icon = "📦"
 
 [[session]]
 name = "kafka producer"
 path = "~/code/ofw-shared-tools-work/initial_kafka_producer/kafka_producer"
 startup_command = ""
+icon = "📤"
 
 [[session]]
 name = "kafka local"
 path = "~/code/kafka_local/"
 startup_command = ""
+icon = "📥"
 
 [[session]]
 name = "rx"
 path = "~/code/rx/"
 startup_command = ""
+icon = "💊"
 
 [[session]]
 name = "ecs"
 path = "~/code/IAC/ofw-ecs-scripts"
 startup_command = ""
+icon = "☁️ "
 
 [[session]]
 name = "jira"
-path = "~"
+path = "~/jira"
 startup_command = "claude"
+alias = "ji"
+alias_auto_connect = true
+icon = "🎫"
+
+[[session]]
+name = "claude"
+path = "~/.claude"
+startup_command = "claude"
+alias = "cl"
+alias_auto_connect = true
+icon = "🎅"
+
+[[session]]
+name = "herdr"
+path = "~/.claude"
+startup_command = "herdr"
+alias = "he"
+alias_auto_connect = true
+icon = "🐑"
+
+[[session]]
+name = "present"
+path = "~/notes/journal"
+startup_command = "kick lunch-and-learn.md"
+icon = "🐑"

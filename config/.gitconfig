@@ -9,3 +9,7 @@
 	desc = !git config branch.$(git symbolic-ref --short HEAD).description
 [credential]
 	helper = store
+[push]
+	autoSetupRemote = true
+[submodule]
+	recurse = false

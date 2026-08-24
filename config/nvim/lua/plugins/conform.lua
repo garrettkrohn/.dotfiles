@@ -7,10 +7,10 @@ return {
 
     conform.setup {
       formatters_by_ft = {
-        javascript = { 'prettier' },
-        typescript = { 'prettier' },
-        javascriptreact = { 'prettier' },
-        typescriptreact = { 'prettier' },
+        javascript = { 'prettier_js' },
+        typescript = { 'prettier_js' },
+        javascriptreact = { 'prettier_js' },
+        typescriptreact = { 'prettier_js' },
         svelte = { 'prettier' },
         css = { 'prettier' },
         markdown = { 'injected' }, -- Use Neovim's built-in formatter
@@ -21,6 +21,10 @@ return {
       formatters = {
         prettier = {
           prepend_args = { '--tab-width', '4' },
+        },
+        prettier_js = {
+          inherit = 'prettier',
+          prepend_args = { '--tab-width', '2' },
         },
       },
       format_on_save = {

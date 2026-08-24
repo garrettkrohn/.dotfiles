@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# open-file - Open a file in neovim in a new tmux window
+# Usage: open-file <filepath>
+
+set -e
+
+if [[ -z "$1" ]]; then
+    echo "Usage: open-file <filepath>"
+    exit 1
+fi
+
+filepath="$1"
+
+if [[ -z "$TMUX" ]]; then
+    echo "Error: Not inside a tmux session"
+    exit 1
+fi
+
+name=$(basename "$filepath")
+
+tmux new-window -n "$name" "nvim '$filepath'"

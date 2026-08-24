@@ -59,6 +59,12 @@ alias rg="mvn clean install && java -jar -Dspring.profiles.active=local ./target
 alias rs="run_scan_service.sh"
 
 # opening neovim
+tmp() {
+  local f=$(mktemp /tmp/tmp.XXXXXX)
+  cat > "$f"
+  nvim "$f"
+  rm -f "$f"
+}
 alias kick="nvim"
 kf() {
   nvim -c ":lua Snacks.picker.files({ input = '$1' })"
@@ -69,7 +75,7 @@ ks() {
 
 alias kg="nvim -c 'Neogit'"
 
-alias diff="nvim -c ':DiffviewOpen origin/master...HEAD'"
+alias diff="nvim -c ':DiffviewOpen origin/master...HEAD --imply-local'"
 
 # Telescope
 # kf() {
@@ -115,7 +121,7 @@ settkd() {
   fi
 }
 alias tkd='"${TREEKANGA_WORKTREE}/treekanga"'
-alias tk="/Users/gkrohn/code/treekanga_work/implement_select/treekanga"
+alias tk="treekanga"
 alias .tk="./treekanga"
 alias tka="treekanga add"
 alias tkl="treekanga list"
@@ -148,6 +154,17 @@ alias dm="docker compose exec kippy ./vendor/bin/doctrine-migrations migrations:
 alias ld="DOCKER_HOST=unix:///$HOME/.docker/run/docker.sock lazydocker"
 alias kiprun="MICRONAUT_ENVIRONMENTS=extract,load ./gradlew run"
 alias dcub="docker compose up --build -d"
+
+# herdr
+h() {
+  local session_name
+  if [ -n "$TMUX" ]; then
+    session_name=$(tmux display-message -p '#S')
+  else
+    session_name="default"
+  fi
+  herdr --session "$session_name"
+}
 
 # tmux
 alias ta="tmux attach -t"
@@ -250,3 +267,22 @@ alias tq='t 2>&1 | grep "src/test.*\.java:[0-9]" > /tmp/quickfix.txt && nvim -q 
 alias splunk='claude mcp add splunk --scope project -- npx -y mcp-remote https://ourfamilywizard.splunkcloud.com:8089/services/mcp --header "Authorization:Bearer biFh7bF8rs8dRwuD7VhDwxqdoF3JxMlm9pPk5HSkcjcHC7qMDtFxBZpJq9tMgMvdGOSUjgiSPcmE2nN6toX4R09OzwFjiIfYArxKPJ/WMxCP1skKW/g7Gx4KqefXsInLzRjIYmQTdn2LbjmkxDmgDQ43GZJgNdLj9vlM2sJXIZXb3EGJOQb1fv+/7QJO0TJfYfk7u1QQca7EDX/Q8NTRqWblpkF2w8lBm7xUrdFrKJ2iTCmdseZNVyZbvuyKxTp3W/Be/yORQIawYFD4WHoFoYKas3K7sB4QUPAsnuj7iU8l7oRgkznz/M+oOYXuoammhJGXlbcYMOI/pipibcHYEA==.Q9w4W2QwpmRoWMtGFTGhBCpWug7TuGRibv7XRKCZQE36RLdvJHfL2XAhF1lSsX+Lg98su5AIk4f4tODK52KS6dqpFZrwEIqyQqjEIxWA3QDJ3po7FJF4e+gPg47VbH7Wrt+7/4BGIehQljaqpcu3T+wRaqAnOkKs2CARXvOT+71VRYWPviPCP0Vp8v2GaWRvWAgR7wem3e0Y2BbzE5sPP/t4i+HnyJ52tqXbNK3hnaZkDKfOj021JiGKL56n8bQAlfdDirYSqx5YgNZmaZCkiSYOY6wj5w1nyv5WfQMMfm6WtPVziyyYtBPqD1un6wI+pGM360ZLSjjbD21p68O5CQ==.BP2K34jYS+ctI5TzJdct+TEDdmaToWS6sUxrhZIywu31IxpVfKTwESYb0vmdpWyoH9WEI1H+n/yK4xA/ZAqBBZtC2Ia6VkZFL9a1iopKp+SEuY/X6CITQFG0M5EwPN9Lfi9GUGWF72A8xb2fQ/uUZcqQfIbO4yXAGhicxHAg8R6ZE6uY86p5moI+u4KukgeloWPgQTCNBXgmBFrY5TO8UEcMXTlx7v7BABZC6/+CDTNONYL5NKQ2rs+IajWakrQQn3+D3e4d2NIJlgt7yYrabt6N2q/Ww1d/cTSoj6l2OEHxYuoVUFVOKoOVUAAIODFVuRb6G67nRbg7ovbu7PPPQw=="'
 
 alias testreport='open -a "Arc" "./build/reports/tests/test/index.html"'
+
+encrypt() {
+  local encrypted decrypted
+  encrypted=$(curl -s -H 'Content-Type: text/plain' -u 'config:LutIWsCqLhVh' https://configserver.$1.ourfamilywizard.com/configserver/encrypt -d "$2")
+  decrypted=$(curl -s -H 'Content-Type: text/plain' -u 'config:LutIWsCqLhVh' https://configserver.$1.ourfamilywizard.com/configserver/decrypt -d "$encrypted")
+  if [[ "$decrypted" == "$2" ]]; then
+    echo "$encrypted" | pbcopy
+    echo "verified: $encrypted"
+  else
+    echo "verification failed: decrypted value does not match input"
+    echo "  input:     $2"
+    echo "  decrypted: $decrypted"
+    return 1
+  fi
+}
+
+decrypt() {
+  curl -s -H 'Content-Type: text/plain' -u 'config:LutIWsCqLhVh' https://configserver.$1.ourfamilywizard.com/configserver/decrypt -d "$2"
+}

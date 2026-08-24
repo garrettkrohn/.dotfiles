@@ -29,7 +29,8 @@ repos:
     defaultBranch: master
     zoxideFolders:
     worktreeTargetDir: /code/front_end_work #assumes starting in the $HOME directory
-    autoRunPostScript: false
+    autoRunPostScript: true
+    postScript: ~/dotfiles/config/scripts/front_end_setup.sh
     listDisplayMode: directory
     autoPull: true
     tuiTheme: catppuccin-mocha
@@ -74,7 +75,7 @@ repos:
     autoPull: true
     tuiTheme: catppuccin-mocha
   ofw-api-common:
-    defaultBranch: main
+    defaultBranch: develop
     zoxideFolders:
     worktreeTargetDir: /code/common_work #assumes starting in the $HOME directory
     autoRunPostScript: false
@@ -85,6 +86,22 @@ repos:
     defaultBranch: main
     zoxideFolders:
     worktreeTargetDir: /code/api-tests
+    autoRunPostScript: false
+    listDisplayMode: directory
+    autoPull: true
+    tuiTheme: catppuccin-mocha
+  ofw-dba-migrate:
+    defaultBranch: master
+    zoxideFolders:
+    worktreeTargetDir: /code/dba-migrate_work
+    autoRunPostScript: false
+    listDisplayMode: directory
+    autoPull: true
+    tuiTheme: catppuccin-mocha
+  ofw-service-discovery:
+    defaultBranch: master
+    zoxideFolders:
+    worktreeTargetDir: /code/service_discovery
     autoRunPostScript: false
     listDisplayMode: directory
     autoPull: true
