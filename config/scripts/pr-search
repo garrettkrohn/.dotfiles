@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Bitbucket app password — set BB_USERNAME and BB_APP_PASSWORD in your env
+: "${BITBUCKET_USER:?BITBUCKET_USER is not set}"
+: "${BITBUCKET_TOKEN:?BITBUCKET_TOKEN is not set}"
+
+# Parse workspace and repo slug from git remote
+remote_url=$(git remote get-url origin 2>/dev/null) || {
+  echo "Error: not a git repository or no 'origin' remote" >&2
+  exit 1
+}
+
+if [[ "$remote_url" =~ bitbucket\.org[:/]([^/]+)/([^/]+)(\.git)?$ ]]; then
+  workspace="${BASH_REMATCH[1]}"
+  repo="${BASH_REMATCH[2]}"
+else
+  echo "Error: could not parse Bitbucket workspace/repo from remote: $remote_url" >&2
+  exit 1
+fi
+
+state="${BB_PR_STATE:-OPEN}"
+base_url="https://api.bitbucket.org/2.0/repositories/${workspace}/${repo}/pullrequests"
+
+fetch_prs() {
+  local url="${1}?state=${state}&pagelen=50&sort=-updated_on"
+  local all_rows=""
+  while [[ -n "$url" ]]; do
+    response=$(curl -s -u "${BITBUCKET_USER}:${BITBUCKET_TOKEN}" "$url")
+    rows=$(echo "$response" | jq -r '
+      .values[] |
+      [
+        (.id | tostring),
+        .title,
+        (.author.display_name // .author.nickname),
+        .source.branch.name,
+        .destination.branch.name,
+        (.updated_on | split("T")[0])
+      ] | @tsv
+    ')
+    all_rows+="${rows}"$'\n'
+    url=$(echo "$response" | jq -r '.next // empty')
+  done
+  echo "$all_rows"
+}
+
+prs=$(fetch_prs "$base_url")
+
+if [[ -z "$(echo "$prs" | tr -d '[:space:]')" ]]; then
+  echo "No ${state} pull requests found for ${workspace}/${repo}" >&2
+  exit 0
+fi
+
+selected=$(echo "$prs" | column -t -s $'\t' | fzf \
+  --ansi \
+  --prompt="PR> " \
+  --header="${workspace}/${repo} — ${state} PRs  [enter: open in browser]" \
+  --preview-window=hidden \
+) || exit 0
+
+pr_id=$(echo "$selected" | awk '{print $1}')
+
+"$(dirname "$0")/pr" -c "$pr_id"

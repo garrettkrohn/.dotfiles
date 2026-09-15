@@ -10,14 +10,14 @@ if ! command -v fzf &> /dev/null; then
     exit 1
 fi
 
-if command -v chafa &> /dev/null; then
-    PREVIEW_CMD="chafa -f symbols --symbols all {}"
+if command -v catimg &> /dev/null; then
+    PREVIEW_CMD="catimg -w 120 {}"
+elif command -v chafa &> /dev/null; then
+    PREVIEW_CMD="chafa {}"
 elif command -v viu &> /dev/null; then
     PREVIEW_CMD="viu {}"
-elif command -v catimg &> /dev/null; then
-    PREVIEW_CMD="catimg {}"
 else
-    PREVIEW_CMD="echo 'Install chafa, viu, or catimg for image preview\n\nFile: {}'"
+    PREVIEW_CMD="echo 'Install catimg for image preview\n\nFile: {}'"
 fi
 
 selected=$(find -L "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) \

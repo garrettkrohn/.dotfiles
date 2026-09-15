@@ -225,3 +225,11 @@ name = "present"
 path = "~/notes/journal"
 startup_command = "kick lunch-and-learn.md"
 icon = "🐑"
+
+[[session]]
+name = "review"
+path = "~/code/review"
+alias = "re"
+startup_command = "cd $(find . -maxdepth 1 -type d | fzf)"
+alias_auto_connect = true
+icon = "👀"

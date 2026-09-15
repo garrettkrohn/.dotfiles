@@ -1,0 +1,16 @@
+#pragma once
+
+#define TAPPING_TERM 140
+#define PERMISSIVE_HOLD
+#define QUICK_TAP_TERM 0
+
+#define COMBO_TERM 20
+#define COMBO_COUNT 7
+
+// Mouse key tuning
+#define MOUSEKEY_INTERVAL 16
+#define MOUSEKEY_TIME_TO_MAX 40
+#define MOUSEKEY_DELAY 100
+#define MOUSEKEY_WHEEL_DELAY 100
+#define MOUSEKEY_WHEEL_INTERVAL 50
+#define MOUSEKEY_WHEEL_TIME_TO_MAX 100

@@ -48,10 +48,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [3] = LAYOUT_moonlander(
     KC_NO,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_CAPS,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_NO,        RGB_SPI,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_LEFT,        KC_DOWN,        KC_UP,          KC_RIGHT,       KC_TRANSPARENT,
-    KC_NO,        RGB_SPD,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_F5,          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_NO,        RGB_SPD,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, TG(5),          LGUI(LSFT(KC_SPC)), LGUI(KC_I), KC_TRANSPARENT,
     KC_NO,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_NO, KC_TRANSPARENT, HSV_0_245_245,  HSV_74_255_206, HSV_152_255_255,KC_TRANSPARENT,                                                        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_NO,                  KC_NO,               KC_NO,                                                                                           KC_NO,               KC_NO,               KC_NO
+  ),
+    // mouseless — full qwerty, plain hjkl (no mod-tap), TG(5) exits
+  [5] = LAYOUT_moonlander(
+    KC_Q,  KC_W,  KC_E,  KC_R,  KC_T,  KC_NO, KC_NO,    KC_NO, KC_NO, KC_Y,     KC_U,    KC_I,    KC_O,    KC_P,
+    KC_A,  KC_S,  KC_D,  KC_F,  KC_G,  KC_NO, KC_NO,    KC_NO, KC_NO, KC_H,     KC_J,    KC_K,    KC_L,    KC_SCLN,
+    KC_Z,  KC_X,  KC_C,  KC_V,  KC_B,  KC_NO, KC_NO,    KC_NO, KC_NO, KC_N,     KC_M,    KC_COMMA,KC_DOT,  KC_SLASH,
+    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_SPC,           TG(5), KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO,
+    KC_NO, KC_NO, KC_NO,                                 KC_NO, KC_NO, KC_NO
   ),
     // media, activated by the M key
   [4] = LAYOUT_moonlander(
@@ -81,3 +90,17 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo5, KC_UNDS),
     COMBO(combo6, QK_BOOT),
 };
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    static bool ml_active = false;
+    bool on = IS_LAYER_ON_STATE(state, 5);
+
+    if (on && !ml_active) {
+        tap_code16(LGUI(KC_SPC));  // open mouseless (Cmd+Space)
+        ml_active = true;
+    } else if (!on && ml_active) {
+        tap_code(KC_ESC);          // close mouseless
+        ml_active = false;
+    }
+    return state;
+}

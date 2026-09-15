@@ -1,0 +1,141 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
+
+#define BASE 0
+#define SYM  1
+#define NUM  2
+#define NAV  3
+#define MED  4
+#define ML   5
+
+/ {
+    combos {
+        compatible = "zmk,combos";
+
+        // D+F = '
+        combo_quote {
+            timeout-ms = <50>;
+            key-positions = <12 13>;
+            bindings = <&kp SQT>;
+        };
+
+        // J+K = enter
+        combo_enter {
+            timeout-ms = <50>;
+            key-positions = <16 17>;
+            bindings = <&kp ENTER>;
+        };
+
+        // S+F = tab
+        combo_tab {
+            timeout-ms = <50>;
+            key-positions = <11 13>;
+            bindings = <&kp TAB>;
+        };
+
+        // J+L = escape
+        combo_escape {
+            timeout-ms = <50>;
+            key-positions = <16 18>;
+            bindings = <&kp ESC>;
+        };
+
+        // M+, = -
+        combo_minus {
+            timeout-ms = <50>;
+            key-positions = <26 27>;
+            bindings = <&kp MINUS>;
+        };
+
+        // C+V = _
+        combo_under {
+            timeout-ms = <50>;
+            key-positions = <22 23>;
+            bindings = <&kp UNDER>;
+        };
+
+        // E+R+U+I = bootloader
+        combo_boot {
+            timeout-ms = <50>;
+            key-positions = <2 3 6 7>;
+            bindings = <&bootloader>;
+        };
+    };
+
+    behaviors {
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        // Layer 0: Base
+        base_layer {
+            bindings = <
+                &kp Q        &kp W        &kp E        &kp R        &kp T            &kp Y        &kp U        &kp I        &kp O        &kp P
+                &hm LCTL A   &hm RALT S   &hm LGUI D   &hm LSFT F   &kp G            &kp H        &hm RSFT J   &hm RGUI K   &hm RALT L   &hm RCTL SEMI
+                &kp Z        &kp X        &kp C        &lt NAV V    &kp B            &kp N        &lt MED M    &kp COMMA    &kp DOT      &kp SLASH
+                                                        &kp ESC      &lt NUM SPC      &lt SYM BSPC &kp ENTER
+            >;
+        };
+
+        // Layer 1: Symbols (right thumb hold)
+        sym_layer {
+            bindings = <
+                &kp EXCL     &kp AT       &kp LBRC     &kp RBRC     &kp PLUS         &trans       &kp TILDE    &kp ASTRK    &kp CARET    &trans
+                &kp EQUAL    &kp GT       &kp LPAR     &kp RPAR     &kp TAB          &kp UNDER    &kp SQT      &kp DQT      &kp GRAVE    &kp AMPS
+                &kp PRCNT    &kp HASH     &kp LBKT     &kp RBKT     &kp MINUS        &trans       &kp DLLR     &trans       &kp BSLH     &kp PIPE
+                                                        &trans       &trans           &trans       &trans
+            >;
+        };
+
+        // Layer 2: Numbers (left thumb hold)
+        num_layer {
+            bindings = <
+                &trans       &trans       &trans       &trans       &trans           &trans       &kp N7       &kp N8       &kp N9       &trans
+                &trans       &trans       &trans       &kp LG(LS(N4)) &trans         &kp MINUS    &kp N4       &kp N5       &kp N6       &kp DOT
+                &kp F4       &kp F3       &kp F2       &kp F1       &trans           &kp N0       &kp N1       &kp N2       &kp N3       &kp COLON
+                                                        &trans       &trans           &trans       &trans
+            >;
+        };
+
+        // Layer 3: Navigation (V hold)
+        nav_layer {
+            bindings = <
+                &trans       &trans       &trans       &trans       &trans           &trans       &kp CAPS     &trans       &trans       &trans
+                &trans       &trans       &trans       &trans       &trans           &kp LEFT     &kp DOWN     &kp UP       &kp RIGHT    &trans
+                &trans       &trans       &trans       &trans       &trans           &trans       &tog ML      &kp LG(LS(SPC)) &kp LG(I) &trans
+                                                        &trans       &trans           &trans       &trans
+            >;
+        };
+
+        // Layer 4: Media (M hold)
+        med_layer {
+            bindings = <
+                &trans       &trans       &trans       &kp C_VOL_UP &trans           &trans       &trans       &trans       &trans       &trans
+                &kp C_MUTE   &kp C_PREV   &kp C_PP     &kp C_NEXT   &trans           &trans       &trans       &trans       &trans       &trans
+                &trans       &trans       &trans       &kp C_VOL_DN &trans           &trans       &trans       &trans       &trans       &trans
+                                                        &trans       &trans           &trans       &trans
+            >;
+        };
+
+        // Layer 5: Mouseless — plain QWERTY, no mod-tap
+        ml_layer {
+            bindings = <
+                &kp Q        &kp W        &kp E        &kp R        &kp T            &kp Y        &kp U        &kp I        &kp O        &kp P
+                &kp A        &kp S        &kp D        &kp F        &kp G            &kp H        &kp J        &kp K        &kp L        &kp SEMI
+                &kp Z        &kp X        &kp C        &kp V        &kp B            &kp N        &kp M        &kp COMMA    &kp DOT      &kp SLASH
+                                                        &trans       &kp SPC          &tog ML      &trans
+            >;
+        };
+    };
+};

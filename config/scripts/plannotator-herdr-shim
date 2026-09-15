@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Shim that impersonates `herdr agent prompt` for plannotator-tui,
+# delivering feedback to a tmux pane instead.
+set -euo pipefail
+
+if [[ "${1:-}" == "agent" && "${2:-}" == "prompt" ]]; then
+    pane="$3"
+    text="$4"
+    printf '%s' "$text" | tmux load-buffer -
+    tmux paste-buffer -p -t "$pane" -d
+    tmux send-keys -t "$pane" Enter
+    exit 0
+fi
+
+echo '{"error":{"code":"agent_not_found","message":"shim: unsupported"}}' >&2
+exit 1

@@ -1,0 +1,59 @@
+#!/bin/bash
+set -e
+
+usage() {
+    echo "Usage: pr [-c] <url|pr_number>"
+    echo "  -c:        checkout the PR branch before opening"
+    echo "  url:       https://bitbucket.org/ourfamilywizard/<repo>/pull-requests/<number>/..."
+    echo "  pr_number: integer (must be run from within a repo directory)"
+    exit 1
+}
+
+extra_flags=""
+
+while getopts "c" opt; do
+    case $opt in
+    c)
+        extra_flags="$extra_flags -c"
+        ;;
+    *)
+        usage
+        ;;
+    esac
+done
+shift $((OPTIND - 1))
+
+if [ -z "$1" ]; then
+    usage
+fi
+
+input="$1"
+REVIEW_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+if [[ "$input" =~ ^[0-9]+$ ]]; then
+    # Plain PR number — must already be in a repo dir
+    pr_number="$input"
+    checkout_and_open_pr.sh "$pr_number" $extra_flags
+else
+    # Parse URL: extract repo name and PR number
+    # Expected format: https://bitbucket.org/<org>/<repo>/pull-requests/<number>/...
+    repo=$(echo "$input" | sed -E 's|https?://[^/]+/[^/]+/([^/]+)/pull-requests/.*|\1|')
+    pr_number=$(echo "$input" | sed -E 's|.*/pull-requests/([0-9]+).*|\1|')
+
+    if [ -z "$repo" ] || [ -z "$pr_number" ] || ! [[ "$pr_number" =~ ^[0-9]+$ ]]; then
+        echo "Failed to parse URL: $input"
+        usage
+    fi
+
+    repo_path="$REVIEW_DIR/$repo"
+
+    if [ ! -d "$repo_path" ]; then
+        echo "Repository directory not found: $repo_path"
+        echo "Available repos:"
+        ls "$REVIEW_DIR"
+        exit 1
+    fi
+
+    cd "$repo_path"
+    checkout_and_open_pr.sh "$pr_number" $extra_flags
+fi

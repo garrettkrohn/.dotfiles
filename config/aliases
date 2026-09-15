@@ -230,8 +230,11 @@ alias pb='pnpm clean && pnpm install && pnpm build'
 # ============================================================================
 # QMK (Keyboard Firmware)
 # ============================================================================
-alias qc='qmk compile -kb zsa/moonlander/reva -km moonlander2'
-alias qf='qmk flash -kb zsa/moonlander/reva -km moonlander2'
+alias qc='cd ~/code/zsa_qmk_firmware && qmk compile -kb zsa/moonlander/reva -km moonlander2'
+alias qf='cd ~/code/zsa_qmk_firmware && qmk flash -kb zsa/moonlander/reva -km moonlander2'
+# Sweep uses ZMK — build via GitHub Actions, flash by drag-drop
+# qss: sync keymap from dotfiles to zmk-config repo and push to trigger a build
+alias qss='cp ~/dotfiles/config/keyboards/sweep/keymaps/default/cradio.keymap ~/code/zmk-config/config/cradio.keymap && cp ~/dotfiles/config/keyboards/sweep/keymaps/default/cradio.conf ~/code/zmk-config/config/cradio.conf && cd ~/code/zmk-config && git add -A && git commit -m "update keymap"'
 
 # ============================================================================
 # Local Project Aliases
@@ -286,3 +289,8 @@ encrypt() {
 decrypt() {
   curl -s -H 'Content-Type: text/plain' -u 'config:LutIWsCqLhVh' https://configserver.$1.ourfamilywizard.com/configserver/decrypt -d "$2"
 }
+
+alias lvim='NVIM_APPNAME=lazyvim nvim'
+alias nvimclean='nvim --clean'
+
+alias pt='plannotator-tui'

@@ -147,6 +147,7 @@ if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)
 export PATH=/opt/homebrew/Caskroom/sqlcl/25.4.2.044.1837/sqlcl/bin:"$PATH"
 
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 source /Users/gkrohn/code/rx/repo-envs/global.env
 source /Users/gkrohn/code/rx/repo-envs/calendar-events.env
 

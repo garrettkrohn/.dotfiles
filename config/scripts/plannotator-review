@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+# Open a Claude session or a specific file in plannotator-tui in a new tmux window,
+# wired to send feedback back to this pane.
+set -euo pipefail
+
+SHIM="$HOME/dotfiles/config/scripts/plannotator-herdr-shim"
+TARGET_PANE="${PLANNOTATOR_TARGET_PANE:-$(tmux display-message -p '#{pane_id}')}"
+TMUX_SESSION=$(tmux display-message -p '#{session_name}')
+
+FILE_PATH=""
+
+# Parse args
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --file)
+            FILE_PATH="$2"
+            shift 2
+            ;;
+        *)
+            echo "plannotator-review: unknown argument: $1" >&2
+            exit 1
+            ;;
+    esac
+done
+
+if [[ -n "$FILE_PATH" ]]; then
+    if [[ ! -f "$FILE_PATH" ]]; then
+        echo "plannotator-review: file not found: $FILE_PATH" >&2
+        exit 1
+    fi
+    tmux new-window -t "$TMUX_SESSION" -n review \
+        "HERDR_ENV=1 \
+         HERDR_BIN_PATH='$SHIM' \
+         PLANNOTATOR_TUI_DELIVER_TO='$TARGET_PANE' \
+         PLANNOTATOR_TUI_DELIVER_AGENT='claude' \
+         $HOME/.cargo/bin/plannotator-tui '$FILE_PATH'"
+else
+    # Derive the Claude project slug from the current working directory.
+    CWD="${PWD}"
+    SLUG=$(echo "$CWD" | sed 's|[/._]|-|g')
+    PROJECT_DIR="$HOME/.claude/projects/$SLUG"
+
+    TRANSCRIPT=$(ls -t "$PROJECT_DIR"/*.jsonl 2>/dev/null | head -1)
+    if [[ -z "$TRANSCRIPT" ]]; then
+        echo "plannotator-review: no Claude transcript found in $PROJECT_DIR" >&2
+        exit 1
+    fi
+
+    tmux new-window -t "$TMUX_SESSION" -n review \
+        "HERDR_ENV=1 \
+         HERDR_BIN_PATH='$SHIM' \
+         PLANNOTATOR_TUI_DELIVER_TO='$TARGET_PANE' \
+         PLANNOTATOR_TUI_DELIVER_AGENT='claude' \
+         $HOME/.cargo/bin/plannotator-tui last --host claude --session '$TRANSCRIPT'"
+fi
